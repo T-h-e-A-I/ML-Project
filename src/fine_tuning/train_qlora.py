@@ -66,12 +66,17 @@ class LoRATrainingProgressCallback(TrainerCallback):
         self._pbar: tqdm | None = None
 
     def on_train_begin(self, args, state, control, **kwargs):
+        # bar_format forces a visible percentage (some Kaggle log views truncate the bar).
         self._pbar = tqdm(
             total=self.total_steps,
             desc="QLoRA train",
             unit="step",
             mininterval=2.0,
             dynamic_ncols=True,
+            bar_format=(
+                "{desc}: {percentage:3.0f}%|{bar}| {n_fmt}/{total_fmt} steps "
+                "[{elapsed}<{remaining}, {rate_fmt}]"
+            ),
         )
         return control
 
