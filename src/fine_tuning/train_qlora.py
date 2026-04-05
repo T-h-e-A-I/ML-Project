@@ -37,6 +37,7 @@ from configs.default import (
     VLM_MODEL,
     resolve_data_path,
 )
+from src.fine_tuning.train_deps import ensure_qlora_train_deps
 
 
 def estimate_qlora_training_steps(
@@ -169,6 +170,8 @@ def train(
         num_train_epochs: Override configs/default NUM_EPOCHS for this run.
         max_steps: If set, stop after this many optimizer steps (overrides epoch count).
     """
+    ensure_qlora_train_deps()
+
     print("Loading training data...")
     train_data, val_data = load_training_data(data_dir)
     if max_train_samples is not None:

@@ -4,6 +4,7 @@ transformers>=4.40.0
 peft>=0.10.0
 bitsandbytes>=0.43.0
 accelerate>=0.28.0
+sentencepiece>=0.2.0
 chromadb>=0.4.24
 sentence-transformers>=2.6.0
 open-clip-torch>=2.24.0
