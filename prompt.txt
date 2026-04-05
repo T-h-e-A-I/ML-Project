@@ -1,0 +1,684 @@
+here is the directory tree
+
+├── configs/
+│   ├── __init__.py
+│   ├── __pycache__/
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── default.cpython-310.pyc
+│   ├── default.py
+├── data/
+│   ├── chroma_db/
+│   │   ├── chroma.sqlite3
+│   ├── eval/
+│   │   ├── eval_dataset.json
+│   ├── processed/
+│   │   ├── OpenStax/
+│   │   │   ├── images/
+│   │   │   │ 1677 files (.jpeg)
+│   │   │   │ 44 files (.png)
+│   ├── raw/
+│   │   ├── ai2d/
+│   │   │   ├── ai2d_samples.json
+│   │   │   ├── images/
+│   │   │   │ 3088 files (.png)
+│   │   ├── scienceqa/
+│   │   │   ├── images/
+│   │   │   │ 1852 files (.png)
+│   │   │   ├── physics_samples.json
+│   │   ├── textbooks/
+│   │   │   ├── OpenStax.pdf
+├── docs/
+│   ├── GUIDE.md
+├── git_ingest.py
+├── git_ingest.txt
+├── notebooks/
+│   ├── finetune_llava.ipynb
+├── paper/
+│   ├── main.tex
+├── requirements.txt
+├── src/
+│   ├── __init__.py
+│   ├── __pycache__/
+│   │   ├── __init__.cpython-310.pyc
+│   ├── embeddings/
+│   │   ├── __init__.py
+│   │   ├── image_embedder.py
+│   │   ├── text_embedder.py
+│   ├── evaluation/
+│   │   ├── __init__.py
+│   │   ├── metrics.py
+│   │   ├── run_benchmark.py
+│   │   ├── visualize_results.py
+│   ├── fine_tuning/
+│   │   ├── __init__.py
+│   │   ├── prepare_data.py
+│   │   ├── train_qlora.py
+│   ├── generation/
+│   │   ├── __init__.py
+│   │   ├── rag_pipeline.py
+│   │   ├── text_generator.py
+│   │   ├── vlm_generator.py
+│   ├── ingestion/
+│   │   ├── __init__.py
+│   │   ├── build_knowledge_base.py
+│   │   ├── download_datasets.py
+│   │   ├── pdf_parser.py
+│   │   ├── synthetic_generator.py
+│   ├── retrieval/
+│   │   ├── __init__.py
+│   │   ├── __pycache__/
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   ├── vector_store.cpython-310.pyc
+│   │   ├── multimodal_retriever.py
+│   │   ├── vector_store.py
+
+
+code contecnts
+
+## file name: `pdf_parser.py`
+
+```py
+"""Parse physics textbook PDFs: extract text chunks and embedded figures."""
+
+import json
+from pathlib import Path
+from typing import Optional
+
+import fitz  # pymupdf
+from PIL import Image
+from tqdm import tqdm
+
+from configs.default import CHUNK_SIZE, CHUNK_OVERLAP, DATA_RAW, DATA_PROCESSED
+
+
+def extract_text_and_images(
+    pdf_path: str | Path,
+    output_dir: Optional[str | Path] = None,
+) -> dict:
+    """
+    Extract text and images from a PDF.
+    Returns dict with 'text_chunks' and 'images' lists.
+    """
+    pdf_path = Path(pdf_path)
+    if output_dir is None:
+        output_dir = DATA_PROCESSED / pdf_path.stem
+    output_dir = Path(output_dir)
+    img_dir = output_dir / "images"
+    img_dir.mkdir(parents=True, exist_ok=True)
+
+    doc = fitz.open(str(pdf_path))
+
+    all_text = []
+    images = []
+
+    for page_num in tqdm(range(len(doc)), desc=f"Parsing {pdf_path.name}"):
+        page = doc[page_num]
+
+        page_text = page.get_text("text")
+        if page_text.strip():
+            all_text.append({
+                "page": page_num + 1,
+                "text": page_text.strip(),
+            })
+
+        for img_idx, img_info in enumerate(page.get_images(full=True)):
+            xref = img_info[0]
+            try:
+                base_image = doc.extract_image(xref)
+                if base_image is None:
+                    continue
+                img_bytes = base_image["image"]
+                img_ext = base_image.get("ext", "png")
+
+                if len(img_bytes) < 5000:
+                    continue
+
+                img_filename = f"page{page_num + 1}_img{img_idx}.{img_ext}"
+                img_path = img_dir / img_filename
+                with open(img_path, "wb") as f:
+                    f.write(img_bytes)
+
+                images.append({
+                    "page": page_num + 1,
+                    "image_path": str(img_path),
+                    "xref": xref,
+                })
+            except Exception:
+                continue
+
+    doc.close()
+
+    text_chunks = _chunk_text(all_text)
+
+    metadata = {
+        "source_pdf": str(pdf_path),
+        "num_pages": len(doc) if hasattr(doc, "__len__") else 0,
+        "num_text_chunks": len(text_chunks),
+        "num_images": len(images),
+    }
+    with open(output_dir / "metadata.json", "w") as f:
+        json.dump(metadata, f, indent=2)
+    with open(output_dir / "text_chunks.json", "w") as f:
+        json.dump(text_chunks, f, indent=2)
+    with open(output_dir / "images.json", "w") as f:
+        json.dump(images, f, indent=2)
+
+    print(f"Extracted {len(text_chunks)} text chunks and {len(images)} images")
+    return {"text_chunks": text_chunks, "images": images, "metadata": metadata}
+
+
+def _chunk_text(
+    page_texts: list[dict],
+    chunk_size: int = CHUNK_SIZE,
+    overlap: int = CHUNK_OVERLAP,
+) -> list[dict]:
+    """Split page texts into overlapping chunks by approximate word count."""
+    chunks = []
+    chunk_id = 0
+
+    for page_data in page_texts:
+        words = page_data["text"].split()
+        page_num = page_data["page"]
+
+        start = 0
+        while start < len(words):
+            end = min(start + chunk_size, len(words))
+            chunk_text = " ".join(words[start:end])
+
+            if len(chunk_text.strip()) > 20:
+                chunks.append({
+                    "chunk_id": f"chunk_{chunk_id}",
+                    "page": page_num,
+                    "text": chunk_text,
+                    "start_word": start,
+                    "end_word": end,
+                })
+                chunk_id += 1
+
+            start += chunk_size - overlap
+
+    return chunks
+
+
+def build_knowledge_base(pdf_dir: Optional[str | Path] = None):
+    """Process all PDFs in the raw data directory."""
+    if pdf_dir is None:
+        pdf_dir = DATA_RAW / "textbooks"
+
+    pdf_dir = Path(pdf_dir)
+    if not pdf_dir.exists():
+        print(f"No textbook directory found at {pdf_dir}. Skipping PDF parsing.")
+        return []
+
+    all_results = []
+    for pdf_file in sorted(pdf_dir.glob("*.pdf")):
+        print(f"\nProcessing: {pdf_file.name}")
+        result = extract_text_and_images(pdf_file)
+        all_results.append(result)
+
+    return all_results
+
+
+if __name__ == "__main__":
+    build_knowledge_base()
+
+```
+
+
+## file name: `build_knowledge_base.py`
+
+```py
+"""Orchestrate the full knowledge base build: parse PDFs, embed, store in ChromaDB."""
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+
+from src.ingestion.pdf_parser import build_knowledge_base as parse_pdfs
+from src.embeddings.text_embedder import TextEmbedder
+from src.embeddings.image_embedder import ImageEmbedder
+from src.retrieval.vector_store import VectorStore
+from configs.default import DATA_PROCESSED, TEXT_COLLECTION, IMAGE_COLLECTION
+
+
+def build():
+    """Full pipeline: parse -> embed -> store."""
+    print("=" * 60)
+    print("Step 1: Parsing PDFs")
+    print("=" * 60)
+    parse_pdfs()
+
+    print("\n" + "=" * 60)
+    print("Step 2: Building text embeddings and storing in ChromaDB")
+    print("=" * 60)
+    text_embedder = TextEmbedder()
+    store = VectorStore()
+
+    text_chunks_files = list(DATA_PROCESSED.rglob("text_chunks.json"))
+    if not text_chunks_files:
+        print("No text chunks found. Ensure PDFs are in data/raw/textbooks/")
+        return
+
+    import json
+    all_chunks = []
+    for chunk_file in text_chunks_files:
+        with open(chunk_file) as f:
+            chunks = json.load(f)
+        source = chunk_file.parent.name
+        for c in chunks:
+            c["source"] = source
+        all_chunks.extend(chunks)
+
+    print(f"Embedding {len(all_chunks)} text chunks...")
+    texts = [c["text"] for c in all_chunks]
+    embeddings = text_embedder.embed_batch(texts)
+    ids = [c["chunk_id"] for c in all_chunks]
+    metadatas = [{"page": c["page"], "source": c.get("source", "")} for c in all_chunks]
+
+    store.add_texts(
+        collection_name=TEXT_COLLECTION,
+        texts=texts,
+        embeddings=embeddings,
+        ids=ids,
+        metadatas=metadatas,
+    )
+    print(f"Stored {len(all_chunks)} text chunks in collection '{TEXT_COLLECTION}'")
+
+    print("\n" + "=" * 60)
+    print("Step 3: Building image embeddings and storing in ChromaDB")
+    print("=" * 60)
+    image_embedder = ImageEmbedder()
+
+    image_meta_files = list(DATA_PROCESSED.rglob("images.json"))
+    all_images = []
+    for img_file in image_meta_files:
+        with open(img_file) as f:
+            imgs = json.load(f)
+        source = img_file.parent.name
+        for im in imgs:
+            im["source"] = source
+        all_images.extend(imgs)
+
+    if not all_images:
+        print("No images found to embed.")
+        return
+
+    print(f"Embedding {len(all_images)} images...")
+    image_paths = [im["image_path"] for im in all_images]
+    img_embeddings = image_embedder.embed_images(image_paths)
+    img_ids = [f"img_{i}" for i in range(len(all_images))]
+    img_metadatas = [
+        {"page": im["page"], "source": im.get("source", ""), "image_path": im["image_path"]}
+        for im in all_images
+    ]
+
+    store.add_images(
+        collection_name=IMAGE_COLLECTION,
+        embeddings=img_embeddings,
+        ids=img_ids,
+        metadatas=img_metadatas,
+    )
+    print(f"Stored {len(all_images)} image embeddings in collection '{IMAGE_COLLECTION}'")
+
+    print("\n" + "=" * 60)
+    print("Knowledge base build complete!")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    build()
+
+```
+
+
+## file name: `synthetic_generator.py`
+
+```py
+"""Generate synthetic physics QA pairs using GPT-4o from diagrams."""
+
+import base64
+import json
+import os
+from pathlib import Path
+
+from openai import OpenAI
+from tqdm import tqdm
+
+from configs.default import DATA_RAW, DATA_EVAL
+
+SYSTEM_PROMPT = """You are an expert physics teacher creating exam questions from diagrams.
+Given a physics diagram, generate a question-answer pair that requires visual reasoning.
+The question should test understanding of the physical concepts shown in the diagram.
+
+Return your response as JSON with these fields:
+- question: The physics question about the diagram
+- answer: The correct answer with brief explanation
+- reasoning: Step-by-step reasoning to arrive at the answer
+- topic: Physics topic (e.g., mechanics, circuits, optics, thermodynamics)
+- difficulty: easy, medium, or hard
+"""
+
+
+def encode_image(image_path: str) -> str:
+    """Encode image to base64 for the OpenAI API."""
+    with open(image_path, "rb") as f:
+        return base64.b64encode(f.read()).decode("utf-8")
+
+
+def generate_qa_from_image(
+    client: OpenAI,
+    image_path: str,
+    model: str = "gpt-4o",
+) -> dict | None:
+    """Generate a QA pair from a single physics diagram using GPT-4o."""
+    try:
+        b64_image = encode_image(image_path)
+        ext = Path(image_path).suffix.lstrip(".")
+        mime = f"image/{ext}" if ext != "jpg" else "image/jpeg"
+
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "Generate a physics question-answer pair for this diagram.",
+                        },
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:{mime};base64,{b64_image}",
+                                "detail": "high",
+                            },
+                        },
+                    ],
+                },
+            ],
+            max_tokens=1024,
+            temperature=0.7,
+            response_format={"type": "json_object"},
+        )
+
+        content = response.choices[0].message.content
+        return json.loads(content)
+    except Exception as e:
+        print(f"Error processing {image_path}: {e}")
+        return None
+
+
+def generate_synthetic_dataset(
+    image_dir: str | Path,
+    output_path: str | Path | None = None,
+    max_samples: int = 500,
+):
+    """Generate synthetic QA dataset from a directory of physics diagrams."""
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        print("OPENAI_API_KEY not set. Skipping synthetic data generation.")
+        print("Set it with: export OPENAI_API_KEY='your-key-here'")
+        return []
+
+    client = OpenAI(api_key=api_key)
+    image_dir = Path(image_dir)
+
+    if output_path is None:
+        output_path = DATA_EVAL / "synthetic_physics_qa.json"
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    image_files = sorted(
+        p for p in image_dir.rglob("*")
+        if p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}
+    )[:max_samples]
+
+    if not image_files:
+        print(f"No images found in {image_dir}")
+        return []
+
+    print(f"Generating QA pairs for {len(image_files)} images...")
+    samples = []
+
+    for img_path in tqdm(image_files, desc="Generating QA"):
+        qa = generate_qa_from_image(client, str(img_path))
+        if qa:
+            samples.append({
+                "id": f"synthetic_{img_path.stem}",
+                "image_path": str(img_path),
+                "question": qa.get("question", ""),
+                "answer": qa.get("answer", ""),
+                "reasoning": qa.get("reasoning", ""),
+                "topic": qa.get("topic", "physics"),
+                "difficulty": qa.get("difficulty", "medium"),
+                "source": "synthetic_gpt4o",
+            })
+
+    with open(output_path, "w") as f:
+        json.dump(samples, f, indent=2)
+    print(f"Saved {len(samples)} synthetic QA pairs to {output_path}")
+    return samples
+
+
+if __name__ == "__main__":
+    img_dir = DATA_RAW / "physics_diagrams"
+    if not img_dir.exists():
+        img_dir = DATA_RAW / "scienceqa" / "images"
+    generate_synthetic_dataset(img_dir)
+
+```
+
+
+## file name: `__init__.py`
+
+```py
+
+```
+
+
+## file name: `download_datasets.py`
+
+```py
+"""Download and preprocess ScienceQA and AI2D datasets from HuggingFace."""
+
+import json
+import sys
+from pathlib import Path
+
+CURRENT_FILE = Path(__file__).resolve()
+PROJECT_ROOT = CURRENT_FILE.parents[2]
+
+DATA_DIR = PROJECT_ROOT / "data"
+DATA_RAW = DATA_DIR / "raw"
+DATA_PROCESSED = DATA_DIR / "processed"
+DATA_EVAL = DATA_DIR / "eval"
+
+# Create base folders
+DATA_RAW.mkdir(parents=True, exist_ok=True)
+DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
+DATA_EVAL.mkdir(parents=True, exist_ok=True)
+# --------------------------------
+
+from datasets import load_dataset
+from PIL import Image
+from tqdm import tqdm
+
+
+PHYSICS_KEYWORDS = {
+    "force", "motion", "energy", "momentum", "gravity", "acceleration",
+    "velocity", "friction", "circuit", "voltage", "current", "resistance",
+    "wave", "frequency", "optics", "lens", "mirror", "reflection",
+    "refraction", "thermodynamics", "heat", "temperature", "pressure",
+    "magnetic", "electric", "field", "potential", "kinetic", "work",
+    "power", "torque", "rotation", "oscillation", "pendulum", "spring",
+    "fluid", "density", "buoyancy", "projectile", "incline", "pulley",
+}
+
+
+def download_scienceqa():
+    print("Downloading ScienceQA dataset...")
+    ds = load_dataset("derek-thomas/ScienceQA", trust_remote_code=True)
+
+    output_dir = DATA_RAW / "scienceqa"
+    img_dir = output_dir / "images"
+    img_dir.mkdir(parents=True, exist_ok=True)
+
+    physics_samples = []
+
+    for split in ["train", "validation", "test"]:
+        if split not in ds:
+            continue
+
+        for idx, sample in enumerate(tqdm(ds[split], desc=f"ScienceQA {split}")):
+            if sample.get("image") is None:
+                continue
+
+            hint_text = (sample.get("hint", "") or "").lower()
+            question_text = (sample.get("question", "") or "").lower()
+            combined = hint_text + " " + question_text
+
+            if not any(kw in combined for kw in PHYSICS_KEYWORDS):
+                continue
+
+            img_path = img_dir / f"{split}_{idx}.png"
+
+            if isinstance(sample["image"], Image.Image):
+                sample["image"].save(str(img_path))
+
+            choices = sample.get("choices", [])
+            answer_idx = sample.get("answer", 0)
+
+            physics_samples.append({
+                "id": f"scienceqa_{split}_{idx}",
+                "split": split,
+                "image_path": str(img_path),
+                "question": sample.get("question", ""),
+                "choices": choices,
+                "answer_idx": answer_idx,
+                "answer": choices[answer_idx] if answer_idx < len(choices) else "",
+                "hint": sample.get("hint", ""),
+                "solution": sample.get("solution", ""),
+                "topic": "physics",
+                "source": "scienceqa",
+            })
+
+    out_file = output_dir / "physics_samples.json"
+    with open(out_file, "w") as f:
+        json.dump(physics_samples, f, indent=2)
+
+    print(f"Saved {len(physics_samples)} samples → {out_file}")
+    return physics_samples
+
+
+def download_ai2d():
+    print("Downloading AI2D dataset...")
+    ds = load_dataset("lmms-lab/ai2d", trust_remote_code=True)
+
+    output_dir = DATA_RAW / "ai2d"
+    img_dir = output_dir / "images"
+    img_dir.mkdir(parents=True, exist_ok=True)
+
+    samples = []
+
+    for split in ["test"]:
+        if split not in ds:
+            continue
+
+        for idx, sample in enumerate(tqdm(ds[split], desc=f"AI2D {split}")):
+            if sample.get("image") is None:
+                continue
+
+            img_path = img_dir / f"{split}_{idx}.png"
+
+            if isinstance(sample["image"], Image.Image):
+                sample["image"].save(str(img_path))
+
+            samples.append({
+                "id": f"ai2d_{split}_{idx}",
+                "split": split,
+                "image_path": str(img_path),
+                "question": sample.get("question", ""),
+                "choices": sample.get("options", []) if isinstance(sample.get("options"), list) else [],
+                "answer": sample.get("answer", ""),
+                "topic": "science_diagram",
+                "source": "ai2d",
+            })
+
+    out_file = output_dir / "ai2d_samples.json"
+    with open(out_file, "w") as f:
+        json.dump(samples, f, indent=2)
+
+    print(f"Saved {len(samples)} samples → {out_file}")
+    return samples
+
+
+def build_eval_set():
+    eval_dir = DATA_EVAL
+    eval_dir.mkdir(parents=True, exist_ok=True)
+
+    all_samples = []
+
+    # ScienceQA
+    scienceqa_path = DATA_RAW / "scienceqa" / "physics_samples.json"
+    if scienceqa_path.exists():
+        with open(scienceqa_path) as f:
+            for s in json.load(f):
+                all_samples.append({
+                    "id": s["id"],
+                    "image_path": s["image_path"],
+                    "question": s["question"],
+                    "answer": s["answer"],
+                    "reasoning": s.get("solution", ""),
+                    "topic": s.get("topic", "physics"),
+                    "difficulty": "medium",
+                    "source": "scienceqa",
+                })
+
+    # AI2D
+    ai2d_path = DATA_RAW / "ai2d" / "ai2d_samples.json"
+    if ai2d_path.exists():
+        with open(ai2d_path) as f:
+            for s in json.load(f):
+                all_samples.append({
+                    "id": s["id"],
+                    "image_path": s["image_path"],
+                    "question": s["question"],
+                    "answer": s["answer"],
+                    "reasoning": "",
+                    "topic": s.get("topic", "science_diagram"),
+                    "difficulty": "medium",
+                    "source": "ai2d",
+                })
+
+    out_file = eval_dir / "eval_dataset.json"
+    with open(out_file, "w") as f:
+        json.dump(all_samples, f, indent=2)
+
+    print(f"Final eval set: {len(all_samples)} samples → {out_file}")
+    return all_samples
+
+
+if __name__ == "__main__":
+    download_scienceqa()
+    download_ai2d()
+    build_eval_set()
+
+
+after running build_knowledge_base.py I have got this error.
+
+Traceback (most recent call last):
+  File "/home/hameem08/My_Codes/ml_project/ML-Project/src/ingestion/build_knowledge_base.py", line 100, in <module>
+    build()
+  File "/home/hameem08/My_Codes/ml_project/ML-Project/src/ingestion/build_knowledge_base.py", line 20, in build
+    parse_pdfs()
+  File "/home/hameem08/My_Codes/ml_project/ML-Project/src/ingestion/pdf_parser.py", line 136, in build_knowledge_base
+    result = extract_text_and_images(pdf_file)
+  File "/home/hameem08/My_Codes/ml_project/ML-Project/src/ingestion/pdf_parser.py", line 75, in extract_text_and_images
+    "num_pages": len(doc) if hasattr(doc, "__len__") else 0,
+  File "/home/hameem08/miniconda/envs/conda_env/lib/python3.10/site-packages/pymupdf/__init__.py", line 3052, in __len__
+    return self.page_count
+  File "/home/hameem08/miniconda/envs/conda_env/lib/python3.10/site-packages/pymupdf/__init__.py", line 5952, in page_count
+    raise ValueError('document closed')
+ValueError: document closed

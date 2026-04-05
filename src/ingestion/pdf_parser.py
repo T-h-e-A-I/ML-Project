@@ -66,8 +66,6 @@ def extract_text_and_images(
             except Exception:
                 continue
 
-    doc.close()
-
     text_chunks = _chunk_text(all_text)
 
     metadata = {
@@ -76,6 +74,7 @@ def extract_text_and_images(
         "num_text_chunks": len(text_chunks),
         "num_images": len(images),
     }
+    doc.close()
     with open(output_dir / "metadata.json", "w") as f:
         json.dump(metadata, f, indent=2)
     with open(output_dir / "text_chunks.json", "w") as f:
