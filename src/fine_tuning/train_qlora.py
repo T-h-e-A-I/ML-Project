@@ -3,6 +3,7 @@
 Designed to run on Kaggle T4 GPUs (16GB VRAM) with 4-bit quantization.
 """
 
+import argparse
 import json
 import math
 import sys
@@ -150,10 +151,25 @@ class LlavaDataCollator:
 def train(
     output_dir: str = "outputs/llava_physics_qlora",
     data_dir: Path | None = None,
+    max_train_samples: int | None = None,
+    max_val_samples: int | None = None,
+    num_train_epochs: int | None = None,
+    max_steps: int | None = None,
 ):
-    """Run QLoRA fine-tuning."""
+    """Run QLoRA fine-tuning.
+
+    Args:
+        max_train_samples: Use only the first N train examples (faster dry runs).
+        max_val_samples: Use only the first N val examples (faster eval).
+        num_train_epochs: Override configs/default NUM_EPOCHS for this run.
+        max_steps: If set, stop after this many optimizer steps (overrides epoch count).
+    """
     print("Loading training data...")
     train_data, val_data = load_training_data(data_dir)
+    if max_train_samples is not None:
+        train_data = train_data[: max(0, max_train_samples)]
+    if max_val_samples is not None:
+        val_data = val_data[: max(0, max_val_samples)]
     print(f"Train: {len(train_data)}, Val: {len(val_data)}")
 
     print("Loading model with 4-bit quantization...")
@@ -192,9 +208,13 @@ def train(
     train_dataset = Dataset.from_list(train_data)
     val_dataset = Dataset.from_list(val_data)
 
+    epochs = int(num_train_epochs) if num_train_epochs is not None else NUM_EPOCHS
+    cap_steps = int(max_steps) if max_steps is not None else -1
+
     training_args = TrainingArguments(
         output_dir=output_dir,
-        num_train_epochs=NUM_EPOCHS,
+        num_train_epochs=epochs,
+        max_steps=cap_steps,
         per_device_train_batch_size=BATCH_SIZE,
         per_device_eval_batch_size=BATCH_SIZE,
         gradient_accumulation_steps=GRADIENT_ACCUMULATION_STEPS,
@@ -223,13 +243,15 @@ def train(
         len(train_data),
         BATCH_SIZE,
         GRADIENT_ACCUMULATION_STEPS,
-        NUM_EPOCHS,
+        epochs,
         world_size=_ws,
     )
+    if cap_steps > 0:
+        total_train_steps = min(total_train_steps, cap_steps)
     progress_cb = LoRATrainingProgressCallback(total_train_steps)
     print(
         f"Planned ~{total_train_steps} optimizer steps "
-        f"({len(train_data)} samples, batch={BATCH_SIZE}, accum={GRADIENT_ACCUMULATION_STEPS}, epochs={NUM_EPOCHS})."
+        f"({len(train_data)} samples, batch={BATCH_SIZE}, accum={GRADIENT_ACCUMULATION_STEPS}, epochs={epochs})."
     )
 
     data_collator = LlavaDataCollator(processor)
@@ -255,4 +277,52 @@ def train(
 
 
 if __name__ == "__main__":
-    train()
+    p = argparse.ArgumentParser(description="QLoRA fine-tune LLaVA on physics diagrams.")
+    p.add_argument(
+        "--output-dir",
+        default="outputs/llava_physics_qlora",
+        help="Directory for checkpoints and final adapter.",
+    )
+    p.add_argument(
+        "--data-dir",
+        type=Path,
+        default=None,
+        help="Folder with train.json and val.json (default: processed/finetune).",
+    )
+    p.add_argument(
+        "--max-train-samples",
+        type=int,
+        default=None,
+        metavar="N",
+        help="Train on only the first N examples (time-budget runs).",
+    )
+    p.add_argument(
+        "--max-val-samples",
+        type=int,
+        default=None,
+        metavar="N",
+        help="Evaluate on only the first N validation examples.",
+    )
+    p.add_argument(
+        "--num-train-epochs",
+        type=int,
+        default=None,
+        metavar="E",
+        help="Override NUM_EPOCHS from configs for this run (e.g. 1 for a quick pass).",
+    )
+    p.add_argument(
+        "--max-steps",
+        type=int,
+        default=None,
+        metavar="S",
+        help="Stop after S optimizer steps (overrides full epoch schedule; caps wall time).",
+    )
+    args = p.parse_args()
+    train(
+        output_dir=args.output_dir,
+        data_dir=args.data_dir,
+        max_train_samples=args.max_train_samples,
+        max_val_samples=args.max_val_samples,
+        num_train_epochs=args.num_train_epochs,
+        max_steps=args.max_steps,
+    )
