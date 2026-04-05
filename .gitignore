@@ -54,3 +54,5 @@ paper/*.toc
 
 # Secrets
 .env
+
+*.zip
