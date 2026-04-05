@@ -4,6 +4,7 @@ Designed to run on Kaggle T4 GPUs (16GB VRAM) with 4-bit quantization.
 """
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -11,12 +12,14 @@ import torch
 from datasets import Dataset
 from PIL import Image
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from tqdm.auto import tqdm
 from transformers import (
     AutoProcessor,
     BitsAndBytesConfig,
     LlavaForConditionalGeneration,
-    TrainingArguments,
     Trainer,
+    TrainerCallback,
+    TrainingArguments,
 )
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
@@ -33,6 +36,57 @@ from configs.default import (
     VLM_MODEL,
     resolve_data_path,
 )
+
+
+def estimate_qlora_training_steps(
+    num_train_samples: int,
+    per_device_batch_size: int,
+    gradient_accumulation_steps: int,
+    num_train_epochs: int,
+    world_size: int = 1,
+) -> int:
+    """Match Trainer's optimizer-step count (epoch-based runs, drop_last=False)."""
+    if num_train_samples <= 0:
+        return 0
+    len_dataloader = math.ceil(num_train_samples / (per_device_batch_size * world_size))
+    len_dataloader = max(len_dataloader, 1)
+    num_update_steps_per_epoch = max(
+        math.ceil(len_dataloader / gradient_accumulation_steps),
+        1,
+    )
+    return num_update_steps_per_epoch * int(num_train_epochs)
+
+
+class LoRATrainingProgressCallback(TrainerCallback):
+    """Single tqdm bar for global training steps (clear in Kaggle / notebooks)."""
+
+    def __init__(self, total_steps: int):
+        self.total_steps = max(1, total_steps)
+        self._pbar: tqdm | None = None
+
+    def on_train_begin(self, args, state, control, **kwargs):
+        self._pbar = tqdm(
+            total=self.total_steps,
+            desc="QLoRA train",
+            unit="step",
+            mininterval=2.0,
+            dynamic_ncols=True,
+        )
+        return control
+
+    def on_step_end(self, args, state, control, **kwargs):
+        if self._pbar is not None:
+            self._pbar.n = min(int(state.global_step), self.total_steps)
+            self._pbar.refresh()
+        return control
+
+    def on_train_end(self, args, state, control, **kwargs):
+        if self._pbar is not None:
+            self._pbar.n = self.total_steps
+            self._pbar.refresh()
+            self._pbar.close()
+            self._pbar = None
+        return control
 
 
 def load_training_data(data_dir: Path | None = None) -> tuple[list, list]:
@@ -161,6 +215,21 @@ def train(
         dataloader_num_workers=2,
         remove_unused_columns=False,
         gradient_checkpointing=True,
+        disable_tqdm=True,
+    )
+
+    _ws = max(1, int(getattr(training_args, "world_size", 1)))
+    total_train_steps = estimate_qlora_training_steps(
+        len(train_data),
+        BATCH_SIZE,
+        GRADIENT_ACCUMULATION_STEPS,
+        NUM_EPOCHS,
+        world_size=_ws,
+    )
+    progress_cb = LoRATrainingProgressCallback(total_train_steps)
+    print(
+        f"Planned ~{total_train_steps} optimizer steps "
+        f"({len(train_data)} samples, batch={BATCH_SIZE}, accum={GRADIENT_ACCUMULATION_STEPS}, epochs={NUM_EPOCHS})."
     )
 
     data_collator = LlavaDataCollator(processor)
@@ -171,6 +240,7 @@ def train(
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         data_collator=data_collator,
+        callbacks=[progress_cb],
     )
 
     print("Starting training...")

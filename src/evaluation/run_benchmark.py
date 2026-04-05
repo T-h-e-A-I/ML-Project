@@ -6,6 +6,8 @@ import sys
 import time
 from pathlib import Path
 
+from tqdm import tqdm
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from configs.default import DATA_EVAL, FUSION_ALPHA, TOP_K, resolve_data_path
@@ -86,7 +88,13 @@ def run_single_config(config_key: str, eval_data: list[dict], **kwargs) -> dict:
 
     start_time = time.time()
 
-    for sample in eval_data:
+    print(f"Starting evaluation: {len(eval_data)} examples (no log lines until now because models were loading).")
+    for sample in tqdm(
+        eval_data,
+        desc=f"{config_key} eval",
+        unit="ex",
+        mininterval=2.0,
+    ):
         question = sample["question"]
         reference = sample["answer"]
         raw_image = sample.get("image_path")
@@ -132,6 +140,7 @@ def run_single_config(config_key: str, eval_data: list[dict], **kwargs) -> dict:
 
     elapsed = time.time() - start_time
 
+    print("Computing metrics (ROUGE / BERTScore may take several minutes)...")
     metrics = compute_all_metrics(questions, predictions, references)
     metrics["config"] = config_key
     metrics["config_name"] = config["name"]
@@ -224,9 +233,17 @@ def main():
     parser.add_argument("--alpha", type=float, default=FUSION_ALPHA)
     parser.add_argument("--output", type=str, default=None,
                         help="Output path for results JSON")
+    parser.add_argument(
+        "--max-samples",
+        type=int,
+        default=None,
+        help="Only run on the first N examples (smoke test; default: full eval set)",
+    )
     args = parser.parse_args()
 
     eval_data = load_eval_dataset(Path(args.eval_path) if args.eval_path else None)
+    if args.max_samples is not None:
+        eval_data = eval_data[: max(0, args.max_samples)]
     print(f"Loaded {len(eval_data)} evaluation samples")
 
     all_results = []
