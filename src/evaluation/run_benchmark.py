@@ -11,6 +11,7 @@ from tqdm import tqdm
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from configs.default import DATA_EVAL, FUSION_ALPHA, TOP_K, resolve_data_path
+from src.evaluation.eval_deps import ensure_benchmark_metric_deps
 from src.evaluation.metrics import compute_all_metrics
 
 CONFIGS = {
@@ -240,6 +241,8 @@ def main():
         help="Only run on the first N examples (smoke test; default: full eval set)",
     )
     args = parser.parse_args()
+
+    ensure_benchmark_metric_deps()
 
     eval_data = load_eval_dataset(Path(args.eval_path) if args.eval_path else None)
     if args.max_samples is not None:
