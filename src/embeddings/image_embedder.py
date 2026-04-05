@@ -7,7 +7,7 @@ import torch
 from PIL import Image
 from tqdm import tqdm
 
-from configs.default import IMAGE_EMBED_MODEL
+from configs.default import IMAGE_EMBED_MODEL, resolve_data_path
 
 _CLIP_MODEL_MAP = {
     "openai/clip-vit-base-patch32": ("ViT-B-32", "openai"),
@@ -30,7 +30,10 @@ class ImageEmbedder:
     @torch.no_grad()
     def embed_image(self, image_path: str | Path) -> list[float]:
         """Embed a single image file."""
-        img = Image.open(str(image_path)).convert("RGB")
+        p = resolve_data_path(image_path)
+        if p is None or not p.is_file():
+            raise FileNotFoundError(f"Image not found: {image_path}")
+        img = Image.open(p).convert("RGB")
         img_tensor = self.preprocess(img).unsqueeze(0).to(self.device)
         features = self.model.encode_image(img_tensor)
         features = features / features.norm(dim=-1, keepdim=True)
@@ -43,12 +46,15 @@ class ImageEmbedder:
         for i in tqdm(range(0, len(image_paths), batch_size), desc="Embedding images"):
             batch_paths = image_paths[i : i + batch_size]
             tensors = []
-            for p in batch_paths:
+            for raw_p in batch_paths:
                 try:
-                    img = Image.open(str(p)).convert("RGB")
+                    p = resolve_data_path(raw_p)
+                    if p is None or not p.is_file():
+                        raise FileNotFoundError(raw_p)
+                    img = Image.open(p).convert("RGB")
                     tensors.append(self.preprocess(img))
                 except Exception as e:
-                    print(f"Skipping {p}: {e}")
+                    print(f"Skipping {raw_p}: {e}")
                     tensors.append(self.preprocess(Image.new("RGB", (224, 224))))
 
             batch = torch.stack(tensors).to(self.device)

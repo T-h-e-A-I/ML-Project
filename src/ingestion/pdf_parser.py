@@ -8,7 +8,7 @@ import fitz  # pymupdf
 from PIL import Image
 from tqdm import tqdm
 
-from configs.default import CHUNK_SIZE, CHUNK_OVERLAP, DATA_RAW, DATA_PROCESSED
+from configs.default import CHUNK_SIZE, CHUNK_OVERLAP, DATA_RAW, DATA_PROCESSED, path_for_storage
 
 
 def extract_text_and_images(
@@ -60,7 +60,7 @@ def extract_text_and_images(
 
                 images.append({
                     "page": page_num + 1,
-                    "image_path": str(img_path),
+                    "image_path": path_for_storage(img_path),
                     "xref": xref,
                 })
             except Exception:
@@ -69,7 +69,7 @@ def extract_text_and_images(
     text_chunks = _chunk_text(all_text)
 
     metadata = {
-        "source_pdf": str(pdf_path),
+        "source_pdf": path_for_storage(pdf_path),
         "num_pages": len(doc) if hasattr(doc, "__len__") else 0,
         "num_text_chunks": len(text_chunks),
         "num_images": len(images),

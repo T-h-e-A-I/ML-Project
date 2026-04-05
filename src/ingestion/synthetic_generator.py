@@ -8,7 +8,7 @@ from pathlib import Path
 from openai import OpenAI
 from tqdm import tqdm
 
-from configs.default import DATA_RAW, DATA_EVAL
+from configs.default import DATA_EVAL, DATA_RAW, path_for_storage, resolve_data_path
 
 SYSTEM_PROMPT = """You are an expert physics teacher creating exam questions from diagrams.
 Given a physics diagram, generate a question-answer pair that requires visual reasoning.
@@ -25,7 +25,10 @@ Return your response as JSON with these fields:
 
 def encode_image(image_path: str) -> str:
     """Encode image to base64 for the OpenAI API."""
-    with open(image_path, "rb") as f:
+    p = resolve_data_path(image_path)
+    if p is None or not p.is_file():
+        raise FileNotFoundError(image_path)
+    with open(p, "rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
@@ -37,7 +40,7 @@ def generate_qa_from_image(
     """Generate a QA pair from a single physics diagram using GPT-4o."""
     try:
         b64_image = encode_image(image_path)
-        ext = Path(image_path).suffix.lstrip(".")
+        ext = Path(str(resolve_data_path(image_path) or image_path)).suffix.lstrip(".")
         mime = f"image/{ext}" if ext != "jpg" else "image/jpeg"
 
         response = client.chat.completions.create(
@@ -110,7 +113,7 @@ def generate_synthetic_dataset(
         if qa:
             samples.append({
                 "id": f"synthetic_{img_path.stem}",
-                "image_path": str(img_path),
+                "image_path": path_for_storage(img_path),
                 "question": qa.get("question", ""),
                 "answer": qa.get("answer", ""),
                 "reasoning": qa.get("reasoning", ""),

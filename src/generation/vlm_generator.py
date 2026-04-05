@@ -10,7 +10,7 @@ from transformers import (
     BitsAndBytesConfig,
 )
 
-from configs.default import VLM_MODEL
+from configs.default import VLM_MODEL, resolve_data_path
 
 MULTIMODAL_RAG_PROMPT = """You are a physics expert. Use the provided context and any diagrams to answer the question.
 Provide step-by-step reasoning, referencing visual elements when relevant.
@@ -92,7 +92,10 @@ class VLMGenerator:
         if image_paths:
             for p in image_paths[:3]:  # LLaVA 1.5 handles single image best
                 try:
-                    img = Image.open(str(p)).convert("RGB")
+                    rp = resolve_data_path(p)
+                    if rp is None or not rp.is_file():
+                        raise FileNotFoundError(p)
+                    img = Image.open(rp).convert("RGB")
                     images.append(img)
                 except Exception as e:
                     print(f"Could not load image {p}: {e}")

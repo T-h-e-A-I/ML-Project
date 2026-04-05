@@ -21,16 +21,17 @@ from transformers import (
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from configs.default import (
-    VLM_MODEL,
+    BATCH_SIZE,
     DATA_PROCESSED,
-    LORA_R,
+    GRADIENT_ACCUMULATION_STEPS,
+    LEARNING_RATE,
     LORA_ALPHA,
     LORA_DROPOUT,
+    LORA_R,
     LORA_TARGET_MODULES,
-    LEARNING_RATE,
     NUM_EPOCHS,
-    BATCH_SIZE,
-    GRADIENT_ACCUMULATION_STEPS,
+    VLM_MODEL,
+    resolve_data_path,
 )
 
 
@@ -69,8 +70,9 @@ class LlavaDataCollator:
             texts.append(text)
 
             img_path = ex.get("image", "")
-            if img_path and Path(img_path).exists():
-                img = Image.open(img_path).convert("RGB")
+            resolved = resolve_data_path(img_path) if img_path else None
+            if resolved and resolved.is_file():
+                img = Image.open(resolved).convert("RGB")
                 images.append(img)
             else:
                 images.append(Image.new("RGB", (224, 224)))

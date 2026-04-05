@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from configs.default import DATA_EVAL, TOP_K, FUSION_ALPHA
+from configs.default import DATA_EVAL, FUSION_ALPHA, TOP_K, resolve_data_path
 from src.evaluation.metrics import compute_all_metrics
 
 CONFIGS = {
@@ -89,7 +89,8 @@ def run_single_config(config_key: str, eval_data: list[dict], **kwargs) -> dict:
     for sample in eval_data:
         question = sample["question"]
         reference = sample["answer"]
-        image_path = sample.get("image_path")
+        raw_image = sample.get("image_path")
+        query_img = resolve_data_path(raw_image) if raw_image else None
 
         context_chunks = []
         image_paths = []
@@ -98,13 +99,21 @@ def run_single_config(config_key: str, eval_data: list[dict], **kwargs) -> dict:
             context_chunks = retriever.retrieve_text_only(question, top_k=top_k)
         elif retriever and config["retrieval"] == "multimodal":
             results = retriever.retrieve_multimodal(
-                question, query_image_path=image_path, top_k=top_k, alpha=alpha
+                question,
+                query_image_path=str(query_img) if query_img else None,
+                top_k=top_k,
+                alpha=alpha,
             )
             context_chunks = results["text_results"]
-            image_paths = [r["image_path"] for r in results["image_results"] if r.get("image_path")]
+            image_paths = []
+            for r in results["image_results"]:
+                ip = r.get("image_path")
+                rp = resolve_data_path(ip) if ip else None
+                if rp and rp.is_file():
+                    image_paths.append(str(rp))
 
-        if image_path and Path(image_path).exists():
-            image_paths = [image_path] + image_paths[:2]
+        if query_img and query_img.is_file():
+            image_paths = [str(query_img)] + image_paths[:2]
 
         q = question
         if use_cot:

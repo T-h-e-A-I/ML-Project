@@ -1,5 +1,6 @@
 """Orchestrate the full knowledge base build: parse PDFs, embed, store in ChromaDB."""
 
+import json
 import sys
 from pathlib import Path
 
@@ -9,7 +10,13 @@ from src.ingestion.pdf_parser import build_knowledge_base as parse_pdfs
 from src.embeddings.text_embedder import TextEmbedder
 from src.embeddings.image_embedder import ImageEmbedder
 from src.retrieval.vector_store import VectorStore
-from configs.default import DATA_PROCESSED, TEXT_COLLECTION, IMAGE_COLLECTION
+from configs.default import (
+    DATA_PROCESSED,
+    IMAGE_COLLECTION,
+    TEXT_COLLECTION,
+    path_for_storage,
+    resolve_data_path,
+)
 
 
 def build():
@@ -30,7 +37,6 @@ def build():
         print("No text chunks found. Ensure PDFs are in data/raw/textbooks/")
         return
 
-    import json
     all_chunks = []
     for chunk_file in text_chunks_files:
         with open(chunk_file) as f:
@@ -74,13 +80,21 @@ def build():
         print("No images found to embed.")
         return
 
-    print(f"Embedding {len(all_images)} images...")
-    image_paths = [im["image_path"] for im in all_images]
+    to_embed: list[tuple[dict, Path]] = []
+    for im in all_images:
+        resolved = resolve_data_path(im["image_path"])
+        if resolved is None or not resolved.is_file():
+            print(f"Skipping missing image: {im.get('image_path')}")
+            continue
+        to_embed.append((im, resolved))
+
+    print(f"Embedding {len(to_embed)} images...")
+    image_paths = [str(r) for _, r in to_embed]
     img_embeddings = image_embedder.embed_images(image_paths)
-    img_ids = [f"img_{i}" for i in range(len(all_images))]
+    img_ids = [f"img_{i}" for i in range(len(to_embed))]
     img_metadatas = [
-        {"page": im["page"], "source": im.get("source", ""), "image_path": im["image_path"]}
-        for im in all_images
+        {"page": im["page"], "source": im.get("source", ""), "image_path": path_for_storage(r)}
+        for im, r in to_embed
     ]
 
     store.add_images(

@@ -2,10 +2,10 @@
 
 from pathlib import Path
 
+from configs.default import FUSION_ALPHA, TOP_K, resolve_data_path
 from src.retrieval.multimodal_retriever import MultimodalRetriever
 from src.generation.text_generator import TextGenerator
 from src.generation.vlm_generator import VLMGenerator
-from configs.default import TOP_K, FUSION_ALPHA
 
 
 class RAGPipeline:
@@ -56,6 +56,7 @@ class RAGPipeline:
         """
         context_chunks = []
         image_paths = []
+        query_img = resolve_data_path(image_path) if image_path else None
 
         if self.retriever:
             if self.config == "B1" or self.config == "B2":
@@ -65,19 +66,20 @@ class RAGPipeline:
             else:
                 results = self.retriever.retrieve_multimodal(
                     question,
-                    query_image_path=image_path,
+                    query_image_path=str(query_img) if query_img else None,
                     top_k=self.top_k,
                     alpha=self.alpha,
                 )
                 context_chunks = results["text_results"]
-                image_paths = [
-                    r["image_path"]
-                    for r in results["image_results"]
-                    if r.get("image_path")
-                ]
+                image_paths = []
+                for r in results["image_results"]:
+                    ip = r.get("image_path")
+                    rp = resolve_data_path(ip) if ip else None
+                    if rp and rp.is_file():
+                        image_paths.append(str(rp))
 
-        if image_path and Path(image_path).exists():
-            image_paths = [str(image_path)] + image_paths[:2]
+        if query_img and query_img.is_file():
+            image_paths = [str(query_img)] + image_paths[:2]
 
         if isinstance(self.generator, TextGenerator):
             answer = self.generator.generate(question, context_chunks)

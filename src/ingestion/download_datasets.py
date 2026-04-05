@@ -1,27 +1,23 @@
 """Download and preprocess ScienceQA and AI2D datasets from HuggingFace."""
 
 import json
-import sys
 from pathlib import Path
-
-CURRENT_FILE = Path(__file__).resolve()
-PROJECT_ROOT = CURRENT_FILE.parents[2]
-
-DATA_DIR = PROJECT_ROOT / "data"
-DATA_RAW = DATA_DIR / "raw"
-DATA_PROCESSED = DATA_DIR / "processed"
-DATA_EVAL = DATA_DIR / "eval"
-
-# Create base folders
-DATA_RAW.mkdir(parents=True, exist_ok=True)
-DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
-DATA_EVAL.mkdir(parents=True, exist_ok=True)
-# --------------------------------
 
 from datasets import load_dataset
 from PIL import Image
 from tqdm import tqdm
 
+from configs.default import (
+    DATA_EVAL,
+    DATA_PROCESSED,
+    DATA_RAW,
+    path_for_storage,
+)
+
+# Create base folders
+DATA_RAW.mkdir(parents=True, exist_ok=True)
+DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
+DATA_EVAL.mkdir(parents=True, exist_ok=True)
 
 PHYSICS_KEYWORDS = {
     "force", "motion", "energy", "momentum", "gravity", "acceleration",
@@ -70,7 +66,7 @@ def download_scienceqa():
             physics_samples.append({
                 "id": f"scienceqa_{split}_{idx}",
                 "split": split,
-                "image_path": str(img_path),
+                "image_path": path_for_storage(img_path),
                 "question": sample.get("question", ""),
                 "choices": choices,
                 "answer_idx": answer_idx,
@@ -115,7 +111,7 @@ def download_ai2d():
             samples.append({
                 "id": f"ai2d_{split}_{idx}",
                 "split": split,
-                "image_path": str(img_path),
+                "image_path": path_for_storage(img_path),
                 "question": sample.get("question", ""),
                 "choices": sample.get("options", []) if isinstance(sample.get("options"), list) else [],
                 "answer": sample.get("answer", ""),

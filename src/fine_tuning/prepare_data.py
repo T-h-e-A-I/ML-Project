@@ -4,7 +4,7 @@ import json
 import random
 from pathlib import Path
 
-from configs.default import DATA_RAW, DATA_EVAL, DATA_PROCESSED
+from configs.default import DATA_EVAL, DATA_PROCESSED, DATA_RAW, path_for_storage, resolve_data_path
 
 
 def load_scienceqa_physics() -> list[dict]:
@@ -43,8 +43,9 @@ def format_for_llava(samples: list[dict]) -> list[dict]:
     """
     formatted = []
     for s in samples:
-        image_path = s.get("image_path", "")
-        if not image_path or not Path(image_path).exists():
+        raw_img = s.get("image_path", "")
+        resolved = resolve_data_path(raw_img) if raw_img else None
+        if not resolved or not resolved.is_file():
             continue
 
         question = s.get("question", "")
@@ -58,7 +59,7 @@ def format_for_llava(samples: list[dict]) -> list[dict]:
 
         formatted.append({
             "id": s.get("id", f"sample_{len(formatted)}"),
-            "image": image_path,
+            "image": path_for_storage(resolved),
             "conversations": [
                 {
                     "from": "human",

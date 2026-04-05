@@ -6,10 +6,11 @@ from src.embeddings.text_embedder import TextEmbedder
 from src.embeddings.image_embedder import ImageEmbedder
 from src.retrieval.vector_store import VectorStore
 from configs.default import (
-    TOP_K,
     FUSION_ALPHA,
-    TEXT_COLLECTION,
     IMAGE_COLLECTION,
+    TEXT_COLLECTION,
+    TOP_K,
+    resolve_data_path,
 )
 
 
@@ -61,8 +62,9 @@ class MultimodalRetriever:
         )
 
         image_results = {"ids": [[]], "metadatas": [[]], "distances": [[]]}
-        if query_image_path is not None:
-            img_query_emb = self.image_embedder.embed_image(query_image_path)
+        qimg = resolve_data_path(query_image_path) if query_image_path else None
+        if qimg is not None and qimg.is_file():
+            img_query_emb = self.image_embedder.embed_image(qimg)
             image_results = self.store.query_image(
                 IMAGE_COLLECTION, img_query_emb, top_k=top_k
             )
@@ -75,7 +77,7 @@ class MultimodalRetriever:
         formatted_text = self._format_text_results(text_results)
         formatted_images = self._format_image_results(image_results)
 
-        if query_image_path and formatted_text and formatted_images:
+        if qimg and formatted_text and formatted_images:
             formatted_text = self._rerank_with_fusion(
                 formatted_text, formatted_images, alpha, top_k
             )

@@ -13,6 +13,9 @@ venv/
 env/
 .venv/
 
+# Local Hugging Face cache (optional; e.g. export HF_HOME="$PWD/.hf_cache")
+.hf_cache/
+
 # IDE
 .vscode/
 .idea/
