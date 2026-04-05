@@ -2,8 +2,6 @@
 
 import os
 import re
-from typing import Optional
-
 import numpy as np
 
 
@@ -37,10 +35,20 @@ def compute_rouge_l(predictions: list[str], references: list[str]) -> dict:
     }
 
 
+def _bert_score_safe_text(text: str) -> str:
+    """bert_score encodes empty strings via build_inputs_with_special_tokens([]), which
+    breaks on recent transformers + RoBERTa. Replace empties with a minimal placeholder."""
+    t = (text or "").strip()
+    return t if t else "."
+
+
 def compute_bert_score(predictions: list[str], references: list[str]) -> dict:
     """Compute BERTScore."""
     from bert_score import score as bert_score_fn
-    P, R, F1 = bert_score_fn(predictions, references, lang="en", verbose=False)
+
+    preds = [_bert_score_safe_text(p) for p in predictions]
+    refs = [_bert_score_safe_text(r) for r in references]
+    P, R, F1 = bert_score_fn(preds, refs, lang="en", verbose=False)
     return {
         "precision": P.mean().item(),
         "recall": R.mean().item(),
