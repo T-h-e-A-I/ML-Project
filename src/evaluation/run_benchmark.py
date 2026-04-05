@@ -141,6 +141,20 @@ def run_single_config(config_key: str, eval_data: list[dict], **kwargs) -> dict:
 
     elapsed = time.time() - start_time
 
+    pred_base = kwargs.get("save_predictions_path")
+    if pred_base:
+        base = Path(pred_base)
+        extra = kwargs.get("save_predictions_extra", "")
+        path = base.parent / f"{base.stem}_{config_key}{extra}{base.suffix}"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        rows = [
+            {"question": q, "reference": r, "prediction": p}
+            for q, r, p in zip(questions, references, predictions)
+        ]
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(rows, f, ensure_ascii=False, indent=2)
+        print(f"Saved {len(rows)} predictions to {path}")
+
     print("Computing metrics (ROUGE / BERTScore may take several minutes)...")
     metrics = compute_all_metrics(questions, predictions, references)
     metrics["config"] = config_key
@@ -171,15 +185,20 @@ def run_ablations(eval_data: list[dict], **kwargs) -> list[dict]:
 
     for top_k in [3, 5, 10]:
         for alpha in [0.3, 0.5, 0.7]:
+            ab_kwargs = {
+                **kwargs,
+                "save_predictions_extra": f"_k{top_k}_a{alpha}",
+            }
             result = run_single_config(
-                "M1", eval_data, top_k=top_k, alpha=alpha, **kwargs
+                "M1", eval_data, top_k=top_k, alpha=alpha, **ab_kwargs
             )
             results.append(result)
             _print_result(result)
 
     for use_cot in [False, True]:
+        ab_kwargs = {**kwargs, "save_predictions_extra": f"_cot{use_cot}"}
         result = run_single_config(
-            "M1", eval_data, use_cot=use_cot, **kwargs
+            "M1", eval_data, use_cot=use_cot, **ab_kwargs
         )
         result["chain_of_thought"] = use_cot
         results.append(result)
@@ -240,6 +259,17 @@ def main():
         default=None,
         help="Only run on the first N examples (smoke test; default: full eval set)",
     )
+    parser.add_argument(
+        "--save-predictions",
+        type=str,
+        default=None,
+        metavar="PATH",
+        help=(
+            "Write question/reference/prediction JSON before metrics "
+            "(so a metrics crash does not lose model outputs). "
+            "File is PATH stem + _CONFIG + extension, e.g. preds_M1.json."
+        ),
+    )
     args = parser.parse_args()
 
     ensure_benchmark_metric_deps()
@@ -250,20 +280,23 @@ def main():
     print(f"Loaded {len(eval_data)} evaluation samples")
 
     all_results = []
+    pred_path = Path(args.save_predictions) if args.save_predictions else None
+
+    bench_kwargs = dict(
+        adapter_path=args.adapter_path,
+        top_k=args.top_k,
+        alpha=args.alpha,
+        save_predictions_path=pred_path,
+    )
 
     if args.config:
-        result = run_single_config(
-            args.config, eval_data,
-            adapter_path=args.adapter_path,
-            top_k=args.top_k,
-            alpha=args.alpha,
-        )
+        result = run_single_config(args.config, eval_data, **bench_kwargs)
         _print_result(result)
         all_results.append(result)
     elif args.all:
-        all_results = run_all_configs(eval_data, adapter_path=args.adapter_path)
+        all_results = run_all_configs(eval_data, **bench_kwargs)
     elif args.ablations:
-        all_results = run_ablations(eval_data, adapter_path=args.adapter_path)
+        all_results = run_ablations(eval_data, **bench_kwargs)
     else:
         parser.print_help()
         return
