@@ -141,6 +141,7 @@ def run_single_config(config_key: str, eval_data: list[dict], **kwargs) -> dict:
 
     elapsed = time.time() - start_time
 
+    predictions_saved_to: str | None = None
     pred_base = kwargs.get("save_predictions_path")
     if pred_base:
         base = Path(pred_base)
@@ -153,7 +154,8 @@ def run_single_config(config_key: str, eval_data: list[dict], **kwargs) -> dict:
         ]
         with open(path, "w", encoding="utf-8") as f:
             json.dump(rows, f, ensure_ascii=False, indent=2)
-        print(f"Saved {len(rows)} predictions to {path}")
+        predictions_saved_to = str(path.resolve())
+        print(f"Saved {len(rows)} predictions to {predictions_saved_to}")
 
     print("Computing metrics (ROUGE / BERTScore may take several minutes)...")
     metrics = compute_all_metrics(questions, predictions, references)
@@ -162,6 +164,8 @@ def run_single_config(config_key: str, eval_data: list[dict], **kwargs) -> dict:
     metrics["elapsed_seconds"] = elapsed
     metrics["top_k"] = top_k
     metrics["alpha"] = alpha
+    if predictions_saved_to:
+        metrics["predictions_saved_to"] = predictions_saved_to
 
     return metrics
 

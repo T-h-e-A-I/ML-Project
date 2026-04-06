@@ -1,0 +1,53 @@
+Loaded 200 evaluation samples
+
+============================================================
+Running config: M1 - Multimodal RAG + LLaVA-7B
+============================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|█| 103/103 [00:00<00:00, 1549.33it/s, Materializing param=
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/usr/local/lib/python3.12/dist-packages/open_clip/factory.py:450: UserWarning: QuickGELU mismatch between final model config (quick_gelu=False) and pretrained tag 'openai' (quick_gelu=True).
+  warnings.warn(
+The image processor of type `CLIPImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. 
+Downloading (incomplete total...): 0.00B [00:00, ?B/s]
+Fetching 3 files: 100%|████████████████████████| 3/3 [00:00<00:00, 29676.68it/s]
+Download complete: : 0.00B [00:00, ?B/s]              
+Loading weights: 100%|█| 686/686 [00:04<00:00, 147.92it/s, Materializing param=m
+Starting evaluation: 200 examples (no log lines until now because models were loading).
+M1 eval: 100%|████████████████████████████████| 200/200 [48:08<00:00, 14.44s/ex]
+Saved 200 predictions to /kaggle/working/preds_M1.json
+Computing metrics (ROUGE / BERTScore may take several minutes)...
+Loading weights: 100%|█| 389/389 [00:00<00:00, 1438.05it/s, Materializing param=
+RobertaModel LOAD REPORT from: roberta-large
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.layer_norm.bias         | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+pooler.dense.bias               | MISSING    | 
+pooler.dense.weight             | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+--- M1 (Multimodal RAG + LLaVA-7B) ---
+  Exact match:      0.0000
+  Contains accuracy: 0.0450
+  ROUGE-L F1:        0.1406
+  BERTScore F1:      0.8347
+  GPT-4o Correctness:1.58
+  GPT-4o Reasoning:  1.96
+  Time:              2888.1s
+  top_k=5, alpha=0.5
+
+Results saved to /kaggle/working/benchmark_m1.json

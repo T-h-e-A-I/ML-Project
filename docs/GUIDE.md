@@ -304,11 +304,29 @@ python -m src.evaluation.run_benchmark --config B1
 python -m src.evaluation.run_benchmark --config B2
 ```
 
+Useful flags for long VL runs or Kaggle:
+
+| Flag | Meaning |
+|------|--------|
+| `--max-samples N` | Only the first N eval examples (smoke test or partial run). |
+| `--output PATH` | Metrics JSON path (default: `data/eval/benchmark_results.json`). |
+| `--save-predictions PATH` | Writes `question` / `reference` / `prediction` rows **before** metrics. On disk the file is `PATH` with the stem suffixed by `_CONFIG` (e.g. `--save-predictions data/eval/preds.json` → `data/eval/preds_B2.json`). If metrics fail, you still have generations. The metrics JSON also includes `num_samples` and, when used, `predictions_saved_to`. |
+
+Example (200 samples, explicit outputs):
+
+```bash
+python -m src.evaluation.run_benchmark --config M1 \
+  --max-samples 200 \
+  --output data/eval/benchmark_m1_200.json \
+  --save-predictions data/eval/preds.json
+# Predictions: data/eval/preds_M1.json
+```
+
 Each run will:
 1. Load the eval dataset
 2. For each question: retrieve context from ChromaDB, generate an answer
 3. Compute all metrics (exact match, contains accuracy, ROUGE-L, BERTScore)
-4. Save results to `data/eval/benchmark_results.json`
+4. Save results to `data/eval/benchmark_results.json` unless `--output` is set
 
 #### Verification tests
 
@@ -438,11 +456,18 @@ print('PASS')
 ```bash
 # Config M2: Multimodal RAG + fine-tuned LLaVA
 python -m src.evaluation.run_benchmark --config M2 \
-  --adapter-path outputs/llava_physics_qlora/final_adapter
+  --adapter-path outputs/llava_physics_qlora/final_adapter \
+  --max-samples 200 \
+  --output data/eval/benchmark_m2.json \
+  --save-predictions data/eval/preds.json
 
 # Config M3: No retrieval + fine-tuned LLaVA (direct inference)
 python -m src.evaluation.run_benchmark --config M3 \
-  --adapter-path outputs/llava_physics_qlora/final_adapter
+  --adapter-path outputs/llava_physics_qlora/final_adapter \
+  --max-samples 200 \
+  --output data/eval/benchmark_m3.json \
+  --save-predictions data/eval/preds.json
+# Predictions land in preds_M2.json / preds_M3.json (shared stem, different suffix)
 ```
 
 #### Verification test
@@ -666,8 +691,12 @@ python -m src.evaluation.run_benchmark --config M1
 # -- FINE-TUNING --
 python -m src.fine_tuning.prepare_data
 # (upload to Kaggle, run notebook, download adapter)
-python -m src.evaluation.run_benchmark --config M2 --adapter-path outputs/llava_physics_qlora/final_adapter
-python -m src.evaluation.run_benchmark --config M3 --adapter-path outputs/llava_physics_qlora/final_adapter
+python -m src.evaluation.run_benchmark --config M2 --adapter-path outputs/llava_physics_qlora/final_adapter \
+  --max-samples 200 --output data/eval/benchmark_m2.json --save-predictions data/eval/preds.json
+python -m src.evaluation.run_benchmark --config M3 --adapter-path outputs/llava_physics_qlora/final_adapter \
+  --max-samples 200 --output data/eval/benchmark_m3.json --save-predictions data/eval/preds.json
+
+# Kaggle example paths: --output /kaggle/working/benchmark_m2.json --save-predictions /kaggle/working/preds.json
 
 # -- ABLATIONS --
 python -m src.evaluation.run_benchmark --ablations --adapter-path outputs/llava_physics_qlora/final_adapter

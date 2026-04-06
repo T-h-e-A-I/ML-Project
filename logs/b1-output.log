@@ -1,0 +1,49 @@
+Loaded 200 evaluation samples
+
+============================================================
+Running config: B1 - Text-only RAG + Mistral-7B
+============================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|█| 103/103 [00:00<00:00, 1472.34it/s, Materializing param=
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/usr/local/lib/python3.12/dist-packages/open_clip/factory.py:450: UserWarning: QuickGELU mismatch between final model config (quick_gelu=False) and pretrained tag 'openai' (quick_gelu=True).
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights: 100%|█| 291/291 [00:08<00:00, 33.43it/s, Materializing param=mo
+Starting evaluation: 200 examples (no log lines until now because models were loading).
+B1 eval: 100%|██████████████████████████████| 200/200 [2:15:05<00:00, 40.53s/ex]
+Computing metrics (ROUGE / BERTScore may take several minutes)...
+Loading weights: 100%|█| 389/389 [00:00<00:00, 1357.42it/s, Materializing param=
+RobertaModel LOAD REPORT from: roberta-large
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+pooler.dense.bias               | MISSING    | 
+pooler.dense.weight             | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+--- B1 (Text-only RAG + Mistral-7B) ---
+  Exact match:      0.0000
+  Contains accuracy: 0.0450
+  ROUGE-L F1:        0.0256
+  BERTScore F1:      0.7905
+  GPT-4o Correctness:1.66
+  GPT-4o Reasoning:  2.04
+  Time:              8105.7s
+  top_k=5, alpha=0.5
+
+Results saved to /kaggle/working/benchmark_b1.json
