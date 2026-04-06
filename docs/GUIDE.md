@@ -541,14 +541,56 @@ print('PASS')
 ```bash
 # Generate all plots and the LaTeX results table
 python -m src.evaluation.visualize_results
+
+# If you store per-config files in data/benchmarks, load from there:
+python -m src.evaluation.visualize_results --benchmarks-dir data/benchmarks
 ```
 
 This creates in `data/eval/plots/`:
 - `accuracy_comparison.png` -- Bar chart comparing all configs
 - `metric_heatmap.png` -- Heatmap of all metrics
+- `contains_vs_bertscore.png` -- Trade-off scatter plot
+- `runtime_comparison.png` -- Runtime comparison by config
 - `ablation_topk.png` -- Line plot of accuracy vs. retrieval depth
 - `ablation_alpha.png` -- Line plot of accuracy vs. fusion weight
 - `results_table.tex` -- LaTeX table ready to paste into the paper
+
+### Phase 8b: Post-hoc prediction analysis (question-wise)
+
+**Goal:** Analyze saved `data/preds/preds_*.json` without re-running model inference.
+
+```bash
+# Generate summary + per-question metrics
+python -m src.evaluation.posthoc_analysis --preds-dir data/preds --output-dir data/eval/posthoc
+```
+
+Outputs:
+- `data/eval/posthoc/posthoc_summary.csv` -- per-config aggregated metrics
+- `data/eval/posthoc/question_metrics_<CONFIG>.csv` -- row-level metrics per question
+- `data/eval/posthoc/topic_breakdown.csv` -- topic-wise performance breakdown
+
+### Phase 8c: Lightweight local UI for prediction review
+
+```bash
+python -m src.evaluation.preds_viewer \
+  --preds-dir data/preds \
+  --benchmarks-dir data/benchmarks \
+  --plots-dir data/eval/plots \
+  --posthoc-dir data/eval/posthoc \
+  --port 8000
+# Open http://127.0.0.1:8000
+```
+
+UI features:
+- Overview dashboard with benchmark metrics across configs
+- Quick per-config prediction stats (hit rate, avg output length)
+- Embedded generated plot images (`data/eval/plots/*.png`) when available
+- Embedded posthoc summary table (`data/eval/posthoc/posthoc_summary.csv`) when available
+- Filter by config, topic, and hit/miss (`contains_ref`)
+- Search by question/prediction text
+- Browse question-wise reference vs model output
+- Side-by-side compare page (`/compare`) with index-based left join (`B1/B2/M1/M2/M3`) and `missing` tags
+- Pagination shows `Page X / Y` in both `/questions` and `/compare`
 
 #### Verification test
 

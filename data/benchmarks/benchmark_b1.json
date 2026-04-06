@@ -1,26 +1,26 @@
 [
   {
     "exact_match": 0.0,
-    "contains_accuracy": 0.045,
+    "contains_accuracy": 0.07,
     "rouge_l": {
-      "precision": 0.017100956991942303,
-      "recall": 0.10656319502658705,
-      "f1": 0.0256
+      "precision": 0.014343274321683945,
+      "recall": 0.5303924078372607,
+      "f1": 0.02736424891125649
     },
     "bert_score": {
-      "precision": 0.7728947362088907,
-      "recall": 0.8093444428316257,
-      "f1": 0.7905
+      "precision": 0.7528481483459473,
+      "recall": 0.8361257314682007,
+      "f1": 0.7919730544090271
     },
     "num_samples": 200,
     "gpt4o_judge": {
-      "correctness": 1.66,
-      "reasoning": 2.04,
+      "correctness": 1.86,
+      "reasoning": 2.18,
       "num_judged": 50
     },
     "config": "B1",
     "config_name": "Text-only RAG + Mistral-7B",
-    "elapsed_seconds": 8105.7,
+    "elapsed_seconds": 7562.749093770981,
     "top_k": 5,
     "alpha": 0.5
   }

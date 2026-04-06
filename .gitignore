@@ -27,8 +27,16 @@ data/raw/
 data/processed/
 data/chroma_db/
 data/eval/*.json
+data/preds/*.json
 
+# Model outputs
+outputs/
+*.bin
+*.safetensors
+*.gguf
 
+# Logs
+logs/
 
 # Jupyter
 .ipynb_checkpoints/

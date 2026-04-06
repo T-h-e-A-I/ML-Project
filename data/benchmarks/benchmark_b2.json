@@ -1,27 +1,28 @@
 [
   {
     "exact_match": 0.0,
-    "contains_accuracy": 0.06,
+    "contains_accuracy": 0.08,
     "rouge_l": {
-      "precision": 0.07512935045503465,
-      "recall": 0.4681623156255509,
-      "f1": 0.1124680550073964
+      "precision": 0.07465124709823903,
+      "recall": 0.45485806228085635,
+      "f1": 0.11096038130283438
     },
     "bert_score": {
-      "precision": 0.8210390210151672,
-      "recall": 0.8597592115402222,
-      "f1": 0.8397409319877625
+      "precision": 0.8205868601799011,
+      "recall": 0.8595333695411682,
+      "f1": 0.8394151329994202
     },
     "num_samples": 200,
     "gpt4o_judge": {
-      "correctness": 1.7,
-      "reasoning": 1.98,
+      "correctness": 1.74,
+      "reasoning": 2.02,
       "num_judged": 50
     },
     "config": "B2",
     "config_name": "Text RAG + LLaVA-7B (no fine-tune)",
-    "elapsed_seconds": 1982.8127224445343,
+    "elapsed_seconds": 1992.8381516933441,
     "top_k": 5,
-    "alpha": 0.5
+    "alpha": 0.5,
+    "predictions_saved_to": "/kaggle/working/ml-project/data/eval/preds_B2.json"
   }
 ]

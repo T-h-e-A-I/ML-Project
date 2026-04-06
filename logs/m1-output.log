@@ -40,14 +40,31 @@ Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 - MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
 
+RobertaModel LOAD REPORT from: roberta-large
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+pooler.dense.weight             | MISSING    | 
+pooler.dense.bias               | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Download complete: 100%|███████████████████| 14.1G/14.1G [50:07<00:00, 4.70MB/s]
+
 --- M1 (Multimodal RAG + LLaVA-7B) ---
   Exact match:      0.0000
-  Contains accuracy: 0.0450
-  ROUGE-L F1:        0.1406
-  BERTScore F1:      0.8347
-  GPT-4o Correctness:1.58
-  GPT-4o Reasoning:  1.96
-  Time:              2888.1s
+  Contains accuracy: 0.0350
+  ROUGE-L F1:        0.1399
+  BERTScore F1:      0.8333
+  GPT-4o Correctness:1.66
+  GPT-4o Reasoning:  2.06
+  Time:              2918.8s
   top_k=5, alpha=0.5
 
 Results saved to /kaggle/working/benchmark_m1.json

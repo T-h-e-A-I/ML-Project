@@ -1,0 +1,3 @@
+config,num_samples,exact_norm_acc,contains_ref_acc,contains_ref_first_sentence_acc,token_f1_mean,token_f1_first_sentence_mean,rougeL_f1_mean,rougeL_f1_first_sentence_mean,bert_score_f1_mean,tfidf_cosine_mean,avg_pred_words,median_pred_words,p95_pred_words,empty_rate,repetition_rate,therefore_phrase_rate,visual_phrase_rate,source_file
+M1,200,0.0,0.035,0.02,0.17551879383477753,0.21675553946184983,0.1316646399647434,0.1630283047170539,,0.30483641354679153,63.775,52.0,181.14999999999995,0.01,0.085,0.0,0.01,data/preds/preds_M1_0_200.json
+M3,200,0.0,0.19,0.06,0.0325894321468797,0.18524758428892496,0.030444436847941375,0.17357928506490886,,0.35507175958044,283.485,314.5,400.15,0.0,0.46,0.85,0.85,data/preds/preds_M3_0_200.json

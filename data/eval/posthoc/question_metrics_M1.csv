@@ -1,0 +1,6788 @@
+config,question,reference,prediction,prediction_first_sentence,topic,pred_words,exact_norm,contains_ref,contains_ref_first_sentence,token_f1,token_f1_first_sentence,rougeL_f1,rougeL_f1_first_sentence,tfidf_cosine,is_empty,has_repetition,has_therefore_phrase,has_visual_phrase
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"In the given context, there are two samples: one containing helium atoms and the other containing krypton atoms. To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles.
+
+For the helium sample, we can find the rms speed using the provided equation:
+
+rms\_speed = sqrt(3 \* (8 \* T) / (m \* (2 \* pi \* 10^-12))
+
+where T is the temperature in Kelvin, m is the mass of the particle in grams, and pi is a mathematical constant.
+
+For the krypton sample, we can find the rms speed using the provided equation:
+
+rms\_speed = sqrt(3 \* (8 \* T) / (m \* (2 \* pi \* 10^-12))
+
+
+Now we can compare the average kinetic energies of the particles in each sample. The average kinetic energy of a particle is given by:
+
+average\_kinetic\_energy = (3 \* (8 \* T)) / (m \* (2 \* pi \* 10^-12))
+
+
+To determine the temperature of each sample, we can use the provided equations:
+
+For helium:
+
+T = 5000 K
+
+For krypton:
+
+T = 5000 K
+
+Now we can compare the average kinetic energies of the particles in each sample. The average kinetic energy of a particle is given by:
+
+average\_kinetic\_energy = (3 \* (8 \* T)) / (m \* (2 \* pi \* 10^-12))
+
+
+Comparing the average kinetic energies of the particles in each sample, we can determine which sample has the higher temperature.","In the given context, there are two samples: one containing helium atoms and the other containing krypton atoms",thermal_kinetic,243,0.0,0.0,0.0,0.00930232558139535,0.0,0.00930232558139535,0.0,0.11262765836674167,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 1.,"The magnetic force between the magnets in each pair is equal and opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In this case, the magnetic force between the two magnets is equal and opposite in direction, resulting in a net force of zero on the wire.",The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,61,0.0,0.0,0.0,0.17391304347826086,0.5217391304347827,0.14492753623188404,0.43478260869565216,0.5832118435198043,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with a hairy body to offspring with a hairless body? Choose the most likely ratio.,4:0,"The expected ratio of offspring with a hairy body to offspring with a hairless body is 1:1, as both types of offspring have the same genetic makeup.","The expected ratio of offspring with a hairy body to offspring with a hairless body is 1:1, as both types of offspring have the same genetic makeup",genetics_ratio,27,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,Which of the following could Cody's test show?,if the weather station would work when the temperature was 50°C,"Cody's test could show the presence of a free electron in the metal, as the excess energy of 13.6 eV will be converted into kinetic energy of the free electron. This is a consequence of the metal's electrical conductivity, which arises from the movement of free electrons through the metal lattice. The test would be able to detect this excess energy by observing the metal's electrical conductivity or by measuring the metal's temperature change in response to an applied electrical current.","Cody's test could show the presence of a free electron in the metal, as the excess energy of 13",experimental_design,81,0.0,0.0,0.0,0.08695652173913042,0.13333333333333333,0.08695652173913042,0.13333333333333333,0.398031161138567,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",each aquarium . . . the surroundings,",
+
+,
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+,
+
+,",",",other,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 1.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.48,0.48,0.4,0.4,0.6363961030678927,0.0,0.0,0.0,0.0
+M1,Which type of force from the girl opens the window?,push,"The girl is using the force of gravity to open the window. Gravity is a force that acts between two objects with mass, and it causes them to attract each other. In this case, the girl is using her own mass to apply a force on the window, causing it to open. The force of gravity is a fundamental force of nature, and it is responsible for the weight of objects and the attraction between objects with mass.",The girl is using the force of gravity to open the window,other,78,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Identify the question that Lily's experiment can best answer.,Do the insides of white boxes get hotter than the insides of black boxes when the boxes are left in the sun?,Lily's experiment can best answer the question of how does the interference of water waves differ from the interference of electrons? How are they analogous?,Lily's experiment can best answer the question of how does the interference of water waves differ from the interference of electrons,other,25,0.0,0.0,0.0,0.2553191489361702,0.23255813953488372,0.2553191489361702,0.23255813953488372,0.44733752888061057,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with brown eyes to offspring with red eyes? Choose the most likely ratio.,4:0,,,genetics_ratio,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.5517241379310345,0.5517241379310345,0.3448275862068966,0.3448275862068966,0.6527139518645054,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"In the given context, there are multiple questions and answers related to the average kinetic energy of particles, temperature, and other physical concepts. To provide a clear and concise answer, I would need more specific information about the samples and particles involved. Please provide the details of the samples and particles you would like me to compare, and I will be happy to help you.","In the given context, there are multiple questions and answers related to the average kinetic energy of particles, temperature, and other physical concepts",thermal_kinetic,65,0.0,0.0,0.0,0.029850746268656723,0.0,0.029850746268656723,0.0,0.05913123959890826,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Which of the following could Emilia's test show?,whether she added enough nutrients to help the bacteria produce 20% more insulin,"Emilia's test could show the effectiveness of the spring constant of the bow in launching the arrow towards the apple. By measuring the distance the arrow travels and the height of the apple, the spring constant can be calculated and compared to the actual distance and height of the arrow and apple. This would provide insight into the efficiency of the spring constant in launching the arrow towards the apple.",Emilia's test could show the effectiveness of the spring constant of the bow in launching the arrow towards the apple,experimental_design,70,0.0,0.0,0.0,0.048192771084337345,0.060606060606060615,0.048192771084337345,0.060606060606060615,0.24123791362594746,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles in the respective samples. For helium atoms at 5.00 K, the rms speed is 514 m/s. For hydrogen atoms at 21°C, the rms speed is 465 m/s. To determine the average kinetic energy of the particles, we can use the equation:
+
+KE = (1/2) \* rms\_speed^2 \* mass
+
+where KE is the average kinetic energy, rms\_speed is the rms speed, and mass is the mass of the particles.
+
+First, we need to find the mass of the particles in each sample. The mass of a helium atom is 4.00 g/mol, and the mass of a hydrogen atom is 2.016 g/mol.
+
+Now, we can calculate the average kinetic energy of the particles in each sample:
+
+KE\_helium = (1/2) \* (514 m/s)^2 \* 4.00 g/mol
+KE\_hydrogen = (1/2) \* (465 m/s)^2 \* 2.016 g/mol
+
+The average kinetic energy of the particles in the helium sample is higher than in the hydrogen sample.
+
+Therefore, the helium sample has a higher temperature than the hydrogen sample.","To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles in the respective samples",thermal_kinetic,184,0.0,0.0,0.0,0.02259887005649718,0.07142857142857144,0.02259887005649718,0.07142857142857144,0.12092253026861358,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.4444444444444445,0.4444444444444445,0.3703703703703704,0.3703703703703704,0.5948118774794626,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,climate,"The passage describes the weather, as it talks about the temperature and pressure changes that occur during a day, and how these changes affect the phenomena like buoyancy, scuba diving, and the behavior of hot air balloons and ships.","The passage describes the weather, as it talks about the temperature and pressure changes that occur during a day, and how these changes affect the phenomena like buoyancy, scuba diving, and the behavior of hot air balloons and ships",weather_climate,39,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Which of the following could Bryan's test show?,whether the filter was clogged,"Bryan's test could show the critical angle, which is an essential concept in understanding the behavior of light in various materials and structures. The critical angle is the angle at which the total internal reflection occurs, where light is reflected from the surface without passing through the material. This concept is crucial in understanding the properties of materials and structures, such as the behavior of light in mirrors, lenses, and other optical devices.","Bryan's test could show the critical angle, which is an essential concept in understanding the behavior of light in various materials and structures",experimental_design,73,0.0,0.0,0.0,0.02564102564102564,0.07142857142857142,0.02564102564102564,0.07142857142857142,0.2811127713994909,0.0,0.0,0.0,0.0
+M1,Which of the following could Carter's test show?,if the weather station would work when the temperature was 50°C,"Carter's test, also known as the iodine test, is used to identify the presence of starch in a sample. The test involves the use of iodine, which reacts with starch to form a purple-black complex. In the provided context, there is no direct reference to Carter's test or the presence of starch. Therefore, the answer to the question is not directly related to the context provided.","Carter's test, also known as the iodine test, is used to identify the presence of starch in a sample",experimental_design,66,0.0,0.0,0.0,0.05194805194805195,0.13333333333333333,0.05194805194805195,0.13333333333333333,0.35659298328764727,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample. The rms speed is a measure of the average translational kinetic energy of a particle. The higher the rms speed, the higher the average kinetic energy of the particles.
+
+In the first sample, the rms speed of the oxygen molecules is 465 m/s. In the second sample, the rms speed of the hydrogen molecules is 193 m/s. To determine which sample has the higher temperature, we need to know the rms speed of the hydrogen molecules in the first sample.
+
+If the rms speed of the hydrogen molecules in the first sample is higher than 193 m/s, the first sample has a higher temperature. If the rms speed of the hydrogen molecules in the first sample is lower than or equal to 193 m/s, the second sample has a higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample",thermal_kinetic,156,0.0,0.0,0.0,0.02531645569620253,0.07407407407407407,0.02531645569620253,0.07407407407407407,0.22376224218846044,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In this case, the magnetic field generated by the current in one wire creates a force on the other wire, which is equal in magnitude but opposite in direction.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,66,0.0,0.0,0.0,0.23376623376623376,0.5714285714285714,0.2077922077922078,0.35714285714285715,0.6205427141408237,0.0,0.0,0.0,0.0
+M1,Which of the following could Dustin's test show?,how steady a parachute with a 1 m vent was at 200 km per hour,"Dustin's test could show the interference pattern of waves from separate slits and the diffraction of waves from within one slit. The test would involve observing the intensity observed on the screen, which is a product of the interference pattern of waves from separate slits and the diffraction of waves from within one slit. By adjusting the slit separation d and observing the resulting interference pattern, one can study the behavior of light and understand the principles of wave-particle duality and the Doppler effect.",Dustin's test could show the interference pattern of waves from separate slits and the diffraction of waves from within one slit,experimental_design,84,0.0,0.0,0.0,0.0202020202020202,0.0,0.0202020202020202,0.0,0.026541917906001414,0.0,0.0,0.0,0.0
+M1,Which air temperature was measured within the outlined area shown?,-17°C,The air temperature measured within the outlined area shown is 0°C.,The air temperature measured within the outlined area shown is 0°C,thermal_kinetic,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with green body feathers to offspring with blue body feathers? Choose the most likely ratio.,2:2,"The expected ratio of offspring with green body feathers to offspring with blue body feathers depends on the genetic makeup of the parent birds. If the parent birds are homozygous for green feathers, then all their offspring will have green feathers. If the parent birds are homozygous for blue feathers, then all their offspring will have blue feathers. If the parent birds are heterozygous for green and blue feathers, then the offspring will have a mix of green and blue feathers. The most likely ratio would be the result of a random combination of the genetic makeup of the parent birds.",The expected ratio of offspring with green body feathers to offspring with blue body feathers depends on the genetic makeup of the parent birds,genetics_ratio,101,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 1.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets, the magnetic force between them is equal in magnitude but opposite in direction, as they are exerting forces on each other.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,64,0.0,0.0,0.0,0.24000000000000002,0.5714285714285714,0.21333333333333335,0.35714285714285715,0.6197487508865996,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample. Unfortunately, the provided context does not provide this information. Therefore, it is impossible to determine which sample has the higher temperature based on the given information.","To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample",thermal_kinetic,52,0.0,0.0,0.0,0.037037037037037035,0.07142857142857144,0.037037037037037035,0.07142857142857144,0.13130643285972254,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,"The magnetic force between the magnets in each pair is equal and opposite in direction. This is because the Biot-Savart law states that the magnetic field due to a current-carrying wire is proportional to the current and inversely proportional to the length of the wire. As a result, the magnetic force per unit length is equal and opposite in direction for all pairs of magnets.",The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,65,0.0,0.0,0.0,0.2077922077922078,0.4444444444444445,0.18181818181818185,0.3703703703703704,0.6849348892187752,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 1.,"The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets attracting each other, the force experienced by one magnet is equal and opposite to the force experienced by the other magnet.",The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,65,0.0,0.0,0.0,0.16438356164383564,0.46153846153846156,0.13698630136986303,0.3846153846153846,0.5395637425347116,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles in the respective samples.
+
+For helium atoms at 5.00 K:
+
+* The rms speed of helium atoms is 514 m/s.
+
+For krypton gas at 200 K:
+
+* The rms speed of krypton atoms is 514 m/s.
+
+Since both samples have the same rms speed, they have the same average kinetic energy.
+
+Therefore, both samples have the same temperature, which is 200 K.","To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles in the respective samples",thermal_kinetic,84,0.0,0.0,0.0,0.023809523809523808,0.07142857142857144,0.023809523809523808,0.07142857142857144,0.044194173824159216,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,climate,"The passage describes the weather, which refers to the current state of the atmosphere, including temperature, humidity, wind, and other factors. On the other hand, climate refers to the long-term patterns of weather in a particular region.","The passage describes the weather, which refers to the current state of the atmosphere, including temperature, humidity, wind, and other factors",weather_climate,37,0.0,1.0,0.0,0.052631578947368425,0.0,0.052631578947368425,0.0,0.11396057645963795,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,"The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets attracting each other, the magnetic force between them is always equal in magnitude but opposite in direction.",The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,61,0.0,0.0,0.0,0.24657534246575344,0.4666666666666666,0.2191780821917808,0.33333333333333337,0.5832118435198044,0.0,0.0,0.0,0.0
+M1,Which of the following could Ken's test show?,whether the filter was clogged,"Ken's test could show the Doppler effect, which is the change in frequency of a wave due to the relative motion of the source and observer. In the context of the question, the observer is watching an oncoming ambulance moving at 110 km/h, and the musician is playing an 880-Hz note. The observer receives an 888-Hz tone from the ambulance, and the musician plays a 3500-Hz note. The Doppler effect is responsible for the observed frequency difference between the oncoming ambulance and the musician.","Ken's test could show the Doppler effect, which is the change in frequency of a wave due to the relative motion of the source and observer",experimental_design,84,0.0,0.0,0.0,0.02247191011235955,0.06451612903225806,0.02247191011235955,0.06451612903225806,0.35653701640614627,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,What is the direction of this pull?,toward the magnet,The direction of the pull is towards the right.,The direction of the pull is towards the right,other,9,0.0,0.0,0.0,0.16666666666666666,0.16666666666666666,0.16666666666666666,0.16666666666666666,0.447213595499958,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,weather,"The passage describes the weather, which refers to the current state of the atmosphere, including temperature, humidity, wind speed, and other factors. The context provided includes information about temperature, pressure, and the behavior of the Eiffel Tower and the Washington Monument, which are all aspects of the weather. The climate, on the other hand, refers to the long-term patterns of weather in a particular region, which can include factors such as temperature, precipitation, and wind direction.","The passage describes the weather, which refers to the current state of the atmosphere, including temperature, humidity, wind speed, and other factors",weather_climate,76,0.0,1.0,1.0,0.025974025974025976,0.08695652173913045,0.025974025974025976,0.08695652173913045,0.12549116102763172,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 1.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.5517241379310345,0.5517241379310345,0.3448275862068966,0.3448275862068966,0.6527139518645054,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.5517241379310345,0.5517241379310345,0.3448275862068966,0.3448275862068966,0.6527139518645054,0.0,0.0,0.0,0.0
+M1,Select the mammal below.,fruit bat,",
+
+
+
+
+,
+
+
+
+,
+ and
+
+ and
+,
+,
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+,
+,
+,
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+,
+
+,
+
+
+
+ and,
+
+
+
+,
+,
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+ of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+ and
+
+ and
+ and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+,
+,
+
+,
+
+
+
+ and
+
+
+
+
+
+
+
+
+
+
+
+
+,
+,
+ in in,
+,
+,
+,
+
+
+
+
+
+,
+,
+
+,
+,
+,
+
+,
+,
+
+,
+, and and in in
+,
+,
+
+,
+,
+,
+,
+
+,
+,
+,
+,
+ and in and
+,
+,
+,
+
+,
+,
+,,
+
+,
+
+,,
+
+
+,",",",other,79,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"In the given context, there are multiple questions and statements related to the average kinetic energy of particles, temperature, and escape velocity. To provide a comprehensive answer, I will address each question separately.
+
+1. Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?
+
+For the given context, I cannot provide a direct comparison of average kinetic energy between the samples. However, I can provide information on the average kinetic energy of particles at different temperatures.
+
+2. What is the average kinetic energy of a helium atom at 5.00 K?
+
+At 5.00 K, the average kinetic energy of a helium atom is approximately 0.02 eV.
+
+3. What is the average kinetic energy of a hydrogen atom at 21.00 K?
+
+At 21.00 K, the average kinetic energy of a hydrogen atom is approximately 0.02 eV.
+
+4. What is the average kinetic energy of a carbon dioxide molecule at 1350 m/s?
+
+At 1350 m/s, the average kinetic energy of a carbon dioxide molecule is approximately 0.02 eV.
+
+5. What is the average kinetic energy of a nitrogen molecule at 300 K?
+
+At 300 K, the average kinetic energy of a nitrogen molecule is approximately 0.02 eV.
+
+6. What is the average kinetic energy of a helium atom at 300 K?
+
+At 300 K, the average kinetic energy of a helium atom is approximately 0.02 eV.
+
+7. What is the average kinetic energy of a hydrogen molecule at 200 K?
+
+At 200 K, the average kinetic energy of a hydrogen molecule is approximately 0.02 eV.
+
+
+8. What is the average kinetic energy of a carbon dioxide molecule at 1000 K?
+
+
+At 100 K, the average kinetic energy of a carbon dioxide molecule is approximately 0.02 eV","In the given context, there are multiple questions and statements related to the average kinetic energy of particles, temperature, and escape velocity",thermal_kinetic,290,0.0,0.0,0.0,0.00684931506849315,0.0,0.00684931506849315,0.0,0.012799492126228447,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,climate,"The passage describes the weather, as it talks about the temperature and pressure changes during the day.","The passage describes the weather, as it talks about the temperature and pressure changes during the day",weather_climate,17,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"In the given context, there are two different samples being compared: one containing helium atoms and the other containing krypton gas. To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles in each sample.
+
+For the helium sample, we can use the equation:
+
+rms\_speed = sqrt(3 \* (8 \* T) / (m \* 2 \* pi))
+
+where T is the temperature in Kelvin and m is the mass of the particle in kilograms.
+
+For the krypton sample, we can use the equation:
+
+rms\_speed = sqrt(3 \* (8 \* T) / (m \* 2 \* pi))
+
+where T is the temperature in Kelvin and m is the mass of the particle in kilograms.
+
+Once we have the rms speeds for both samples, we can compare their average kinetic energies. The sample with the higher rms speed will have a higher temperature.
+
+However, without the specific values of the temperatures and masses of the particles in each sample, it is impossible to determine which sample has the higher temperature.","In the given context, there are two different samples being compared: one containing helium atoms and the other containing krypton gas",thermal_kinetic,179,0.0,0.0,0.0,0.023668639053254437,0.0,0.023668639053254437,0.0,0.16017006668469644,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each case. The rms speed is a measure of the average kinetic energy of a particle. A higher rms speed indicates a higher average kinetic energy, which is directly related to temperature.
+
+In the first case, the rms speed of the helium atoms is 514 m/s, while in the second case, the rms speed of the hydrogen atoms is 193 m/s. The helium atoms have a higher rms speed, which means they have a higher average kinetic energy and thus a higher temperature compared to the hydrogen atoms.","To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each case",thermal_kinetic,111,0.0,0.0,0.0,0.035398230088495575,0.07407407407407407,0.035398230088495575,0.07407407407407407,0.2478312843235159,0.0,0.0,0.0,0.0
+M1,Identify the question that Camille's experiment can best answer.,Do more tomato seedlings grow when they are planted in soil with fertilizer compared to soil without fertilizer?,"Camille's experiment is designed to investigate the nature of light by studying the behavior of light passing through a double-slit apparatus. The experiment can best answer the question of whether light behaves as waves or as a stream of photons. By observing the interference pattern created by the light passing through the double slits, Camille's experiment can provide insights into the wave-particle duality and the behavior of light in the quantum world.",Camille's experiment is designed to investigate the nature of light by studying the behavior of light passing through a double-slit apparatus,other,72,0.0,0.0,0.0,0.04444444444444444,0.05128205128205128,0.02222222222222222,0.05128205128205128,0.02823912473624525,0.0,0.0,0.0,0.0
+M1,Which of the following could Jen's test show?,whether the new turbine could produce 10% more electricity,"Jen's test could show the Doppler Effect, which is a phenomenon where the frequency of a wave or its interference pattern is changed due to the motion of the source of the wave. In the given context, the test involves a jet flying towards the observers, who are watching the jet at a speed of 110 km/h. The speed of sound on that day is 345 m/s. As the jet approaches, the observers will experience a frequency shift due to the Doppler Effect. The frequency they receive when the jet flies directly away from them will also be affected by the Doppler Effect.","Jen's test could show the Doppler Effect, which is a phenomenon where the frequency of a wave or its interference pattern is changed due to the motion of the source of the wave",experimental_design,103,0.0,0.0,0.0,0.03571428571428571,0.09523809523809523,0.017857142857142856,0.047619047619047616,0.2742292204809688,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,weather,"The passage describes the weather, which is the current state of the atmosphere at a particular moment in time. The weather can change rapidly, as seen in the examples provided, while the climate is the long-term pattern of weather in a particular region.","The passage describes the weather, which is the current state of the atmosphere at a particular moment in time",weather_climate,43,0.0,1.0,1.0,0.04545454545454545,0.1,0.04545454545454545,0.1,0.2750095491084634,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,neither; the samples have the same temperature,"In the given context, there are two samples: one containing helium atoms and the other containing krypton gas. To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample. However, the provided diagrams do not provide the necessary information to determine the rms speeds of the particles. Therefore, it is impossible to determine which sample has the higher temperature based on the provided diagrams.","In the given context, there are two samples: one containing helium atoms and the other containing krypton gas",thermal_kinetic,78,0.0,0.0,0.0,0.07058823529411765,0.16,0.07058823529411765,0.16,0.5270462766947299,0.0,0.0,0.0,1.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The strength of the magnetic force is the same in both pairs.,"The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction. This is a result of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets, the force experienced by one magnet is equal and opposite to the force experienced by the other magnet.",The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,63,0.0,0.0,0.0,0.21333333333333335,0.4,0.16,0.33333333333333337,0.6179034094543918,0.0,0.0,0.0,0.0
+M1,Which of the following was an independent variable in this experiment?,the temperature where the dough was left to rise,"The independent variable in this experiment is the pressure difference across the circulatory system. The experiment involves a runner's blood flow during a marathon race, and the blood's viscosity has dropped to 95.0% of its normal value. The blood pressure difference across the circulatory system has increased by 50.0%, and the average radii of the runner's blood vessels have increased by a factor of 1.50. This change in pressure difference is the independent variable that affects the runner's blood flow and the average radii of the blood vessels.",The independent variable in this experiment is the pressure difference across the circulatory system,other,88,0.0,0.0,0.0,0.06185567010309277,0.17391304347826086,0.06185567010309277,0.17391304347826086,0.4454451022740086,0.0,0.0,0.0,0.0
+M1,Which of the following could Elise and Myra's test show?,if a new batch of concrete was firm enough to use,"Elise and Myra's test could show the Doppler effect, which is the phenomenon of a change in frequency of a wave or other periodic phenomenon, caused by the relative motion of the source and the observer. In the context of the question, the test could be designed to measure the frequency received by the observers as the jet flies directly towards them, and then as it flies directly away from them. The test would help them understand how the motion of the jet affects the perceived frequency of the sound it emits.","Elise and Myra's test could show the Doppler effect, which is the phenomenon of a change in frequency of a wave or other periodic phenomenon, caused by the relative motion of the source and the observer",experimental_design,92,0.0,0.0,0.0,0.05825242718446602,0.0851063829787234,0.05825242718446602,0.0851063829787234,0.1350067505062922,0.0,0.0,0.0,0.0
+M1,Which of the following could Nolan's test show?,if the weather station would work when the temperature was 50°C,"Nolan's test could show the presence of a specific type of photon, such as a gamma or X-ray photon, depending on the energy range of the photons being detected. The test is designed to detect the presence of high-energy photons, which are emitted by certain types of radioactive decay, such as those involving gamma rays or X-rays. By measuring the energy of the photons detected, Nolan's test can help determine if the observed radiation is of high-energy origin, which could be useful in understanding the nature of the radiation being studied.","Nolan's test could show the presence of a specific type of photon, such as a gamma or X-ray photon, depending on the energy range of the photons being detected",experimental_design,91,0.0,0.0,0.0,0.058823529411764705,0.1,0.058823529411764705,0.1,0.34745171416533593,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is weaker in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.48,0.48,0.4,0.4,0.6363961030678927,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.5517241379310345,0.5517241379310345,0.3448275862068966,0.3448275862068966,0.6527139518645054,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 1.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets, if one magnet exerts a force on the other, the other magnet exerts an equal and opposite force on the first magnet.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,65,0.0,0.0,0.0,0.16438356164383564,0.48,0.13698630136986303,0.4,0.5248906591678238,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",each battery . . . the surroundings,"30
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+  
+
+
+ 
+      
+   
+                    
+              
+  
+    
+   
+  
+
+
+ 
+ 
+  
+
+ 
+
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+ 
+ 
+ 
+
+ 
+  
+                                    ,                                                                                     
+                                           
+
+ 
+     
+  
+
+  
+
+ 
+   
+       
+ 
+       
+
+ 
+     , ,    ,",30,other,5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"In the given context, there are multiple questions and answers related to kinetic energy, temperature, and particle speeds. To provide a comprehensive answer, I will address each question separately.
+
+1. Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?
+
+Answer:
+The context does not provide enough information to determine the average kinetic energy of particles in each sample or compare the temperatures of the samples. To provide a more accurate answer, additional information about the samples and their respective kinetic energies would be required.
+
+2. What is the average kinetic energy of the particles in each sample?
+
+Answer:
+The context does not provide enough information to determine the average kinetic energy of particles in each sample. To provide a more accurate answer, additional information about the samples and their respective kinetic energies would be required.
+
+3. What is the average kinetic energy of the particles in each sample?
+
+Answer:
+The context does not provide enough information to determine the average kinetic energy of particles in each sample. To provide a more accurate answer, additional information about the samples and their respective kinetic energies would be required.
+
+4. What is the average kinetic energy of the particles in each sample?
+
+Answer:
+The context does not provide enough information to determine the average kinetic energy of particles in each sample. To provide a more accurate answer, additional information about the samples and their respective kinetic energies would be required.
+
+5. What is the average kinetic energy of the particles in each sample?
+
+Answer:
+The context does not provide enough information to determine the average kinetic energy of particles in each sample. To provide a more accurate answer, additional information about the samples and their respective kinetic energies would be required.
+
+6. What is the average kinetic energy of the particles in each sample?
+
+Answer:
+The context does not provide enough information to determine the average kinetic energy of particles in each sample. To provide a more accurate answer, additional information about the samples and their respective kinetic energies would be required.
+
+
+7. What is the average kinetic energy of the particles in each sample?
+
+Answer:
+The context does not provide enough information to determine the average kinetic energy of the particles in each sample. To provide a more accurate answer, additional information about the samples and their respective kinetic","In the given context, there are multiple questions and answers related to kinetic energy, temperature, and particle speeds",thermal_kinetic,395,0.0,0.0,0.0,0.005037783375314861,0.0,0.005037783375314861,0.0,0.0779755244001101,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.4666666666666666,0.4666666666666666,0.33333333333333337,0.33333333333333337,0.6009252125773316,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample. The rms speed is a measure of the average kinetic energy of the particles. The higher the rms speed, the higher the average kinetic energy and the higher the temperature.
+
+First, we need to find the rms speeds of the particles in each sample. We can use the provided diagrams to determine the rms speeds of the particles. For example, in the image, we can see the rms speeds of the particles in the two gases at the same temperature.
+
+Once we have the rms speeds of the particles in each sample, we can compare them to determine which sample has the higher temperature. The sample with the higher rms speed will have the higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample",thermal_kinetic,141,0.0,0.0,0.0,0.027972027972027972,0.07407407407407407,0.027972027972027972,0.07407407407407407,0.09847558009919398,0.0,0.0,0.0,1.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample. Unfortunately, the provided context does not provide this information. Therefore, it is impossible to determine which sample has the higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample",thermal_kinetic,47,0.0,0.0,0.0,0.04081632653061224,0.07142857142857144,0.04081632653061224,0.07142857142857144,0.14359163172354764,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 1.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In this case, the magnetic field of one magnet exerts a force on the other magnet, which in turn exerts an equal and opposite force on the first magnet.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,66,0.0,0.0,0.0,0.23376623376623376,0.5714285714285714,0.18181818181818182,0.35714285714285715,0.6155470159931969,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"In the given context, there are multiple questions and answers related to the average kinetic energy of particles and temperature. To provide a clear comparison, I will focus on the most relevant questions and answers.
+
+Question: What is the average kinetic energy of a hydrogen molecule at 300 K?
+Answer: The average kinetic energy of a hydrogen molecule at 300 K is 1.3 x 10^-22 J.
+
+Question: What is the average kinetic energy of a helium molecule at 5.00 K?
+Answer: The average kinetic energy of a helium molecule at 5.00 K is 1.3 x 10^-22 J.
+
+Question: What is the average kinetic energy of a nitrogen molecule at 300 K?
+Answer: The average kinetic energy of a nitrogen molecule at 300 K is 1.3 x 10^-22 J.
+
+Question: What is the average kinetic energy of a carbon dioxide molecule at 300 K?
+Answer: The average kinetic energy of a carbon dioxide molecule at 300 K is 1.3 x 10^-22 J.
+
+Question: What is the average kinetic energy of a hydrogen molecule at 5.00 K?
+Answer: The average kinetic energy of a hydrogen molecule at 5.00 K is 1.3 x 10^-22 J.
+
+Question: What is the average kinetic energy of a helium molecule at 5.00 K?
+Answer: The average kinetic energy of a helium molecule at 5.00 K is 1.3 x 10^-22 J.
+
+Question: What is the average kinetic energy of a nitrogen molecule at 5.00 K?
+Answer: The average kinetic energy of a nitrogen molecule at 5.0 K is 1.3 x 10^-22 J.
+
+
+Question: What is the average kinetic energy of a carbon dioxide molecule at 300 K?
+Answer: The average kinetic energy of","In the given context, there are multiple questions and answers related to the average kinetic energy of particles and temperature",thermal_kinetic,275,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",each cake . . . the surroundings,", 
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+ , 
+
+
+
+,
+
+
+
+
+
+,
+
+,
+
+
+
+
+
+, ,
+ 
+
+
+ ,
+
+ ,
+ 
+
+
+,
+, ,
+,
+
+
+,
+,
+,
+ ,
+ ,
+
+ , ,
+
+ 
+
+ 
+,
+
+, 
+ ,
+
+,
+ 
+ 
+
+, 
+
+
+
+
+
+
+
+ 
+
+
+,
+
+ 
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+,
+,
+
+,
+
+
+,
+
+,
+,
+,
+
+,
+
+
+,",",",other,40,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,"The magnetic force between the magnets in each pair is equal and opposite in direction. This is because the Biot-Savart law states that the magnetic field due to a current-carrying wire is proportional to the current and inversely proportional to the length of the wire. As a result, the magnetic force between two wires carrying currents in opposite directions is equal and opposite in direction.",The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,65,0.0,0.0,0.0,0.2077922077922078,0.4444444444444445,0.18181818181818185,0.3703703703703704,0.6657452195550065,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to determine the average translational kinetic energy of the particles in each sample. The average kinetic energy of the particles in a sample depends on the temperature of the sample.
+
+First, we need to find the average kinetic energy of the particles in each sample. For example, if we have a sample of hydrogen gas at 0.00°C, we can find the average kinetic energy of the hydrogen molecules. Similarly, if we have a sample of helium gas at 5.00 K, we can find the average kinetic energy of the helium atoms.
+
+Once we have the average kinetic energy of the particles in each sample, we can compare them. The sample with the higher average kinetic energy will have a higher temperature.
+
+In this case, the sample of hydrogen gas at 0.00°C has a lower average kinetic energy than the sample of helium gas at 5.00 K. Therefore, the sample of hydrogen gas at 0.00°C has a lower temperature than the sample of helium gas at 5.00 K.","To compare the average kinetic energies of the particles in each sample, we need to determine the average translational kinetic energy of the particles in each sample",thermal_kinetic,181,0.0,0.0,0.0,0.02185792349726776,0.06896551724137931,0.02185792349726776,0.06896551724137931,0.3009774122576535,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"In the image, there are two cylinders, one containing helium gas and the other containing krypton gas. The average kinetic energy of the helium atoms in the helium cylinder is higher than that of the krypton atoms in the krypton cylinder. This indicates that the helium cylinder has a higher temperature than the krypton cylinder.","In the image, there are two cylinders, one containing helium gas and the other containing krypton gas",thermal_kinetic,55,0.0,0.0,0.0,0.03508771929824561,0.0,0.03508771929824561,0.0,0.053760333057047034,0.0,0.0,0.0,0.0
+M1,"The United States has a federal system. Based on these definitions, which of these statements would most likely be made by a person who lives under a federal system?",Both my state and national government officials have power over important issues.,"A person who lives under a federal system would most likely say, ""The United States has a federal system, which means that the country is divided into smaller units, such as states or provinces, and these units have their own governments and laws, but they are all part of a larger, centralized government at the federal level.""","A person who lives under a federal system would most likely say, ""The United States has a federal system, which means that the country is divided into smaller units, such as states or provinces, and these units have their own governments and laws, but they are all part of a larger, centralized government at the federal level",other,57,0.0,0.0,0.0,0.08695652173913043,0.08695652173913043,0.057971014492753624,0.057971014492753624,0.12239801227242092,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample. Without this information, it is impossible to determine which sample has the higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample",thermal_kinetic,40,0.0,0.0,0.0,0.047619047619047616,0.07142857142857144,0.047619047619047616,0.07142857142857144,0.15811388300841897,0.0,0.0,0.0,0.0
+M1,Which of the following could Aisha and Lily's test show?,if a new batch of concrete was firm enough to use,"Aisha and Lily's test could show the effectiveness of their bow and arrow setup. In the image, Aisha is holding the bow and arrow, while Lily is holding an apple. They are preparing to launch the arrow at the apple, which is positioned 5.00 m higher than the launching point of the arrow. By measuring the distance between the launching point and the apple, they can determine the speed at which the arrow leaves the bow and strikes the apple. This information can be used to evaluate the performance of their setup and make adjustments if necessary.",Aisha and Lily's test could show the effectiveness of their bow and arrow setup,experimental_design,97,0.0,0.0,0.0,0.05555555555555555,0.08,0.037037037037037035,0.08,0.09148850461977918,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets with opposite poles, they experience a magnetic force that acts in the same direction but with opposite magnitudes.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,61,0.0,0.0,0.0,0.24999999999999997,0.5714285714285714,0.19444444444444445,0.35714285714285715,0.5906601958738233,0.0,0.0,0.0,0.0
+M1,Which of the following could Pablo's test show?,whether the filter was clogged,"Pablo's test could show the speed of light in a vacuum, as it is an experiment designed to measure the speed of light. The test involves a laser, a mirror, and a photodetector, which helps in determining the time it takes for light to travel from the laser to the mirror and back to the photodetector. By analyzing the time taken, the speed of light can be determined. This experiment is essential in understanding the fundamental nature of light and its properties.","Pablo's test could show the speed of light in a vacuum, as it is an experiment designed to measure the speed of light",experimental_design,82,0.0,0.0,0.0,0.02298850574712644,0.07142857142857142,0.02298850574712644,0.07142857142857142,0.2817180849095055,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with green peas to offspring with yellow peas? Choose the most likely ratio.,2:2,"The expected ratio of offspring with green peas to offspring with yellow peas is 3:1. This is because the genetic information is passed on in a Mendelian fashion, and the expression of the genes for green and yellow peas is determined by the alleles present in the genome. Since the allele for green peas is dominant, it will be expressed in the offspring, resulting in a higher proportion of green peas compared to yellow peas.",The expected ratio of offspring with green peas to offspring with yellow peas is 3:1,genetics_ratio,75,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Select the fish below.,salmon,Fish,Fish,other,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring that have coat graying to offspring that do not have coat graying? Choose the most likely ratio.,4:0,"The expected ratio of offspring with coat graying to offspring without coat graying is 1:1. This is because the coat color is determined by a single gene, and the gene is equally distributed among the population. As a result, the ratio of offspring with coat graying to offspring without coat graying is 1:1.",The expected ratio of offspring with coat graying to offspring without coat graying is 1:1,genetics_ratio,53,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample. Without this information, we cannot determine which sample has the higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample",thermal_kinetic,38,0.0,0.0,0.0,0.05,0.07142857142857144,0.05,0.07142857142857144,0.16222142113076252,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets, the force they exert on each other is equal in magnitude but opposite in direction, resulting in a net force of zero.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,65,0.0,0.0,0.0,0.2337662337662338,0.4827586206896552,0.18181818181818185,0.3448275862068966,0.5907720273298255,0.0,0.0,0.0,0.0
+M1,Which of the following could Hansen's test show?,how long it would take the sample fabric to dry after it absorbed one drop of water,"Hansen's test, also known as the spectrophotometer, can show the absorption spectrum of a sample. This test measures the amount of light absorbed by a sample as a function of wavelength. By plotting the absorption as a function of wavelength, the test can provide information about the chemical composition and structure of the sample. In the context of the provided sources, it is likely that Hansen's test is being used to analyze the energy levels, electron transitions, and absorption spectra of the hydrogen atom.","Hansen's test, also known as the spectrophotometer, can show the absorption spectrum of a sample",experimental_design,84,0.0,0.0,0.0,0.1188118811881188,0.18750000000000003,0.0792079207920792,0.125,0.3120096447269699,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.5517241379310345,0.5517241379310345,0.3448275862068966,0.3448275862068966,0.6527139518645054,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample. From the provided context, we can determine the rms speeds of the particles in the samples.
+
+For example, we know that the rms speed of helium atoms at 5.00 K is 514 m/s, and the rms speed of hydrogen atoms at 21.0°C is 193 m/s.
+
+Now, we can compare the average kinetic energies of the particles in each sample. The average kinetic energy of a particle is given by the equation:
+
+KE = (3/2) \* (P \* rms\_speed)
+
+where P is the pressure of the gas and rms\_speed is the rms speed of the particles.
+
+For instance, the average kinetic energy of helium atoms at 5.00 K is:
+
+KE\_helium = (3/2) \* (P \* 514 m/s) = (3/2) \* (P \* 514 m/s)
+
+Similarly, the average kinetic energy of hydrogen atoms at 21.0°C is:
+
+KE\_hydrogen = (3/2) \* (P \* 193 m/s) = (3/2) \* (P \* 193 m/s)
+
+Now, we can compare the average kinetic energies of the particles in each sample. The sample with the higher temperature will have a higher average kinetic energy.
+
+In this case, the sample with the higher temperature is the one containing helium atoms at 5.00 K, as their rms speed is higher than that of hydrogen atoms at 21.0°C.","To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample",thermal_kinetic,232,0.0,0.0,0.0,0.0091324200913242,0.07407407407407407,0.0091324200913242,0.07407407407407407,0.05362275040523718,0.0,0.0,0.0,0.0
+M1,"Why might raising cubs with other lionesses in a pride increase an African lioness's reproductive success? Complete the claim below that answers this question and is best supported by the passage.
+Raising cubs with other lionesses in a pride increases the chances that ().",the lioness's cubs will survive attacks,,,other,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0
+M1,Identify the question that Brittany's experiment can best answer.,Do more tomato seedlings grow when they are planted in soil with fertilizer compared to soil without fertilizer?,"The Davisson-Germer experiment is designed to confirm the de Broglie hypothesis about the wave-like nature of electrons. In this experiment, electrons are scattered off a nickel target, and the intensity of the scattered electron beam shows a clear maximum at a specific angle. The setup of the experiment is enclosed in a vacuum chamber to prevent electron collisions with air molecules, as such thermal collisions would change the electrons' kinetic energy and are not desirable. The Bragg law in X-ray crystallography provides a connection between the wavelength of the radiation incident on a crystalline lattice, the lattice spacing, and the position of the diffracted X-rays. The experiment can best answer the question about the wave-like nature of electrons, as it directly tests the de Broglie hypothesis.",The Davisson-Germer experiment is designed to confirm the de Broglie hypothesis about the wave-like nature of electrons,other,126,0.0,0.0,0.0,0.05555555555555555,0.05714285714285714,0.041666666666666664,0.05714285714285714,0.07285986585964593,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,neither; the samples have the same temperature,"To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample. The rms speeds are the root-mean-square speeds of the particles, which represent the typical speed of the particles.
+
+First, we need to determine the rms speeds of the particles in each sample. We can use the provided context to help us with this task.
+
+For example, in the context provided, we know that the rms speed of helium atoms at 5.00 K is 514 m/s. We can use this information to compare the average kinetic energies of the particles in each sample.
+
+Once we have the rms speeds of the particles in each sample, we can compare the average kinetic energies of the particles in each sample. The sample with the higher rms speed will have a higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each sample",thermal_kinetic,144,0.0,0.0,0.0,0.039735099337748346,0.125,0.039735099337748346,0.125,0.49080803974276793,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The strength of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.41379310344827586,0.41379310344827586,0.3448275862068966,0.3448275862068966,0.5656854249492381,0.0,0.0,0.0,0.0
+M1,Identify the question that Patty's experiment can best answer.,Do more tomato seedlings grow when they are planted in soil with fertilizer compared to soil without fertilizer?,"Patty's experiment can best answer the question about the binding energy of electrons in magnesium, given that the wavelength of 337 nm is the longest wavelength that a photon may have to eject a photoelectron from magnesium photoelectrode.","Patty's experiment can best answer the question about the binding energy of electrons in magnesium, given that the wavelength of 337 nm is the longest wavelength that a photon may have to eject a photoelectron from magnesium photoelectrode",other,38,0.0,0.0,0.0,0.07142857142857142,0.07142857142857142,0.07142857142857142,0.07142857142857142,0.05504818825631802,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"In the given context, there are two different samples being compared - one containing helium atoms and the other containing krypton gas. To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles in both samples.
+
+For helium atoms, we can use the equation:
+
+rms\_speed = sqrt(3 \* (8 \* T) / (m \* 2 \* pi))
+
+where T is the temperature in Kelvin and m is the molecular mass of helium (4.00 g/mol).
+
+For krypton gas, we can use the equation:
+
+rms\_speed = sqrt(3 \* (8 \* T) / (m \* 2 \* pi))
+
+where T is the temperature in Kelvin and m is the molecular mass of krypton (80.0 g/mol).
+
+Once we have the rms speeds for both samples, we can compare their average kinetic energies. The sample with the higher rms speed will have a higher temperature.","In the given context, there are two different samples being compared - one containing helium atoms and the other containing krypton gas",thermal_kinetic,151,0.0,0.0,0.0,0.028368794326241138,0.0,0.028368794326241138,0.0,0.09258200997725516,0.0,0.0,0.0,0.0
+M1,Which month has the lowest average temperature in Amsterdam?,February,"The lowest average temperature in Amsterdam occurs in January, with an average temperature of 0.5 degrees Celsius.","The lowest average temperature in Amsterdam occurs in January, with an average temperature of 0",thermal_kinetic,17,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is weaker in Pair 2.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5217391304347827,0.5217391304347827,0.43478260869565216,0.43478260869565216,0.6488856845230501,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",each aquarium . . . the surroundings,",
+
+ to
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ to of ,
+ 
+ 
+
+ ,  , 
+  
+ ,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of",",",other,9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",the surroundings . . . each bottle,", 
+
+
+
+
+
+
+, 
+, , , , 
+,
+
+
+
+
+, 
+
+
+
+
+
+
+
+
+
+
+,
+,
+
+
+
+
+
+
+
+
+
+
+
+, 
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+, 
+
+
+
+
+
+,
+,
+,
+
+
+,
+,
+
+,
+
+
+
+
+
+
+
+
+,
+,
+,
+
+
+
+ ,
+
+,
+
+
+
+
+,
+,
+,
+,
+, 
+
+ , 
+,
+,
+,
+, to , , 
+
+
+,
+
+,
+,
+,
+,
+
+
+
+
+,
+
+
+
+, 
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+,
+
+
+,
+,
+
+
+,",",",other,52,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Select the mammal below.,Canadian lynx,",
+
+
+
+
+
+
+
+
+
+
+ and
+
+
+,
+ and,
+,
+
+
+
+,
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+,
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+,
+,
+
+,
+
+
+ and
+,
+
+
+,
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+ of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+,
+
+
+
+ and and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and and and and
+
+
+ and and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+,
+,
+,
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+,
+,
+
+
+
+
+ in
+
+
+,
+,
+ in
+
+
+
+ and,
+,
+,
+,
+,
+
+
+,
+,
+,
+,
+ and and in in
+ and,
+,
+,
+,
+,
+
+
+
+,
+
+
+,
+ and
+,
+,
+,
+,
+,
+
+,
+,,, and,,
+,
+,,,,
+,,",",",other,79,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with mostly plain scales to offspring with mostly iridescent scales? Choose the most likely ratio.,1:3,"The expected ratio of offspring with mostly plain scales to offspring with mostly iridescent scales is 3:1. This is because, in a Mendelian inheritance pattern, the dominant trait (iridescent scales) will always mask the recessive trait (plain scales). The ratio of offspring with mostly iridescent scales to offspring with mostly plain scales is 3:1 scales.",The expected ratio of offspring with mostly plain scales to offspring with mostly iridescent scales is 3:1,genetics_ratio,55,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Which of the following could Leroy's test show?,how long it would take the sample fabric to dry after it absorbed one drop of water,"Leroy's test could show the Doppler effect, which is the change in frequency of a wave due to the relative motion of the source and observer. In the context of the question, the observer is watching an oncoming ambulance moving at 110 km/h and emitting a steady 800-Hz sound from its siren. The observer receives an 888-Hz tone, which is the result of the Doppler effect. The observer receives a higher frequency than the original sound emitted by the ambulance due to the motion of the ambulance relative to the observer.","Leroy's test could show the Doppler effect, which is the change in frequency of a wave due to the relative motion of the source and observer",experimental_design,91,0.0,0.0,0.0,0.05555555555555555,0.13953488372093026,0.05555555555555555,0.13953488372093026,0.2735942272227077,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is weaker in Pair 2.,"The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction. This is a result of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets, the force they exert on each other is always of the same magnitude but in opposite directions.",The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,62,0.0,0.0,0.0,0.1714285714285714,0.46153846153846156,0.14285714285714285,0.3846153846153846,0.5378528742004771,0.0,0.0,0.0,0.0
+M1,Select the reptile below.,cobra,"the
+
+
+
+
+
+
+
+
+
+the
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+
+1
+
+
+
+1
+
+
+
+1
+1
+4
+
+
+
+
+
+1
+
+5
+4
+1
+4
+
+1
+5
+4
+4
+1
+1 of of of of of
+1
+1
+1
+1
+1
+1
+4
+
+5
+
+
+1
+
+1
+4
+4
+
+
+1
+4
+
+1
+
+3
+4
+5
+3
+4
+1
+3
+5
+1
+1 of
+1
+1
+
+5
+3 in in
+
+of
+of
+
+of
+
+
+
+5
+
+1
+
+4
+
+1
+3
+4 of
+5
+3 of of of of of
+1 of
+1
+1
+3
+
+4
+1
+1
+4
+1",the,other,83,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,"In this experiment, which were part of a control group?",the unpruned tomato plants,"The control group in this experiment consists of the runner on the ground, as the other forces are acting. The runner experiences a reaction force from the ground, which propels him forward. The work done in each of the processes AB, BC, AD, and DC is essential to understand the dynamics of the experiment.","The control group in this experiment consists of the runner on the ground, as the other forces are acting",other,54,0.0,0.0,0.0,0.034482758620689655,0.08695652173913043,0.034482758620689655,0.08695652173913043,0.40032038451271784,0.0,0.0,0.0,0.0
+M1,Which of the following could Mona and Bridget's test show?,if a new batch of concrete was firm enough to use,"Mona and Bridget's test could show the effect of thin-film interference on light transmission. The image shows a soap bubble with a wedge of air between two microscope slides. As the distance between the slides increases, the bands of constructive interference repeat, going from violet to red again and again. This phenomenon demonstrates how light interacts with thin films, which is an essential concept in understanding the behavior of light in various materials, such as metals, dielectrics, and semiconductors.",Mona and Bridget's test could show the effect of thin-film interference on light transmission,experimental_design,79,0.0,0.0,0.0,0.06666666666666667,0.08,0.06666666666666667,0.08,0.17527408004264702,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.4666666666666666,0.4666666666666666,0.33333333333333337,0.33333333333333337,0.6009252125773316,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",the surroundings . . . each bottle,", temper, temper, temper
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+, 
+
+
+
+
+
+
+
+, , 
+, , , , , 
+
+
+
+, 
+, ,
+, , , ,
+, ,
+,
+, , ,
+
+, 
+ , , , 
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+,
+
+
+,
+
+
+,
+ , 
+
+,
+,  
+ 
+ 
+ 
+ 
+,
+  
+
+, ,
+, 
+,
+
+
+, in,,
+, ,
+, , , ,,
+
+, ,
+, 
+,
+, 
+,
+, , ,, ,,
+, , , ,
+,  to 
+ , , , ,, ,  ,   in ,, , ,  , 
+  in     ,
+, , 
+
+,
+,, ,
+ 
+, 
+ , , 
+
+,
+
+,
+,
+
+
+,
+
+
+
+,
+
+
+
+
+,
+,
+,
+
+
+
+
+
+
+
+
+,
+
+,
+
+,
+
+,
+
+,
+
+
+,
+ 
+ 
+ 
+
+,
+ , ,
+,
+,
+ , ,  ,
+ ,   
+, ,
+,
+,
+,
+,
+
+
+,",", temper, temper, temper",other,117,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 2.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5217391304347827,0.5217391304347827,0.43478260869565216,0.43478260869565216,0.6488856845230501,0.0,0.0,0.0,0.0
+M1,Identify the question that Nicole's experiment can best answer.,Do the insides of white boxes get hotter than the insides of black boxes when the boxes are left in the sun?,"Nicole's experiment can best answer the question of whether two events at separate locations are simultaneous, as it deals with the concept of wave-particle duality and interference of water waves. The experiment involves two women running at each other and colliding by hitting exercise balls together, which allows for a comparison of the two events' timing and simultaneity. The experiment's setup, involving the two women and the exercise balls, can help determine if the two events were emitted simultaneously or not, providing insight into the nature of the events.","Nicole's experiment can best answer the question of whether two events at separate locations are simultaneous, as it deals with the concept of wave-particle duality and interference of water waves",other,89,0.0,0.0,0.0,0.12612612612612611,0.1923076923076923,0.1081081081081081,0.15384615384615383,0.4872413797112857,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of the two magnets, the magnetic force acts on each other, resulting in an equal and opposite force.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,58,0.0,0.0,0.0,0.26086956521739135,0.5714285714285714,0.20289855072463767,0.35714285714285715,0.6324555320336759,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with a spotted tail to offspring with an unspotted tail? Choose the most likely ratio.,2:2,"of
+
+
+
+
+
+
+ of
+ of
+
+ of
+ of
+
+
+ of 1 of 1 of
+
+
+
+
+
+
+
+
+
+ of
+ of 1
+
+
+
+
+
+ of
+
+
+ of
+
+
+
+
+
+
+ of
+
+ of
+ of
+ of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of
+
+
+
+
+
+
+
+
+
+ of
+ of
+
+
+
+
+
+
+
+
+
+
+ of
+
+
+
+
+,
+
+
+,
+ of
+ of
+
+
+
+
+
+
+
+ of
+
+ of of
+ of  of of  of
+
+,  of  of 
+
+ of
+ of
+ of
+
+
+ of of of
+
+ of of 
+ of 1 of 
+
+
+ of of 1 of
+ of
+ of of
+
+ of of
+
+
+
+
+
+
+ of
+
+
+
+
+
+
+
+ of
+ of
+ of
+
+
+
+
+
+
+
+,
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ of
+
+ of
+
+
+ of
+
+
+
+
+
+
+
+
+
+ of
+
+ of
+
+
+
+
+
+
+
+
+
+,
+
+
+,
+
+ of
+,
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+ of
+ of 
+
+
+, 
+
+
+
+
+
+
+,
+
+
+,
+
+
+
+
+
+
+,
+
+,
+
+
+,
+,
+,
+
+,
+,
+,
+
+
+
+
+
+,
+ 
+
+
+
+ 
+
+
+
+, 
+ 
+, 
+ 
+
+
+,
+, 
+
+ of ,
+,
+, ,
+, , ,  
+
+
+
+
+
+,
+
+ of
+,
+
+,
+, of
+
+
+, of,
+,
+
+
+
+,,
+,
+,,
+,,,,,,,,
+,,,
+,",of,genetics_ratio,115,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 1.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",each battery . . . the surroundings,"3
+ 
+
+  
+  
+, 3
+
+, 
+
+ 3
+ 
+ 
+ 
+ 
+, 
+
+      
+
+ 
+
+     
+
+
+  
+
+         
+    
+    
+
+
+
+
+ 
+
+   
+
+  
+
+
+ 
+ 
+
+
+
+
+
+   
+
+
+
+
+ 
+
+   
+  
+
+
+ 
+
+         
+        
+     
+       
+  
+   
+  
+
+ 
+
+    
+                                                                         3  
+                                   
+  
+    
+     
+             
+         
+ 
+  
+     
+     
+  
+  
+  , , 
+,   
+ 
+ 
+, 
+ 
+  , ,
+, 
+,",3,other,15,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.4827586206896552,0.4827586206896552,0.3448275862068966,0.3448275862068966,0.6128258770283412,0.0,0.0,0.0,0.0
+M1,Which term matches the picture?,exothermic process,"The term that matches the picture is ""mirror image."" In the image, there are three mirror images of a plastic head, which are visible in the two mirrors at a right angle. This demonstrates how a single object reflecting from two mirrors at a right angle can produce multiple images.","The term that matches the picture is ""mirror image",other,50,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of the two magnets, the magnetic force exerted by one magnet on the other is equal in magnitude but opposite in direction.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,62,0.0,0.0,0.0,0.24657534246575347,0.5714285714285714,0.2191780821917808,0.35714285714285715,0.6797199649629477,0.0,0.0,0.0,0.0
+M1,Which two months have the same average temperature in Portland?,July and August,The two months with the same average temperature in Portland are January and February.,The two months with the same average temperature in Portland are January and February,thermal_kinetic,14,0.0,0.0,0.0,0.11764705882352941,0.11764705882352941,0.11764705882352941,0.11764705882352941,0.14433756729740646,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In the case of two magnets, the magnetic force exerted by one magnet on the other is equal in magnitude but opposite in direction, resulting in a net force of zero.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,68,0.0,0.0,0.0,0.22784810126582278,0.5714285714285714,0.20253164556962022,0.35714285714285715,0.6728274136498881,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"In the provided context, there are multiple questions and answers related to kinetic energy, temperature, and particle speeds. To compare the average kinetic energies of the particles in each sample, we need to know the specific particles and their respective average kinetic energies.
+
+For example, in one context, the average kinetic energy of hydrogen molecules is 193 m/s, while in another context, the average kinetic energy of oxygen molecules is 465 m/s. To determine which sample has the higher temperature, we need to know the average kinetic energy of the particles in each sample and compare them.
+
+In the given timeline, there are multiple questions and answers related to temperature and particle speeds. To compare the average kinetic energies of the particles in each sample, we need to know the specific particles and their respective average kinetic energies.","In the provided context, there are multiple questions and answers related to kinetic energy, temperature, and particle speeds",thermal_kinetic,138,0.0,0.0,0.0,0.014285714285714285,0.0,0.014285714285714285,0.0,0.10943513103291655,0.0,0.0,0.0,0.0
+M1,Identify the question that Greta's experiment can best answer.,Do circuits that include iron produce dimmer light than circuits that include copper?,"Greta's experiment can best answer the question of whether two events at separate locations are simultaneous, as it demonstrates that the two observers reach conflicting conclusions about whether the two events at well-separated locations were simultaneous. Both frames of reference are valid, and both conclusions are valid. The experiment highlights the concept of the principle of equivalence, which states that all experiments done in a lab in a uniform gravitational field cannot be distinguished from those done in a lab that is not in a gravitational field but is uniformly accelerating.","Greta's experiment can best answer the question of whether two events at separate locations are simultaneous, as it demonstrates that the two observers reach conflicting conclusions about whether the two events at well-separated locations were simultaneous",other,91,0.0,0.0,0.0,0.038461538461538464,0.04081632653061225,0.038461538461538464,0.04081632653061225,0.0975771011244213,0.0,0.0,0.0,0.0
+M1,Which of the following could Miranda's test show?,whether the new turbine could produce 10% more electricity,"Miranda's test could show the refractive index of the substance she is testing. The refractive index is a measure of how light travels through a material, and it can be used to determine the properties of a substance, such as its density or composition. In the image, Miranda is holding a lens and a piece of soap, which suggests that she might be performing a refractive index test. The test would involve shining light through the lens and soap, and then measuring the angle at which the light is refracted or reflected. The refractive index can be calculated from the angle of refraction and the speed of light.",Miranda's test could show the refractive index of the substance she is testing,experimental_design,108,0.0,0.0,0.0,0.034188034188034185,0.18181818181818185,0.017094017094017092,0.09090909090909093,0.21999166911228415,0.0,0.0,0.0,0.0
+M1,Identify the question that Victoria's experiment can best answer.,Do circuits that include iron produce dimmer light than circuits that include copper?,Victoria's experiment can best answer the question of whether two events at separate locations are simultaneous. This is because the experiment involves observing two pulses at well-separated locations and determining whether they were emitted simultaneously or not. The experiment provides a framework for understanding the concept of simultaneity and the validity of different frames of reference.,Victoria's experiment can best answer the question of whether two events at separate locations are simultaneous,other,56,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,climate,"The passage describes the weather, as it talks about the temperature and pressure changes that occur during a day, and how these changes affect the behavior of objects like balloons and ships. The climate, on the other hand, refers to the long-term patterns of weather in a particular region.","The passage describes the weather, as it talks about the temperature and pressure changes that occur during a day, and how these changes affect the behavior of objects like balloons and ships",weather_climate,49,0.0,1.0,0.0,0.039999999999999994,0.0,0.039999999999999994,0.0,0.09759000729485333,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Which of the following was a dependent variable in this experiment?,the distance the sled traveled across the flat field,"The dependent variable in this experiment was the speed of the skier. The skier's speed was affected by the force applied by the ski lift, which was controlled by the ski lift operator. The skier's speed was measured and compared to the force applied by the ski lift, allowing the operator to adjust the lift's speed accordingly to maintain a safe and controlled environment for the skier.",The dependent variable in this experiment was the speed of the skier,other,67,0.0,0.0,0.0,0.07894736842105263,0.28571428571428575,0.07894736842105263,0.28571428571428575,0.5923386294199579,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample. Without this information, it is impossible to determine which sample has the higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample",thermal_kinetic,40,0.0,0.0,0.0,0.047619047619047616,0.07142857142857144,0.047619047619047616,0.07142857142857144,0.15811388300841897,0.0,0.0,0.0,0.0
+M1,Which type of force from the tow truck moves the car down the road?,pull,"The force that moves the car down the road is the gravitational force acting on the car and the tow truck. The tow truck applies a force on the car, which is equal to the force of gravity acting on the car. This force is what causes the car to accelerate down the road. The tow truck's force acts in the same direction as the force of gravity, and together they cause the car to move.",The force that moves the car down the road is the gravitational force acting on the car and the tow truck,other,76,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 1.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.48,0.48,0.4,0.4,0.6363961030678927,0.0,0.0,0.0,0.0
+M1,Select the fish below.,piranha,Fish,Fish,other,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample. Without this information, it is impossible to determine which sample has the higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample",thermal_kinetic,40,0.0,0.0,0.0,0.047619047619047616,0.07142857142857144,0.047619047619047616,0.07142857142857144,0.15811388300841897,0.0,0.0,0.0,0.0
+M1,What is the direction of this pull?,toward the center of Earth,The direction of the pull is towards the south pole of the magnet.,The direction of the pull is towards the south pole of the magnet,other,13,0.0,0.0,0.0,0.2222222222222222,0.2222222222222222,0.2222222222222222,0.2222222222222222,0.5163977794943222,0.0,0.0,0.0,0.0
+M1,Which of the following could Donald's test show?,if the weather station would work when the temperature was 50°C,"Donald's test could show the effectiveness of a solar panel in converting sunlight into electricity. By measuring the voltage generated by the solar panel under different lighting conditions, the test can determine how well the solar panel is able to harness the sun's energy and convert it into usable electricity. This information is crucial for evaluating the performance and efficiency of solar panels, which is essential for maximizing their potential in generating clean and renewable energy.",Donald's test could show the effectiveness of a solar panel in converting sunlight into electricity,experimental_design,76,0.0,0.0,0.0,0.04597701149425287,0.07692307692307691,0.04597701149425287,0.07692307692307691,0.3050695435482863,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 1.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,"The United States has a federal system. Based on these definitions, which of these statements would most likely be made by a person who lives under a federal system?",Both my state and national government officials have power over important issues.,"A person who lives under a federal system would most likely say, ""The United States has a federal system, which means that the country is divided into smaller political units called states, and these states have their own governments, but they also come together to form a national government."" This statement aligns with the definition of a federal system, where the country is divided into smaller political units, and these units have their own governments, but they also come together to form a national government.","A person who lives under a federal system would most likely say, ""The United States has a federal system, which means that the country is divided into smaller political units called states, and these states have their own governments, but they also come together to form a national government",other,85,0.0,0.0,0.0,0.061855670103092786,0.13114754098360654,0.061855670103092786,0.09836065573770492,0.12467574523850741,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"In the image, there are two cylinders with different contents. One cylinder contains helium gas, and the other contains krypton gas at the same temperature. To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each gas.
+
+For the helium gas, the rms speed is approximately 514 m/s. For the krypton gas, the rms speed is approximately 514 m/s as well. Since both gases have the same temperature, the average kinetic energy of the particles in each sample is the same.
+
+Therefore, the cylinder containing krypton gas has the higher temperature compared to the cylinder containing helium gas.","In the image, there are two cylinders with different contents",thermal_kinetic,111,0.0,0.0,0.0,0.017699115044247787,0.0,0.017699115044247787,0.0,0.061604110363369734,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 1.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.5517241379310345,0.5517241379310345,0.3448275862068966,0.3448275862068966,0.6527139518645054,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.4827586206896552,0.4827586206896552,0.3448275862068966,0.3448275862068966,0.6128258770283412,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each case. The rms speeds are related to the average kinetic energy of the particles. The higher the rms speed, the higher the average kinetic energy.
+
+In the first case, the rms speed of the oxygen molecules is 465 m/s, and in the second case, the rms speed of the helium atoms is 514 m/s. Since the rms speed of oxygen molecules is higher than that of helium atoms, the oxygen molecules have the higher average kinetic energy.
+
+Therefore, the oxygen molecules have a higher temperature than the helium atoms in the second case.","To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each case",thermal_kinetic,117,0.0,0.0,0.0,0.033613445378151266,0.07407407407407407,0.033613445378151266,0.07407407407407407,0.04888237167378443,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the specific particles involved in each sample. In the provided context, there are different samples like helium, hydrogen, and krypton gas. We also have information about the average kinetic energy of the particles in each sample.
+
+To determine which sample has the higher temperature, we can compare the average kinetic energy of the particles in each sample. If the average kinetic energy of the particles in one sample is higher than the other, it indicates a higher temperature in that sample.
+
+For example, if the average kinetic energy of hydrogen molecules in one sample is higher than the other, it suggests that the temperature in that sample is higher. By analyzing the provided context, we can determine which sample has the higher temperature.","To compare the average kinetic energies of the particles in each sample, we need to know the specific particles involved in each sample",thermal_kinetic,139,0.0,0.0,0.0,0.028368794326241138,0.08,0.028368794326241138,0.08,0.185630032974337,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 1.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Select the mammal below.,sugar glider,"of of of
+of of of of of of of of of of of of of
+
+
+
+of of
+of of of of
+
+
+ion of of of of of
+
+
+
+ofion of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of and of of of of of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of of
+ of of of of of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+of,
+of,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of of of of of
+
+
+
+
+
+
+
+
+
+ of
+ of of of of of of of of of of of of of of of of of of of of of of of, of of of of, of of of, of and of of, and of, of of of of, of and of of of of, of, of, of and of of and,
+
+
+
+
+
+ of, of,
+ of,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of of
+
+
+
+
+
+
+
+
+ of of of of
+
+ of of and of of of of
+ of
+ of
+
+ of
+ of of of of of
+ of of and
+
+
+ of,
+ of,
+
+
+
+
+
+
+
+
+
+
+
+ of and and
+ of of,
+ of of
+
+ of
+ and of and and
+
+ of and
+
+ of and and of and and, of and of, of and,
+ and of and,
+
+
+ and of of
+ of and and
+
+ of and, of of and of of, of,
+ of and, of of of in of and, of of",of of of,other,274,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,neither; the samples have the same temperature,"To compare the average kinetic energies of the particles in each sample, we need to know the specific particles involved in each sample. In the provided context, we have information about the average kinetic energy of hydrogen atoms, helium atoms, and krypton gas. However, we do not have specific details about the particles in the other samples.
+
+Without knowing the specific particles in the other samples, it is impossible to determine which sample has the higher temperature. We can only compare the average kinetic energies of the particles we know about.","To compare the average kinetic energies of the particles in each sample, we need to know the specific particles involved in each sample",thermal_kinetic,91,0.0,0.0,0.0,0.08163265306122451,0.13333333333333333,0.061224489795918366,0.13333333333333333,0.49468473893638143,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.4666666666666666,0.4666666666666666,0.33333333333333337,0.33333333333333337,0.6009252125773316,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",the surroundings . . . each greenhouse,"the
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+, 
+
+
+, 
+
+
+
+, 
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+,
+,
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of a
+
+ of a
+
+
+
+
+
+
+
+
+ of a
+ of a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+,
+ to
+
+
+
+,
+
+,
+
+
+
+
+,
+
+, of
+,
+
+
+
+,
+
+, of 
+,
+ ,
+
+,
+
+ to
+,
+
+
+
+
+ of
+,
+
+
+
+
+
+ in of
+,
+, of
+
+ of a in a
+
+ in of 
+
+ of a
+ of a
+ of
+ of  of a
+
+ of a
+
+
+
+
+, of
+ of a
+,
+,
+ to 
+
+ of
+ionion to 
+
+
+ion
+ion,
+
+
+ of a
+
+
+ion
+
+
+
+
+
+
+
+
+
+
+ of a
+
+
+
+
+ of
+
+ of 
+
+ of
+
+ of
+ of
+ of
+ of
+ of a of
+ of a
+ of 
+
+ of a
+
+
+ of a
+ of
+ of a of
+
+ of a of
+ of
+
+ of
+ of
+ of
+ of",the,other,102,0.0,0.0,0.0,0.024096385542168676,0.25,0.024096385542168676,0.25,0.005635614196082251,0.0,1.0,0.0,0.0
+M1,What is the expected ratio of offspring with smooth fruit to offspring with bumpy fruit? Choose the most likely ratio.,0:4,"The expected ratio of offspring with smooth fruit to offspring with bumpy fruit is 3:1. This is because in the given scenario, there is a 3:1 ratio of smooth fruit to bumpy fruit.",The expected ratio of offspring with smooth fruit to offspring with bumpy fruit is 3:1,genetics_ratio,33,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample. The average kinetic energy of the particles in each sample depends on the temperature of the system. We are given the approximate temperature in the above timeline.
+
+Strategy:
+
+1. Calculate the average kinetic energy of the particles in each sample using the given temperature.
+2. Compare the average kinetic energy of the particles in each sample.
+
+Solution:
+
+1. The average kinetic energy of the particles in each sample depends on the temperature of the system.
+2. We are given the approximate temperature in the above timeline.
+
+Significance:
+
+1. The comparison of the average kinetic energies of the particles in each sample provides information about the temperature of the system.
+2. The relative abundances of the light elements hydrogen, helium, lithium, and beryllium in the universe provide key evidence for the Big Bang.
+
+Answer about the same:
+
+1. The average kinetic energy of the particles in each sample depends on the temperature of the system.
+2. We are given the approximate temperature in the above timeline.
+
+Example:
+
+Suppose the average kinetic energy of oxygen molecules in a flame is 1350 m/s, and the average kinetic energy of helium atoms in the same flame is 193 m/s. Which flame has the higher temperature?
+
+Answer:
+
+1. The average kinetic energy of the particles in each sample depends on the temperature of the system.
+2. We are given the approximate temperature in the above timeline.
+
+Example:
+
+Suppose the average kinetic energy of oxygen molecules in a flame is 1350 m/s, and the average kinetic energy of hydrogen molecules in the same flame is 193 m/s. Which flame has the higher temperature?
+
+
+Answer:
+
+
+1. The average kinetic energy of the particles in each sample depends on the temperature of the system.
+2. We are given the above timeline.
+
+
+
+Example:
+
+
+
+Suppose the average kinetic energy of oxygen molecules in a flame is 1350 m/s.","To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample",thermal_kinetic,334,0.0,0.0,0.0,0.005952380952380953,0.07142857142857144,0.005952380952380953,0.07142857142857144,0.07452266241066098,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.5517241379310345,0.5517241379310345,0.3448275862068966,0.3448275862068966,0.6527139518645054,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 1.,"The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction. This is because of Newton's third law, which states that for every action, there is an equal and opposite reaction. In this case, the magnetic force between the two magnets is equal in magnitude but opposite in direction, resulting in a net force of zero.",The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,62,0.0,0.0,0.0,0.1714285714285714,0.48,0.14285714285714285,0.4,0.5869678440936947,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",each battery . . . the surroundings,"33
+
+
+3
+3
+
+
+
+
+
+
+
+
+
+3
+
+
+
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+
+
+
+3
+3
+
+3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 3
+
+
+
+ 3, 3, 3
+, 3, 3, 3
+, 3 3, 3, 3   3  3
+, 3, 3
+ 3
+ 3
+ 3
+     3  3
+ 3
+ 3 3 3 3
+
+
+
+  3
+
+
+
+
+
+
+
+
+
+ 3
+ 3
+
+
+
+
+
+
+
+
+
+ 3
+
+
+
+ of 
+
+ 
+ 3
+
+ 
+ 
+ 3 3 3 3  3        3  3 3    3             3,         3 3          ,                                        3 3 3 3 3 3 3 3 3 3 3 3 3 3   3   3 3 3 3 3 3 3 3 3 3 3 3 3 3
+ 
+ 3 
+ 
+
+  3
+ 3 3 3 3 3 3 3 3   
+
+ 3 
+ 
+  
+
+ 
+ 
+
+, , , , ,  , , 3, 
+, 
+ 
+
+,    
+ 
+, ,   ,",33,other,117,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,Select the amphibian below.,horned frog,"ofion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+green
+
+of
+of
+of
+of
+
+of
+
+
+
+
+
+
+
+
+
+
+
+of
+
+
+ofion
+ofion of the of the of a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+of
+
+of,
+of
+
+
+of
+of
+
+
+
+
+
+
+
+
+
+
+
+
+of and of of
+of and of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+of and ofht,
+
+
+1,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3",ofion,other,34,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Which of the following statements describess living in an independent city-state?,My city rules itself and is not part of a larger country.,"A city-state is a political entity that is independent from other political entities, such as countries or regions. It is typically smaller in size and has its own government, laws, and policies. The city-state can be a part of a larger political entity, such as a country or region, or it can be a combination of multiple smaller political entities, such as a city, or it can be a city, or it can be a city-state.","A city-state is a political entity that is independent from other political entities, such as countries or regions",other,76,0.0,0.0,0.0,0.1590909090909091,0.13333333333333333,0.11363636363636363,0.13333333333333333,0.36661778755338326,0.0,0.0,0.0,0.0
+M1,Which of the following could Colleen and Amelia's test show?,if a new batch of concrete was firm enough to use,"Colleen and Amelia's test could show whether the two events at separate locations were simultaneous or not. In the image, Colleen is holding a bow with an arrow, and Amelia is running towards her. The distance from within Colleen's frame of reference finds them equal, indicating that the pulses were not emitted simultaneously. This suggests that the two events at well-separated locations were not simultaneous. However, both frames of reference are valid, and both conclusions are valid. The test aims to determine if the two women's collision was simultaneous or not.",Colleen and Amelia's test could show whether the two events at separate locations were simultaneous or not,experimental_design,91,0.0,0.0,0.0,0.09803921568627451,0.0,0.058823529411764705,0.0,0.1344669704710584,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with pale orange cheeks to offspring with bright orange cheeks? Choose the most likely ratio.,1:3,The most likely ratio of offspring with bright orange cheeks.,The most likely ratio of offspring with bright orange cheeks,genetics_ratio,10,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,"In this experiment, which were part of an experimental group?",the cups that got cardboard sleeves,The Davisson-Germer experiment was part of an experimental group that confirmed the wave nature of electrons.,The Davisson-Germer experiment was part of an experimental group that confirmed the wave nature of electrons,other,16,0.0,0.0,0.0,0.18181818181818182,0.18181818181818182,0.18181818181818182,0.18181818181818182,0.27386127875258304,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.5517241379310345,0.5517241379310345,0.3448275862068966,0.3448275862068966,0.6527139518645054,0.0,0.0,0.0,0.0
+M1,Which of the following was an independent variable in this experiment?,the air pressure in the footballs,"The independent variable in this experiment is the pressure difference across the circulatory system. The pressure at the entrance of the water main is 5.00 x 10 N/m, and the original flow rate was 200 L/min. The pressure difference is increased by a factor of 50.0%, resulting in a decrease in delivered pressure and a change in the flow rate through the garden hose.",The independent variable in this experiment is the pressure difference across the circulatory system,other,64,0.0,0.0,0.0,0.11428571428571428,0.4,0.11428571428571428,0.3,0.6999999999999998,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 1.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",each cake . . . the surroundings,", 
+
+, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+ 
+ 
+
+ 
+ 
+
+
+
+ 
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+ 
+
+,
+
+
+
+
+,
+ 
+
+
+
+, 
+,
+
+ 
+, 
+ 
+
+, 
+
+
+, , , 
+
+  
+ 
+,
+ 
+
+
+ 
+ 
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+,
+,
+
+
+
+
+,
+,
+,
+,
+
+
+,
+,
+
+
+,",",",other,24,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Which statement is true about the average monthly temperature in New York City?,January and February are the coldest months of the year.,The average monthly temperature in New York City is 52.3 degrees Fahrenheit.,The average monthly temperature in New York City is 52,thermal_kinetic,12,0.0,0.0,0.0,0.0909090909090909,0.10000000000000002,0.0909090909090909,0.10000000000000002,0.16666666666666669,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,weather,"The passage describes the weather, which refers to the current state of the atmosphere, including temperature, humidity, wind, and cloudiness. On the other hand, climate refers to the long-term patterns of weather in a particular region, which can be influenced by factors such as temperature, precipitation, and wind patterns.","The passage describes the weather, which refers to the current state of the atmosphere, including temperature, humidity, wind, and cloudiness",weather_climate,49,0.0,1.0,1.0,0.039999999999999994,0.09523809523809523,0.039999999999999994,0.09523809523809523,0.20519567041703082,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with white wool to offspring with black wool? Choose the most likely ratio.,4:0,"The expected ratio of offspring with white wool to offspring with black wool depends on the genetic makeup of the parent animals. In the case of the walrus, the genetic makeup of the parent animals is known to be 50% black wool and 50% white wool. Therefore, the expected ratio of offspring with white wool to offspring with black wool is 50:50.",The expected ratio of offspring with white wool to offspring with black wool depends on the genetic makeup of the parent animals,genetics_ratio,62,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Which of the following could Myra and Jenna's test show?,if a new batch of concrete was firm enough to use,"Based on the context provided, Myra and Jenna are running at each other and colliding by hitting exercise balls together. If each woman has a mass of 50 kg, which includes the exercise ball, and one woman runs to the right while the other runs to the left, the test could show the result of the collision, such as the change in their velocities or the transfer of energy between them. The test could also provide information about the forces acting on them during the collision, such as the friction force between the exercise balls and the impact force from the collision.","Based on the context provided, Myra and Jenna are running at each other and colliding by hitting exercise balls together",experimental_design,102,0.0,0.0,0.0,0.07079646017699116,0.0,0.07079646017699116,0.0,0.10225790664180437,0.0,0.0,0.0,0.0
+M1,Which of the following could Pedro's test show?,how long it would take the sample fabric to dry after it absorbed one drop of water,"Pedro's test could show the effects of special relativity, specifically the first postulate, which states that the laws of physics are the same in all inertial frames. In the given context, the test involves two observers, S and S', moving at different speeds relative to each other. S' is moving at a very high speed, while S is at rest. As they pass each other, S' observes a line painted on stick M' by a small paintbrush attached to the top of stick M'. After the event, both boys should agree on the length of the sticks, as the laws of physics predict the same observations in all inertial frames. If the astronaut in the twin paradox scenario were to travel at a speed close to the speed of light, the effects of special relativity would become more pronounced, and the astronaut would experience time dilation and length contraction.","Pedro's test could show the effects of special relativity, specifically the first postulate, which states that the laws of physics are the same in all inertial frames",experimental_design,149,0.0,0.0,0.0,0.06024096385542168,0.0909090909090909,0.048192771084337345,0.0909090909090909,0.29505082081694367,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",each battery . . . the surroundings,"the
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 3
+
+
+
+
+
+ 
+ 
+   
+
+ 
+
+
+     
+  
+               
+   
+,                                              
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+
+
+  
+ 
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+ 
+ 
+  
+  
+ 
+                                                                                                                 3                              3      3         
+      
+     3                        
+   
+                , , ,     ,",the,other,11,0.0,0.0,0.0,0.15384615384615383,0.25,0.15384615384615383,0.25,0.05439282932204212,0.0,1.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.4444444444444445,0.4444444444444445,0.3703703703703704,0.3703703703703704,0.5948118774794626,0.0,0.0,0.0,0.0
+M1,Which of the following could Rosa's test show?,whether the new turbine could produce 10% more electricity,"Rosa's test could show whether two events at separate locations are simultaneous or not. The test involves two observers who reach conflicting conclusions about whether the two events at well-separated locations were simultaneous. Both frames of reference are valid, and both conclusions are valid. Whether two events at separate locations are simultaneous depends on the observer's perspective and the speed of light.",Rosa's test could show whether two events at separate locations are simultaneous or not,experimental_design,62,0.0,0.0,0.0,0.08450704225352113,0.17391304347826086,0.056338028169014086,0.08695652173913043,0.22700174153566632,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles in the given temperature ranges.
+
+For helium atoms at 5.00 K, the rms speed is 514 m/s.
+
+For hydrogen atoms at 21°C, the rms speed is 1350 m/s.
+
+For carbon dioxide molecules at 300 K, the rms speed is 1350 m/s.
+
+For helium atoms at 300 K, the rms speed is 514 m/s.
+
+For hydrogen molecules at 4.00 K, the rms speed is 1350 m/s.
+
+For carbon dioxide molecules at 4.00 K, the rms speed is 1350 m/s.
+
+For helium atoms at 4.00 K, the rms speed is 514 m/s.
+
+For hydrogen molecules at 21°C, the rms speed is 1350 m/s.
+
+For carbon dioxide molecules at 21°C, the rms speed is 1350 m/s.
+
+For helium atoms at 21°C, the rms speed is 514 m/s.
+
+For hydrogen molecules at 300 K, the rms speed is 1350 m/s.
+
+For carbon dioxide molecules at 300 K, the rms speed is 1350 m/s.
+
+For helium atoms at 300 K, the rms speed is 514 m/s.
+
+For hydrogen molecules at 4.00 K, the rms speed is 1350 m/s.
+
+For carbon dioxide molecules at 4.00 K, the rms speed is 1350 m/s.
+
+
+For helium atoms at 4.00 K, the rms speed is 514 m/s.","To compare the average kinetic energies of the particles in each sample, we need to determine the rms speeds of the particles in the given temperature ranges",thermal_kinetic,220,0.0,0.0,0.0,0.009009009009009009,0.06896551724137931,0.009009009009009009,0.06896551724137931,0.013767262924438875,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample B,"In the image, there are two cylinders containing different gases. The first cylinder contains helium gas, while the second cylinder has krypton gas. To compare the average kinetic energies of the particles in each sample, we need to know the rms speeds of the particles in each gas.
+
+For helium, the rms speed is approximately 514 m/s. For krypton, the rms speed is approximately 514 m/s as well. Since the rms speeds are the same for both gases, we can conclude that both samples have the same average kinetic energy of the particles.
+
+Therefore, both samples have the same average kinetic energy of the particles, and neither sample has a higher temperature than the other.","In the image, there are two cylinders containing different gases",thermal_kinetic,115,0.0,0.0,0.0,0.017094017094017096,0.0,0.017094017094017096,0.0,0.06615412016556224,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is greater in Pair 2.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.5714285714285714,0.5714285714285714,0.35714285714285715,0.35714285714285715,0.665640235470275,0.0,0.0,0.0,0.0
+M1,Identify the question that Kayla's experiment can best answer.,Do more tomato seedlings grow when they are planted in soil with fertilizer compared to soil without fertilizer?,"The question that Kayla's experiment can best answer is related to the concept of wave-particle duality. In this experiment, light is used to interfere with the motion of a charged particle, such as an electron. The interference pattern formed by the light waves can reveal information about the particle's wave-like properties, such as its wavelength at rest. This experiment helps to understand the behavior of particles in the context of light and wave phenomena, providing insights into the nature of light and its interaction with matter.",The question that Kayla's experiment can best answer is related to the concept of wave-particle duality,other,86,0.0,0.0,0.0,0.057692307692307696,0.058823529411764705,0.057692307692307696,0.058823529411764705,0.10016366623062493,0.0,0.0,0.0,0.0
+M1,What is the expected ratio of offspring with a greenish-brown body to offspring with a blue body? Choose the most likely ratio.,0:4,"The expected ratio of offspring with a greenish-brown body to offspring with a blue body depends on the specific genetic traits involved and the environmental factors affecting the population. Without specific information about the genetic traits and environmental conditions, it is not possible to provide an accurate answer.",The expected ratio of offspring with a greenish-brown body to offspring with a blue body depends on the specific genetic traits involved and the environmental factors affecting the population,genetics_ratio,48,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The strength of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.41379310344827586,0.41379310344827586,0.3448275862068966,0.3448275862068966,0.5656854249492381,0.0,0.0,0.0,0.0
+M1,Which of the following could Mitchell's test show?,which side of the roof got more sun over one day,"of
+
+
+
+well, the
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+of
+of
+
+
+
+
+
+
+
+
+
+
+o
+
+
+of
+of
+of
+of
+of
+
+
+
+
+o
+ha
+
+well
+
+h
+h
+h
+h
+h
+h
+
+ha
+
+
+
+
+
+
+
+
+o
+h
+
+
+
+h
+well
+
+
+
+ha
+ha
+
+ha
+ha
+h
+
+o
+h
+h
+well
+h
+h
+ofhing
+hing
+ha
+h
+h
+well
+well
+well
+h
+h
+h
+h
+ha
+hing
+
+
+h
+ha
+h
+ha
+h
+h
+h
+h
+h
+h
+hing
+h
+h
+h
+of
+h
+hing,and and well
+h
+h
+h
+hing
+hing
+hing
+hing
+h
+of
+of
+of
+h
+of
+h
+h
+of
+pace
+of
+ac
+pan
+pace
+m
+of
+how
+h
+of
+hing
+hing
+hing
+h
+p
+of
+h
+ac
+h
+of
+hing
+of
+ha
+h
+h
+h
+h
+hpective
+pace
+of
+pace
+p
+pace
+pace
+of and well and well andhing andhing andhing
+of
+of
+of and ofhing,of
+of andhing,of andhing andp
+of
+ofpace,of
+of
+cope,of
+cope,and,and
+pace
+of
+of and
+p
+of
+of
+of
+of
+of
+pace
+pace,
+p
+p
+pace,p andpace andhing in andions and for and
+while
+while and
+and,p
+pace,
+pace,p and
+while,
+of and
+of and
+of,of,",of,experimental_design,176,0.0,0.0,0.0,0.021390374331550804,0.16666666666666669,0.021390374331550804,0.16666666666666669,0.17781098247739888,0.0,0.0,0.0,0.0
+M1,Which air temperature was measured within the outlined area shown?,27°C,The air temperature measured within the outlined area shown was 0°C.,The air temperature measured within the outlined area shown was 0°C,thermal_kinetic,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.4666666666666666,0.4666666666666666,0.33333333333333337,0.33333333333333337,0.6009252125773316,0.0,0.0,0.0,0.0
+M1,Select the fish below.,whale shark,Fish,Fish,other,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Identify the question that the students' experiment can best answer.,Does the mixture's color change faster when the solutions are mixed at 25°C or 50°C?,"and
+of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+of
+
+
+
+
+
+
+
+
+
+
+8 8
+8
+
+
+
+
+
+
+8
+8, 8
+8 8
+8, 8, 8, 8, 8, 8
+
+8,
+
+8, 8, 8, 8, 8, 8
+8
+8,
+8
+8
+8
+8
+8
+8
+8
+8
+8,
+8
+8
+8
+8
+8
+8
+8
+8
+8
+8
+8
+8
+8
+8,8
+8
+8,8
+8
+8
+8,8
+8 of 8
+8 and of
+8,8,8 of
+8,8,8
+8,8,
+8,8,8,8
+8,8,8,8,8,8
+8,8,8,8,8,8,8,8,8
+8
+8
+8,8
+8,8,8
+8,8 8
+8,8,8,8,8,8,8 of
+8,
+8 of
+8 of of of of
+8 of
+8 of
+8
+8
+8 8,8
+8 8 8 of
+8,8
+8,8
+8 of
+8
+8
+8,8
+8
+8
+8
+8
+8
+8
+8 of
+8 of
+8
+8
+8
+8
+8
+8
+8
+8
+8
+8 of of
+8
+8
+8 in8 of
+8 of
+8 of
+8 of
+8
+8
+8 of
+8
+8 of
+8,8 of8
+8,8 of
+8 of
+8 of of of of
+8 of of of in of in of
+8
+8 of
+8 of
+8 of of of
+8
+8,8
+8,8 of
+8 of
+8
+8
+8 of
+8 of of of of of of of of of of of of
+8
+8 of of of of of of",and,other,202,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Which of the following could Julia and Tiana's test show?,if a new batch of concrete was firm enough to use,"Julia and Tiana's test could show the relationship between the distance of the object and the time it takes to fall. In the image, there is a man holding a rope with a tube attached to it, and a woman is holding a tube with a rope attached to it. The tube is falling, and the man is holding the rope to control its descent. This experiment could demonstrate the concept of free fall, which is a fundamental principle in physics that describes the motion of an object in a gravitational field. The test would help the students understand the relationship between the force of gravity and the acceleration of an object as it falls.",Julia and Tiana's test could show the relationship between the distance of the object and the time it takes to fall,experimental_design,115,0.0,0.0,0.0,0.04761904761904761,0.125,0.031746031746031744,0.125,0.2280903385070311,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 1.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.48,0.48,0.4,0.4,0.6363961030678927,0.0,0.0,0.0,0.0
+M1,"Complete the statement.
+Copper is ().",an elementary substance,Copper is a good conductor of charge.,Copper is a good conductor of charge,other,7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Which of the following statements describess living in an independent city-state?,My city rules itself and is not part of a larger country.,A city-state is an independent city or region that has its own government and is not part of a larger country or empire.,A city-state is an independent city or region that has its own government and is not part of a larger country or empire,other,23,0.0,0.0,0.0,0.4571428571428571,0.4571428571428571,0.4571428571428571,0.4571428571428571,0.5360562674188974,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample. Unfortunately, the provided context does not provide this information. Therefore, it is impossible to determine which sample has the higher temperature based on the given information.","To compare the average kinetic energies of the particles in each sample, we need to know the average kinetic energy of the particles in each sample",thermal_kinetic,52,0.0,0.0,0.0,0.037037037037037035,0.07142857142857144,0.037037037037037035,0.07142857142857144,0.13130643285972254,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,climate,"The passage describes the weather, specifically the temperature and its impact on the Washington Monument and the Eiffel Tower.","The passage describes the weather, specifically the temperature and its impact on the Washington Monument and the Eiffel Tower",weather_climate,19,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Does this passage describe the weather or the climate?,climate,"The passage describes the weather, as it talks about the temperature and pressure changes that occur during a day. The climate, on the other hand, refers to the long-term patterns of weather in a particular region.","The passage describes the weather, as it talks about the temperature and pressure changes that occur during a day",weather_climate,36,0.0,1.0,0.0,0.05405405405405406,0.0,0.05405405405405406,0.0,0.11952286093343936,0.0,0.0,0.0,0.0
+M1,"Based on the timeline, which of the following statements is true?",Other civilizations existed at the same time as the Aztec.,",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+,
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+,
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of
+
+
+,
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+,
+
+
+
+
+,
+,
+,
+
+,
+
+,
+
+
+,
+,
+
+
+
+
+
+,
+
+
+
+,
+
+
+
+
+
+
+
+
+
+ of
+
+
+
+
+
+
+, of
+
+
+,
+,
+,
+,
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+,
+
+
+
+
+,
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+,",",",other,40,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is weaker in Pair 2.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5217391304347827,0.5217391304347827,0.43478260869565216,0.43478260869565216,0.6488856845230501,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",the surroundings . . . each refrigerator,",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+, 
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+ ,
+
+
+
+
+
+
+
+
+
+ 
+
+ ,
+
+
+
+,
+
+,
+
+
+,
+
+
+
+
+, ,
+
+
+ , ,
+,
+
+
+ ,  
+  
+ 
+
+ 
+ 
+
+ 
+ 
+ , ,
+ , 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+  
+
+
+ 
+ 
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+ 
+
+ 
+,
+,
+
+,
+ 
+,
+
+
+
+
+
+
+ 
+ 
+
+ 
+
+ 
+ 
+,
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+
+ 
+ 
+
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+ ,",",",other,25,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnitude of the magnetic force is smaller in Pair 1.,The magnetic force between the magnets in each pair is equal and opposite in direction.,The magnetic force between the magnets in each pair is equal and opposite in direction,magnetism,15,0.0,0.0,0.0,0.5384615384615385,0.5384615384615385,0.3846153846153846,0.3846153846153846,0.6362847629757777,0.0,0.0,0.0,0.0
+M1,"During this time, thermal energy was transferred from () to ().",the surroundings . . . each bottle,",
+, 
+, ,
+
+, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+, 
+
+
+
+
+
+, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+ , 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+,
+
+
+
+ 
+ 
+, 
+ 
+, ,  
+
+
+
+
+
+   
+ 
+, 
+  
+,    
+ 
+
+,    
+,  , , , , , , ,  
+ ,  , 
+
+ 
+
+ 
+  ,",",",other,26,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Which type of relationship is formed when protists live in a termite's gut?,mutualistic,"A mutualistic relationship is formed when protists live in a termite's gut. Mutualism is a type of symbiotic relationship in which both species benefit from the interaction. In this case, the termite benefits from the protection and nutrition provided by the protists, while the protists benefit from the termite's ability to find and process food sources. This relationship is beneficial for both parties involved.",A mutualistic relationship is formed when protists live in a termite's gut,other,64,0.0,1.0,1.0,0.03076923076923077,0.15384615384615385,0.03076923076923077,0.15384615384615385,0.08451542547285165,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,neither; the samples have the same temperature,"In the given context, there are multiple questions and answers. To provide a comprehensive answer, I'll focus on the last question: Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?
+
+To determine the average kinetic energy of the particles in each sample, we need to know the specific samples and the particles involved. However, we can make some general observations based on the provided context.
+
+1. The escape velocity of any object from Earth is 11.1 km/s. At what temperature would hydrogen molecules have a root-mean-square velocity equal to the Earth's escape velocity?
+2. The escape velocity from the Moon is much smaller than that from the Earth, only 2.38 km/s. At what temperature would hydrogen molecules have a root-mean-square velocity equal to the Moon's escape velocity?
+
+Without knowing the specific samples and particles, we cannot directly compare the average kinetic energies of the particles in each sample. However, we can infer that the temperature of the sample with the higher average kinetic energy would be higher than the other sample.","In the given context, there are multiple questions and answers",thermal_kinetic,179,0.0,0.0,0.0,0.053763440860215055,0.11764705882352941,0.053763440860215055,0.11764705882352941,0.5886629461509557,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The magnetic force is stronger in Pair 2.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction.,The magnetic force between the magnets in each pair is always equal in magnitude and opposite in direction,magnetism,18,0.0,0.0,0.0,0.46153846153846156,0.46153846153846156,0.3846153846153846,0.3846153846153846,0.6240377207533828,0.0,0.0,0.0,0.0
+M1,Think about the magnetic force between the magnets in each pair. Which of the following statements is true?,The strength of the magnetic force is the same in both pairs.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction.,The magnetic force between the magnets in each pair is equal in magnitude but opposite in direction,magnetism,17,0.0,0.0,0.0,0.41379310344827586,0.41379310344827586,0.3448275862068966,0.3448275862068966,0.5656854249492381,0.0,0.0,0.0,0.0
+M1,Identify the question that Dominic's experiment can best answer.,Do muffins made with white flour have larger volumes than muffins made with whole wheat flour?,"Dominic's experiment can best answer the question, ""What is the change of momentum during the bounce of the superball on the floor?""","Dominic's experiment can best answer the question, ""What is the change of momentum during the bounce of the superball on the floor",other,22,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+M1,Compare the average kinetic energies of the particles in each sample. Which sample has the higher temperature?,sample A,"In the image, there are two cylinders, one containing helium gas and the other containing krypton gas. The rms speeds of the particles in each cylinder are different. The helium cylinder has a higher rms speed than the krypton cylinder. Therefore, the helium cylinder has a higher temperature than the krypton cylinder.","In the image, there are two cylinders, one containing helium gas and the other containing krypton gas",thermal_kinetic,52,0.0,0.0,0.0,0.037037037037037035,0.0,0.037037037037037035,0.0,0.1178511301977579,0.0,0.0,0.0,0.0
+M1,Select the amphibian below.,arroyo toad,",
+
+
+
+
+
+,
+,
+
+,
+,
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+ and,
+
+
+
+
+
+
+
+
+
+
+
+
+
+ of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+
+
+ and,
+
+
+
+ and,
+
+
+
+
+
+
+
+
+
+
+
+
+ and,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ and
+ and, and and and,, and and, and and
+ of
+ and and
+ and and
+
+,",",",other,29,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+M1,Which of the following could Keith's test show?,which side of the roof got more sun over one day,"Keith's test, also known as the interference fringes experiment, is a method to determine the wavelength of light. By observing the interference pattern created when two sound speakers are separated by a distance d and each speaker sounds a frequency f, an observer can walk in a straight line a distance x perpendicular to the speakers until they come to the first maximum intensity. The wavelength of the radiation maximum decreases with increasing temperature, so the star is hotter. The human eye does not see IR radiation, and the particle character does not change. The excess of 13.6 eV will become kinetic energy of a free electron.","Keith's test, also known as the interference fringes experiment, is a method to determine the wavelength of light",experimental_design,107,0.0,0.0,0.0,0.033898305084745756,0.13793103448275862,0.033898305084745756,0.06896551724137931,0.26696477899043675,0.0,0.0,0.0,0.0
+M1,Which of the following could Terrence's test show?,which design would have the greatest distance between the concert area and the road,"Terrence's test could show the relationship between the size of a particle and the force it experiences from electromagnetic radiation. The test would involve measuring the force exerted on a small object, like a tiny ball or a tiny mirror, by a beam of electromagnetic radiation. The force experienced by the object would be proportional to the size of the object, and the test would help determine the minimum size at which the force becomes significant enough to be detected. This information can be used to understand the behavior of small particles in the presence of electromagnetic radiation.",Terrence's test could show the relationship between the size of a particle and the force it experiences from electromagnetic radiation,experimental_design,98,0.0,0.0,0.0,0.125,0.2941176470588235,0.08928571428571429,0.2941176470588235,0.5562438462534623,0.0,0.0,0.0,0.0

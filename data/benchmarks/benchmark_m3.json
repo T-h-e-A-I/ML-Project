@@ -1,0 +1,28 @@
+[
+  {
+    "exact_match": 0.0,
+    "contains_accuracy": 0.19,
+    "rouge_l": {
+      "precision": 0.017968812820762063,
+      "recall": 0.6222135176914589,
+      "f1": 0.03424098651982024
+    },
+    "bert_score": {
+      "precision": 0.7490904927253723,
+      "recall": 0.8403332233428955,
+      "f1": 0.7918146252632141
+    },
+    "num_samples": 200,
+    "gpt4o_judge": {
+      "correctness": 1.98,
+      "reasoning": 2.14,
+      "num_judged": 50
+    },
+    "config": "M3",
+    "config_name": "No retrieval + LLaVA-7B (fine-tuned)",
+    "elapsed_seconds": 8776.988019943237,
+    "top_k": 5,
+    "alpha": 0.5,
+    "predictions_saved_to": "/kaggle/working/preds_m3_200_M3.json"
+  }
+]

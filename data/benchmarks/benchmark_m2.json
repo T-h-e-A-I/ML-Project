@@ -1,0 +1,28 @@
+[
+  {
+    "exact_match": 0.0,
+    "contains_accuracy": 0.12,
+    "rouge_l": {
+      "precision": 0.04468961026409922,
+      "recall": 0.2784795995030732,
+      "f1": 0.0669
+    },
+    "bert_score": {
+      "precision": 0.8014444215944689,
+      "recall": 0.839240531042484,
+      "f1": 0.8197
+    },
+    "num_samples": 200,
+    "gpt4o_judge": {
+      "correctness": 1.5,
+      "reasoning": 1.54,
+      "num_judged": 50
+    },
+    "config": "M2",
+    "config_name": "Multimodal RAG + LLaVA-7B (fine-tuned)",
+    "elapsed_seconds": 9259.4,
+    "top_k": 5,
+    "alpha": 0.5,
+    "predictions_saved_to": "/kaggle/working/ml-project/data/eval/preds_M2.json"
+  }
+]
