@@ -67,6 +67,34 @@ def _table_html(headers: list[str], rows: list[list[str]]) -> str:
     return f"<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
 
 
+def _info_badge(text: str) -> str:
+    return (
+        '<details class="info-pop">'
+        '<summary title="Explain">i</summary>'
+        f'<div class="info-text">{html.escape(text)}</div>'
+        "</details>"
+    )
+
+
+def _plot_description(plot_name: str) -> str:
+    descriptions = {
+        "accuracy_comparison.png": "Compares answer-match style metrics across configs.",
+        "metric_heatmap.png": "Heatmap view of core benchmark metrics to spot strengths quickly.",
+        "contains_vs_bertscore.png": "Trade-off chart between literal answer containment and semantic similarity.",
+        "runtime_comparison.png": "Inference/evaluation runtime comparison across configs.",
+        "quality_profile_radar.png": "Radar profile summarizing multi-metric quality per config.",
+        "efficiency_frontier.png": "Quality versus cost frontier to see efficient choices.",
+        "delta_vs_m1.png": "Per-metric improvement or drop relative to M1 baseline.",
+        "metric_rankings.png": "Rank positions of configs for each metric.",
+        "posthoc_length_vs_contains.png": "Checks whether longer outputs correlate with contain accuracy.",
+        "posthoc_repetition_rate.png": "Measures repeated-token tendency across configs.",
+        "posthoc_first_sentence_delta.png": "Compares first-sentence quality against full-answer quality.",
+        "posthoc_topic_contains_heatmap.png": "Topic-wise contain accuracy heatmap.",
+        "posthoc_word_distribution.png": "Distribution of answer lengths (word counts).",
+    }
+    return descriptions.get(plot_name, "Generated evaluation plot for this experiment.")
+
+
 def _load_preds(preds_dir: Path) -> tuple[list[dict], dict[str, list[dict]]]:
     by_cfg: dict[str, list[dict]] = {}
     flat: list[dict] = []
@@ -178,6 +206,11 @@ pre { white-space: pre-wrap; max-height: 220px; overflow:auto; }
 .plot-frame { width:100%; height:340px; object-fit: contain; background:#fff; border:1px solid #e5e7eb; border-radius:8px; }
 .diagram-grid { display:grid; grid-template-columns: repeat(2, minmax(360px, 1fr)); gap: 12px; }
 .diagram-frame { width:100%; height:300px; object-fit: contain; background:#fff; border:1px solid #e5e7eb; border-radius:8px; }
+.th-wrap { display:inline-flex; align-items:center; gap:6px; }
+.info-pop { display:inline-block; position:relative; }
+.info-pop summary { list-style:none; cursor:pointer; width:18px; height:18px; border-radius:50%; border:1px solid #cbd5e1; display:grid; place-items:center; font-size:12px; color:#334155; background:#f8fafc; }
+.info-pop summary::-webkit-details-marker { display:none; }
+.info-pop .info-text { position:absolute; z-index:5; top:22px; right:0; width:260px; background:#0f172a; color:#f8fafc; border-radius:8px; padding:8px 10px; font-size:12px; line-height:1.35; box-shadow:0 8px 20px rgba(0,0,0,0.25); }
 @media (max-width: 960px) { .plot-grid { grid-template-columns: 1fr; } .plot-frame { height:300px; } }
 """
 
@@ -279,39 +312,48 @@ def make_handler(
                 return
 
             if path in ("/", "/index.html"):
-                cfg_stats = []
-                for cfg in cfgs_all:
+                bench_by_cfg = {str(b.get("config", "")): b for b in benchmark_rows}
+                posthoc_by_cfg = {str(p.get("config", "")): p for p in posthoc_rows}
+
+                metric_headers = [
+                    ('Config', "Experiment configuration id."),
+                    ('Rows', "Total prediction rows available for that config."),
+                    ('Contains', "Fraction where normalized reference text appears in prediction."),
+                    ('ROUGE-L', "Longest-common-subsequence overlap F1 between prediction and reference."),
+                    ('BERTScore', "Embedding-based semantic similarity score."),
+                    ('GPT Corr', "LLM-judge correctness score (higher is better)."),
+                    ('GPT Reas', "LLM-judge reasoning-quality score (higher is better)."),
+                    ('Token F1', "Token overlap F1 from posthoc analysis."),
+                    ('TFIDF Cos', "TF-IDF cosine similarity from posthoc analysis."),
+                    ('Avg Words', "Average generated answer length (words)."),
+                    ('Repetition', "Rate of repetitive generations (lower is better)."),
+                    ('Time (min)', "Benchmark runtime in minutes."),
+                ]
+                metrics_head_html = "".join(
+                    f'<th><span class="th-wrap">{html.escape(name)}{_info_badge(desc)}</span></th>'
+                    for name, desc in metric_headers
+                )
+                metrics_rows_html = ""
+                for cfg in cfg_order:
+                    b = bench_by_cfg.get(cfg, {})
+                    p = posthoc_by_cfg.get(cfg, {})
                     rr = by_cfg.get(cfg, [])
-                    hits = sum(1 for x in rr if _contains_ref(x["prediction"], x["reference"]))
-                    avg_words = (sum(len((x["prediction"] or "").split()) for x in rr) / len(rr)) if rr else 0.0
-                    cfg_stats.append([cfg, str(len(rr)), f"{hits / max(len(rr), 1):.3f}", f"{avg_words:.1f}"])
-
-                bench_rows = []
-                for b in sorted(benchmark_rows, key=lambda x: x.get("config", "")):
-                    gj = b.get("gpt4o_judge", {})
-                    bench_rows.append(
-                        [
-                            html.escape(str(b.get("config", "N/A"))),
-                            f"{float(b.get('contains_accuracy', 0.0)):.3f}",
-                            f"{float(b.get('rouge_l', {}).get('f1', 0.0)):.3f}",
-                            f"{float(b.get('bert_score', {}).get('f1', 0.0)):.3f}",
-                            f"{float(gj.get('correctness', 0.0)):.2f}",
-                            f"{float(gj.get('reasoning', 0.0)):.2f}",
-                            f"{float(b.get('elapsed_seconds', 0.0))/60.0:.1f}",
-                        ]
-                    )
-
-                posthoc_tbl = []
-                for r in sorted(posthoc_rows, key=lambda x: x.get("config", "")):
-                    posthoc_tbl.append(
-                        [
-                            html.escape(r.get("config", "")),
-                            f"{float(r.get('contains_ref_acc', 0.0)):.3f}",
-                            f"{float(r.get('token_f1_mean', 0.0)):.3f}",
-                            f"{float(r.get('rougeL_f1_mean', 0.0)):.3f}",
-                            f"{float(r.get('avg_pred_words', 0.0)):.1f}",
-                            f"{float(r.get('repetition_rate', 0.0)):.3f}",
-                        ]
+                    gj = b.get("gpt4o_judge", {}) if isinstance(b, dict) else {}
+                    metrics_rows_html += (
+                        "<tr>"
+                        f"<td>{html.escape(cfg)}</td>"
+                        f"<td>{len(rr)}</td>"
+                        f"<td>{float(b.get('contains_accuracy', 0.0)):.3f}</td>"
+                        f"<td>{float(b.get('rouge_l', {}).get('f1', 0.0)):.3f}</td>"
+                        f"<td>{float(b.get('bert_score', {}).get('f1', 0.0)):.3f}</td>"
+                        f"<td>{float(gj.get('correctness', 0.0)):.2f}</td>"
+                        f"<td>{float(gj.get('reasoning', 0.0)):.2f}</td>"
+                        f"<td>{float(p.get('token_f1_mean', 0.0)):.3f}</td>"
+                        f"<td>{float(p.get('tfidf_cosine_mean', 0.0)):.3f}</td>"
+                        f"<td>{float(p.get('avg_pred_words', 0.0)):.1f}</td>"
+                        f"<td>{float(p.get('repetition_rate', 0.0)):.3f}</td>"
+                        f"<td>{float(b.get('elapsed_seconds', 0.0))/60.0:.1f}</td>"
+                        "</tr>"
                     )
 
                 preferred_plot_order = [
@@ -338,7 +380,12 @@ def make_handler(
                 existing_plots = [p for p in preferred_plot_order if p in discovered_plot_files]
                 existing_plots.extend([p for p in discovered_plot_files if p not in existing_plots])
                 plot_html = "".join(
-                    f'<div class="card"><h3>{html.escape(p)}</h3><img src="/static/plots/{html.escape(p)}" style="max-width:100%; border:1px solid #e5e7eb; border-radius:8px;" /></div>'
+                    (
+                        '<div class="card">'
+                        f'<h3>{html.escape(p)} {_info_badge(_plot_description(p))}</h3>'
+                        f'<img class="plot-frame" src="/static/plots/{html.escape(p)}" />'
+                        "</div>"
+                    )
                     for p in existing_plots
                 )
 
@@ -349,51 +396,20 @@ def make_handler(
   <div class="muted">Benchmark + posthoc + question-level exploration</div>
 
   <div class="card">
-    <h3>Benchmark Metrics</h3>
-    {_table_html(["Config", "Contains", "ROUGE-L", "BERTScore", "GPT Corr", "GPT Reas", "Time (min)"], bench_rows)}
-    <p class="muted">JSON APIs: <a href="/api/benchmarks">benchmarks</a> | <a href="/api/posthoc">posthoc</a></p>
+    <h3>Unified Metrics Table</h3>
+    <table>
+      <thead><tr>{metrics_head_html}</tr></thead>
+      <tbody>{metrics_rows_html}</tbody>
+    </table>
+    <p class="muted">Each metric appears once only. APIs: <a href="/api/benchmarks">benchmarks</a> | <a href="/api/posthoc">posthoc</a>. Downloads: <a href="/static/posthoc/posthoc_summary.csv">posthoc_summary.csv</a> | <a href="/static/posthoc/topic_breakdown.csv">topic_breakdown.csv</a></p>
   </div>
 
   <div class="card">
-    <h3>Benchmark + Posthoc Matrix</h3>
-    {_table_html(
-        ["Config", "Contains", "ROUGE-L", "BERTScore", "GPT Corr", "GPT Reas", "Token F1", "Avg Words", "Repetition"],
-        [
-            [
-                html.escape(str(b.get("config", "N/A"))),
-                f"{float(b.get('contains_accuracy', 0.0)):.3f}",
-                f"{float(b.get('rouge_l', {}).get('f1', 0.0)):.3f}",
-                f"{float(b.get('bert_score', {}).get('f1', 0.0)):.3f}",
-                f"{float(b.get('gpt4o_judge', {}).get('correctness', 0.0)):.2f}",
-                f"{float(b.get('gpt4o_judge', {}).get('reasoning', 0.0)):.2f}",
-                (
-                    next((f"{float(p.get('token_f1_mean', 0.0)):.3f}" for p in posthoc_rows if p.get("config") == b.get("config")), "N/A")
-                ),
-                (
-                    next((f"{float(p.get('avg_pred_words', 0.0)):.1f}" for p in posthoc_rows if p.get("config") == b.get("config")), "N/A")
-                ),
-                (
-                    next((f"{float(p.get('repetition_rate', 0.0)):.3f}" for p in posthoc_rows if p.get("config") == b.get("config")), "N/A")
-                ),
-            ]
-            for b in sorted(benchmark_rows, key=lambda x: x.get("config", ""))
-        ],
-    )}
-  </div>
-
-  <div class="card">
-    <h3>Prediction Set Stats</h3>
-    {_table_html(["Config", "Rows", "Contains Hit Rate", "Avg Pred Words"], cfg_stats)}
+    <h3>Explore</h3>
     <p><a href="/questions">Question browser</a> | <a href="/compare">Side-by-side compare (left join by index)</a> | <a href="/experiment">Experiment diagrams</a></p>
   </div>
 
-  <div class="card">
-    <h3>Posthoc Summary</h3>
-    {_table_html(["Config", "Contains", "Token F1", "ROUGE-L", "Avg Words", "Repetition"], posthoc_tbl) if posthoc_tbl else "<p class='muted'>No posthoc summary found. Run posthoc_analysis first.</p>"}
-    <p class="muted">Downloads: <a href="/static/posthoc/posthoc_summary.csv">posthoc_summary.csv</a> | <a href="/static/posthoc/topic_breakdown.csv">topic_breakdown.csv</a></p>
-  </div>
-
-  {f'<div class="card"><h3>Plots</h3><div class="plot-grid">{ "".join(f"<div><div class=muted>{html.escape(p)}</div><img class=plot-frame src=/static/plots/{html.escape(p)} /></div>" for p in existing_plots) }</div></div>' if existing_plots else '<div class="card"><h3>Plots</h3><p class="muted">No plot files found in data/eval/plots. Run visualize_results first.</p></div>'}
+  {f'<div class="card"><h3>Plots</h3><div class="plot-grid">{plot_html}</div></div>' if existing_plots else '<div class="card"><h3>Plots</h3><p class="muted">No plot files found in data/eval/plots. Run visualize_results first.</p></div>'}
 </body></html>"""
                 self._send_html(page)
                 return
@@ -404,7 +420,7 @@ def make_handler(
                 cards = "".join(
                     f"""
                     <div class="card">
-                      <h3>{html.escape(p.stem)}</h3>
+                      <h3>{html.escape(p.stem)} {_info_badge("Experiment artifact diagram. Use filename/title to identify pipeline, architecture, or flow context.")}</h3>
                       <img class="diagram-frame" src="/static/diagrams/{html.escape(p.name)}" />
                       <div class="muted">file: {html.escape(p.name)}</div>
                     </div>
