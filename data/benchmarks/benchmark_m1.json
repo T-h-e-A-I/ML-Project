@@ -1,0 +1,27 @@
+[
+  {
+    "exact_match": 0.0,
+    "contains_accuracy": 0.045,
+    "rouge_l": {
+      "precision": 0.09392166222918312,
+      "recall": 0.5852650476850836,
+      "f1": 0.1406
+    },
+    "bert_score": {
+      "precision": 0.8161103558678825,
+      "recall": 0.8545981106028564,
+      "f1": 0.8347
+    },
+    "num_samples": 200,
+    "gpt4o_judge": {
+      "correctness": 1.58,
+      "reasoning": 1.96,
+      "num_judged": 50
+    },
+    "config": "M1",
+    "config_name": "Multimodal RAG + LLaVA-7B",
+    "elapsed_seconds": 2888.1,
+    "top_k": 5,
+    "alpha": 0.5
+  }
+]
