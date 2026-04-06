@@ -78,9 +78,18 @@ def run_predictions(
 
     rows = []
     t0 = time.time()
-    for i, sample in enumerate(
-        tqdm(eval_data, desc=f"{config_key} preds", unit="ex", mininterval=2.0)
-    ):
+    pbar = tqdm(
+        eval_data,
+        desc=f"{config_key} preds",
+        unit="ex",
+        mininterval=2.0,
+        dynamic_ncols=True,
+        bar_format=(
+            "{desc}: {percentage:3.0f}%|{bar}| {n_fmt}/{total_fmt} "
+            "[{elapsed}<{remaining}, {rate_fmt}]"
+        ),
+    )
+    for i, sample in enumerate(pbar):
         question = sample["question"]
         reference = sample["answer"]
         raw_image = sample.get("image_path")
@@ -132,6 +141,8 @@ def run_predictions(
                 "prediction": pred,
             }
         )
+        # Helpful runtime signal when running long configs.
+        pbar.set_postfix_str(f"{(time.time() - t0) / (i + 1):.2f}s/ex", refresh=False)
 
     output_preds.parent.mkdir(parents=True, exist_ok=True)
     final_path = output_preds.parent / f"{output_preds.stem}_{config_key}{output_preds.suffix}"
