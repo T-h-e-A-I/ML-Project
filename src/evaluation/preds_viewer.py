@@ -14,7 +14,7 @@ import json
 import mimetypes
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 
 def _norm(s: str) -> str:
@@ -174,6 +174,11 @@ th { background: #f3f4f6; }
 .pager { margin: 12px 0; display:flex; gap: 10px; align-items:center; }
 .pred { font-size: 13px; line-height: 1.35; white-space: pre-wrap; max-height: 220px; overflow: auto; border:1px solid #eef2ff; border-radius: 6px; padding: 8px; background:#fafaff; }
 pre { white-space: pre-wrap; max-height: 220px; overflow:auto; }
+.plot-grid { display:grid; grid-template-columns: repeat(2, minmax(380px, 1fr)); gap: 12px; }
+.plot-frame { width:100%; height:340px; object-fit: contain; background:#fff; border:1px solid #e5e7eb; border-radius:8px; }
+.diagram-grid { display:grid; grid-template-columns: repeat(2, minmax(360px, 1fr)); gap: 12px; }
+.diagram-frame { width:100%; height:300px; object-fit: contain; background:#fff; border:1px solid #e5e7eb; border-radius:8px; }
+@media (max-width: 960px) { .plot-grid { grid-template-columns: 1fr; } .plot-frame { height:300px; } }
 """
 
 
@@ -184,6 +189,7 @@ def make_handler(
     posthoc_rows: list[dict],
     plots_dir: Path,
     posthoc_dir: Path,
+    diagrams_dir: Path,
 ):
     cfg_order = ["B1", "B2", "M1", "M2", "M3"]
     cfgs_all = sorted({r["config"] for r in rows}, key=lambda c: (cfg_order.index(c) if c in cfg_order else 999, c))
@@ -222,7 +228,7 @@ def make_handler(
                 return
 
             if path.startswith("/static/plots/"):
-                name = path.split("/static/plots/", 1)[1]
+                name = unquote(path.split("/static/plots/", 1)[1])
                 target = (plots_dir / name).resolve()
                 if not target.exists() or target.parent != plots_dir.resolve():
                     self.send_response(404)
@@ -239,7 +245,7 @@ def make_handler(
                 return
 
             if path.startswith("/static/posthoc/"):
-                name = path.split("/static/posthoc/", 1)[1]
+                name = unquote(path.split("/static/posthoc/", 1)[1])
                 target = (posthoc_dir / name).resolve()
                 if not target.exists() or target.parent != posthoc_dir.resolve():
                     self.send_response(404)
@@ -248,6 +254,23 @@ def make_handler(
                 with open(target, "rb") as f:
                     data = f.read()
                 mime = mimetypes.guess_type(str(target))[0] or "text/plain"
+                self.send_response(200)
+                self.send_header("Content-Type", mime)
+                self.send_header("Content-Length", str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+                return
+
+            if path.startswith("/static/diagrams/"):
+                name = unquote(path.split("/static/diagrams/", 1)[1])
+                target = (diagrams_dir / name).resolve()
+                if not target.exists() or target.parent != diagrams_dir.resolve():
+                    self.send_response(404)
+                    self.end_headers()
+                    return
+                with open(target, "rb") as f:
+                    data = f.read()
+                mime = mimetypes.guess_type(str(target))[0] or "application/octet-stream"
                 self.send_response(200)
                 self.send_header("Content-Type", mime)
                 self.send_header("Content-Length", str(len(data)))
@@ -291,15 +314,29 @@ def make_handler(
                         ]
                     )
 
-                plot_files = [
+                preferred_plot_order = [
                     "accuracy_comparison.png",
                     "metric_heatmap.png",
                     "contains_vs_bertscore.png",
                     "runtime_comparison.png",
-                    "ablation_topk.png",
-                    "ablation_alpha.png",
+                    "quality_profile_radar.png",
+                    "efficiency_frontier.png",
+                    "delta_vs_m1.png",
+                    "metric_rankings.png",
+                    "posthoc_length_vs_contains.png",
+                    "posthoc_repetition_rate.png",
+                    "posthoc_first_sentence_delta.png",
+                    "posthoc_topic_contains_heatmap.png",
+                    "posthoc_word_distribution.png",
                 ]
-                existing_plots = [p for p in plot_files if (plots_dir / p).exists()]
+                allowed_plot_ext = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
+                discovered_plot_files = (
+                    [p.name for p in sorted(plots_dir.iterdir()) if p.is_file() and p.suffix.lower() in allowed_plot_ext]
+                    if plots_dir.exists()
+                    else []
+                )
+                existing_plots = [p for p in preferred_plot_order if p in discovered_plot_files]
+                existing_plots.extend([p for p in discovered_plot_files if p not in existing_plots])
                 plot_html = "".join(
                     f'<div class="card"><h3>{html.escape(p)}</h3><img src="/static/plots/{html.escape(p)}" style="max-width:100%; border:1px solid #e5e7eb; border-radius:8px;" /></div>'
                     for p in existing_plots
@@ -318,9 +355,36 @@ def make_handler(
   </div>
 
   <div class="card">
+    <h3>Benchmark + Posthoc Matrix</h3>
+    {_table_html(
+        ["Config", "Contains", "ROUGE-L", "BERTScore", "GPT Corr", "GPT Reas", "Token F1", "Avg Words", "Repetition"],
+        [
+            [
+                html.escape(str(b.get("config", "N/A"))),
+                f"{float(b.get('contains_accuracy', 0.0)):.3f}",
+                f"{float(b.get('rouge_l', {}).get('f1', 0.0)):.3f}",
+                f"{float(b.get('bert_score', {}).get('f1', 0.0)):.3f}",
+                f"{float(b.get('gpt4o_judge', {}).get('correctness', 0.0)):.2f}",
+                f"{float(b.get('gpt4o_judge', {}).get('reasoning', 0.0)):.2f}",
+                (
+                    next((f"{float(p.get('token_f1_mean', 0.0)):.3f}" for p in posthoc_rows if p.get("config") == b.get("config")), "N/A")
+                ),
+                (
+                    next((f"{float(p.get('avg_pred_words', 0.0)):.1f}" for p in posthoc_rows if p.get("config") == b.get("config")), "N/A")
+                ),
+                (
+                    next((f"{float(p.get('repetition_rate', 0.0)):.3f}" for p in posthoc_rows if p.get("config") == b.get("config")), "N/A")
+                ),
+            ]
+            for b in sorted(benchmark_rows, key=lambda x: x.get("config", ""))
+        ],
+    )}
+  </div>
+
+  <div class="card">
     <h3>Prediction Set Stats</h3>
     {_table_html(["Config", "Rows", "Contains Hit Rate", "Avg Pred Words"], cfg_stats)}
-    <p><a href="/questions">Question browser</a> | <a href="/compare">Side-by-side compare (left join by index)</a></p>
+    <p><a href="/questions">Question browser</a> | <a href="/compare">Side-by-side compare (left join by index)</a> | <a href="/experiment">Experiment diagrams</a></p>
   </div>
 
   <div class="card">
@@ -329,7 +393,30 @@ def make_handler(
     <p class="muted">Downloads: <a href="/static/posthoc/posthoc_summary.csv">posthoc_summary.csv</a> | <a href="/static/posthoc/topic_breakdown.csv">topic_breakdown.csv</a></p>
   </div>
 
-  {plot_html if plot_html else '<div class="card"><h3>Plots</h3><p class="muted">No plot files found in data/eval/plots. Run visualize_results first.</p></div>'}
+  {f'<div class="card"><h3>Plots</h3><div class="plot-grid">{ "".join(f"<div><div class=muted>{html.escape(p)}</div><img class=plot-frame src=/static/plots/{html.escape(p)} /></div>" for p in existing_plots) }</div></div>' if existing_plots else '<div class="card"><h3>Plots</h3><p class="muted">No plot files found in data/eval/plots. Run visualize_results first.</p></div>'}
+</body></html>"""
+                self._send_html(page)
+                return
+
+            if path == "/experiment":
+                allowed = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
+                diagrams = [p for p in sorted(diagrams_dir.iterdir()) if p.is_file() and p.suffix.lower() in allowed] if diagrams_dir.exists() else []
+                cards = "".join(
+                    f"""
+                    <div class="card">
+                      <h3>{html.escape(p.stem)}</h3>
+                      <img class="diagram-frame" src="/static/diagrams/{html.escape(p.name)}" />
+                      <div class="muted">file: {html.escape(p.name)}</div>
+                    </div>
+                    """
+                    for p in diagrams
+                )
+                page = f"""<!doctype html>
+<html><head><meta charset="utf-8"/><title>Experiment Diagrams</title><style>{_base_css()}</style></head>
+<body>
+  <h2>Experiment Diagrams</h2>
+  <p><a href="/">Back to dashboard</a> | <a href="/questions">Question browser</a> | <a href="/compare">Compare</a></p>
+  {f'<div class="diagram-grid">{cards}</div>' if cards else '<div class="card"><p class="muted">No diagram images found.</p></div>'}
 </body></html>"""
                 self._send_html(page)
                 return
@@ -395,7 +482,7 @@ def make_handler(
 <html><head><meta charset="utf-8"/><title>Compare</title><style>{_base_css()}</style></head>
 <body>
   <h2>Side-by-Side Compare (index left join)</h2>
-  <p><a href="/">Back to dashboard</a> | <a href="/questions">Question browser</a></p>
+  <p><a href="/">Back to dashboard</a> | <a href="/questions">Question browser</a> | <a href="/experiment">Experiment diagrams</a></p>
   <form method="get" class="controls" style="grid-template-columns:180px 1fr 120px;">
     <input type="hidden" name="page" value="1"/>
     <select name="topic"><option value="all">all topics</option>{"".join(f'<option value="{t}" {"selected" if t==topic else ""}>{t}</option>' for t in topics)}</select>
@@ -465,7 +552,7 @@ def make_handler(
 <html><head><meta charset="utf-8"/><title>Questions</title><style>{_base_css()}</style></head>
 <body>
   <h2>Question Browser</h2>
-  <p><a href="/">Back to dashboard</a> | <a href="/compare">Side-by-side compare</a></p>
+  <p><a href="/">Back to dashboard</a> | <a href="/compare">Side-by-side compare</a> | <a href="/experiment">Experiment diagrams</a></p>
   <form method="get" class="controls" style="grid-template-columns:repeat(5,minmax(120px,1fr));">
     <input type="hidden" name="page" value="1"/>
     <select name="config"><option value="all">all configs</option>{"".join(f'<option value="{c}" {"selected" if c==cfg else ""}>{c}</option>' for c in cfgs_all)}</select>
@@ -500,6 +587,7 @@ def main():
     parser.add_argument("--benchmarks-dir", type=Path, default=Path("data/benchmarks"))
     parser.add_argument("--plots-dir", type=Path, default=Path("data/eval/plots"))
     parser.add_argument("--posthoc-dir", type=Path, default=Path("data/eval/posthoc"))
+    parser.add_argument("--diagrams-dir", type=Path, default=Path("paper/Diagrams"))
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
@@ -510,7 +598,15 @@ def main():
     benchmark_rows = _load_benchmarks(args.benchmarks_dir)
     posthoc_rows = _load_posthoc_summary(args.posthoc_dir)
 
-    handler = make_handler(rows, by_cfg, benchmark_rows, posthoc_rows, args.plots_dir, args.posthoc_dir)
+    handler = make_handler(
+        rows,
+        by_cfg,
+        benchmark_rows,
+        posthoc_rows,
+        args.plots_dir,
+        args.posthoc_dir,
+        args.diagrams_dir,
+    )
     httpd = HTTPServer((args.host, args.port), handler)
     print(
         f"Serving dashboard at http://{args.host}:{args.port} "

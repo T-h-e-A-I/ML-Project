@@ -60,3 +60,6 @@ paper/*.toc
 .env
 
 *.zip
+
+.cache 
+.mplconfig  

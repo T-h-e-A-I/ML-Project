@@ -97,8 +97,18 @@ def _compute_tfidf_cosines(preds: list[str], refs: list[str]) -> list[float]:
     for p, r in zip(preds, refs):
         docs = [p or ".", r or "."]
         vect = TfidfVectorizer(ngram_range=(1, 2))
-        X = vect.fit_transform(docs)
-        sim = float(cosine_similarity(X[0], X[1])[0][0])
+        try:
+            X = vect.fit_transform(docs)
+            sim = float(cosine_similarity(X[0], X[1])[0][0])
+        except ValueError:
+            # Rare case: tokenizer drops all tokens (empty vocabulary)
+            p_tokens = Counter(_normalize(p).split())
+            r_tokens = Counter(_normalize(r).split())
+            all_keys = set(p_tokens) | set(r_tokens)
+            dot = float(sum(p_tokens[k] * r_tokens[k] for k in all_keys))
+            p_norm = float(np.sqrt(sum(v * v for v in p_tokens.values())))
+            r_norm = float(np.sqrt(sum(v * v for v in r_tokens.values())))
+            sim = dot / (p_norm * r_norm) if p_norm > 0 and r_norm > 0 else 0.0
         values.append(sim)
     return values
 

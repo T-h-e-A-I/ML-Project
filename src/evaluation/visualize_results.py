@@ -78,6 +78,23 @@ def _savefig(fig, output_path: Path | None, label: str):
     plt.close(fig)
 
 
+def _load_posthoc_frames(posthoc_dir: Path) -> tuple[pd.DataFrame | None, pd.DataFrame | None, pd.DataFrame | None]:
+    """Load posthoc CSV artifacts if present."""
+    summary = None
+    topic = None
+    qmetrics = None
+    summary_path = posthoc_dir / "posthoc_summary.csv"
+    topic_path = posthoc_dir / "topic_breakdown.csv"
+    if summary_path.exists():
+        summary = pd.read_csv(summary_path)
+    if topic_path.exists():
+        topic = pd.read_csv(topic_path)
+    q_paths = sorted(posthoc_dir.glob("question_metrics_*.csv"))
+    if q_paths:
+        qmetrics = pd.concat([pd.read_csv(p) for p in q_paths], ignore_index=True)
+    return summary, topic, qmetrics
+
+
 def _to_plot_df(results: list[dict]) -> pd.DataFrame:
     rows = []
     for r in results:
@@ -174,6 +191,211 @@ def plot_runtime(results: list[dict], output_path: Path | None = None):
     _savefig(fig, output_path, "runtime plot")
 
 
+def plot_quality_profile(results: list[dict], output_path: Path | None = None):
+    """Radar-style normalized profile across key metrics."""
+    df = _to_plot_df(results).copy()
+    dims = ["Contains Acc", "ROUGE-L F1", "BERTScore F1", "GPT Correct", "GPT Reason"]
+    # Normalize GPT metrics to [0,1]
+    df["GPT Correct"] = df["GPT Correct"] / 5.0
+    df["GPT Reason"] = df["GPT Reason"] / 5.0
+
+    angles = np.linspace(0, 2 * np.pi, len(dims), endpoint=False).tolist()
+    angles += angles[:1]
+    fig = plt.figure(figsize=(8.2, 8.2))
+    ax = plt.subplot(111, polar=True)
+
+    for _, row in df.iterrows():
+        vals = [float(row[d]) if pd.notna(row[d]) else 0.0 for d in dims]
+        vals += vals[:1]
+        ax.plot(angles, vals, linewidth=2, label=row["Config"])
+        ax.fill(angles, vals, alpha=0.08)
+
+    ax.set_thetagrids(np.degrees(angles[:-1]), ["Contains", "ROUGE-L", "BERTScore", "GPT Corr/5", "GPT Reas/5"])
+    ax.set_ylim(0, 1)
+    ax.set_title("Configuration Quality Profile", y=1.08)
+    ax.legend(loc="upper right", bbox_to_anchor=(1.3, 1.1))
+    fig.tight_layout()
+    _savefig(fig, output_path, "quality profile")
+
+
+def plot_efficiency_frontier(results: list[dict], output_path: Path | None = None):
+    """Quality vs runtime frontier view."""
+    df = _to_plot_df(results).copy()
+    df["Elapsed Min"] = df["Elapsed Sec"] / 60.0
+    # Composite quality (simple equal weighting).
+    df["Quality"] = (
+        0.35 * df["Contains Acc"]
+        + 0.25 * df["BERTScore F1"]
+        + 0.2 * (df["GPT Correct"] / 5.0).fillna(0)
+        + 0.2 * (df["GPT Reason"] / 5.0).fillna(0)
+    )
+    fig, ax = plt.subplots(figsize=(8.2, 5.6))
+    ax.scatter(df["Elapsed Min"], df["Quality"], s=110, c="#0ea5e9")
+    for _, row in df.iterrows():
+        ax.annotate(row["Config"], (row["Elapsed Min"] + 0.2, row["Quality"] + 0.003), fontsize=9)
+    ax.set_xlabel("Runtime (minutes)")
+    ax.set_ylabel("Composite Quality (0-1)")
+    ax.set_title("Efficiency Frontier: Quality vs Runtime")
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    _savefig(fig, output_path, "efficiency frontier")
+
+
+def plot_delta_vs_m1(results: list[dict], output_path: Path | None = None):
+    """Show metric deltas relative to M1 baseline."""
+    df = _to_plot_df(results).set_index("Config")
+    if "M1" not in df.index:
+        return
+    base = df.loc["M1"]
+    metrics = ["Contains Acc", "ROUGE-L F1", "BERTScore F1"]
+    rows = []
+    for cfg, row in df.iterrows():
+        for m in metrics:
+            rows.append({"Config": cfg, "Metric": m, "Delta": float(row[m] - base[m])})
+    ddf = pd.DataFrame(rows)
+    fig, ax = plt.subplots(figsize=(9.2, 5.2))
+    sns.barplot(ddf, x="Config", y="Delta", hue="Metric", ax=ax)
+    ax.axhline(0, color="#111827", linewidth=1)
+    ax.set_title("Metric Delta vs M1 Baseline")
+    ax.set_ylabel("Delta")
+    ax.grid(axis="y", alpha=0.2)
+    fig.tight_layout()
+    _savefig(fig, output_path, "delta vs M1")
+
+
+def plot_metric_rankings(results: list[dict], output_path: Path | None = None):
+    """Rank each config across key metrics (lower rank is better)."""
+    df = _to_plot_df(results).copy()
+    metrics = {
+        "Contains": "Contains Acc",
+        "ROUGE-L": "ROUGE-L F1",
+        "BERTScore": "BERTScore F1",
+        "GPT Corr": "GPT Correct",
+        "GPT Reas": "GPT Reason",
+    }
+    ranks = {"Config": df["Config"].tolist()}
+    for name, col in metrics.items():
+        ranks[name] = df[col].rank(ascending=False, method="dense").tolist()
+    rdf = pd.DataFrame(ranks).set_index("Config")
+
+    fig, ax = plt.subplots(figsize=(8.5, 4.8))
+    sns.heatmap(rdf, annot=True, fmt=".0f", cmap="Blues_r", vmin=1, vmax=max(1, len(df)), ax=ax, linewidths=0.4)
+    ax.set_title("Rankings by Metric (1 = best)")
+    fig.tight_layout()
+    _savefig(fig, output_path, "metric rankings")
+
+
+def plot_posthoc_length_vs_contains(summary_df: pd.DataFrame, output_path: Path | None = None):
+    """Scatter: average output length vs contains accuracy (posthoc)."""
+    if summary_df is None or summary_df.empty:
+        return
+    required = {"config", "avg_pred_words", "contains_ref_acc"}
+    if not required.issubset(summary_df.columns):
+        return
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.scatter(summary_df["avg_pred_words"], summary_df["contains_ref_acc"], s=100, c="#14b8a6")
+    for _, row in summary_df.iterrows():
+        ax.annotate(row["config"], (row["avg_pred_words"] + 2, row["contains_ref_acc"] + 0.002), fontsize=9)
+    ax.set_xlabel("Average Prediction Length (words)")
+    ax.set_ylabel("Contains Accuracy (posthoc)")
+    ax.set_title("Length vs Contains (Posthoc)")
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    _savefig(fig, output_path, "posthoc length-vs-contains")
+
+
+def plot_posthoc_repetition(summary_df: pd.DataFrame, output_path: Path | None = None):
+    """Bar: repetition rate by config (posthoc)."""
+    if summary_df is None or summary_df.empty:
+        return
+    required = {"config", "repetition_rate"}
+    if not required.issubset(summary_df.columns):
+        return
+    df = summary_df.copy().sort_values("config")
+    fig, ax = plt.subplots(figsize=(8.5, 4.8))
+    bars = ax.bar(df["config"], df["repetition_rate"], color="#f97316")
+    ax.set_ylabel("Repetition Rate")
+    ax.set_title("Output Repetition by Configuration (Posthoc)")
+    ax.set_ylim(0, max(0.1, float(df["repetition_rate"].max()) + 0.05))
+    for b in bars:
+        h = b.get_height()
+        ax.text(b.get_x() + b.get_width() / 2, h + 0.005, f"{h:.3f}", ha="center", fontsize=8)
+    ax.grid(axis="y", alpha=0.2)
+    fig.tight_layout()
+    _savefig(fig, output_path, "posthoc repetition")
+
+
+def plot_posthoc_first_sentence_delta(summary_df: pd.DataFrame, output_path: Path | None = None):
+    """Delta between first-sentence and full-answer metrics."""
+    if summary_df is None or summary_df.empty:
+        return
+    req = {
+        "config",
+        "token_f1_mean",
+        "token_f1_first_sentence_mean",
+        "rougeL_f1_mean",
+        "rougeL_f1_first_sentence_mean",
+    }
+    if not req.issubset(summary_df.columns):
+        return
+    rows = []
+    for _, r in summary_df.iterrows():
+        rows.append(
+            {
+                "Config": r["config"],
+                "Metric": "Token F1 Δ(first-full)",
+                "Delta": float(r["token_f1_first_sentence_mean"] - r["token_f1_mean"]),
+            }
+        )
+        rows.append(
+            {
+                "Config": r["config"],
+                "Metric": "ROUGE-L Δ(first-full)",
+                "Delta": float(r["rougeL_f1_first_sentence_mean"] - r["rougeL_f1_mean"]),
+            }
+        )
+    ddf = pd.DataFrame(rows)
+    fig, ax = plt.subplots(figsize=(9, 5))
+    sns.barplot(ddf, x="Config", y="Delta", hue="Metric", ax=ax)
+    ax.axhline(0, color="#111827", linewidth=1)
+    ax.set_title("First Sentence vs Full Answer Delta (Posthoc)")
+    ax.set_ylabel("Delta")
+    ax.grid(axis="y", alpha=0.2)
+    fig.tight_layout()
+    _savefig(fig, output_path, "posthoc first-sentence delta")
+
+
+def plot_posthoc_topic_heatmap(topic_df: pd.DataFrame, output_path: Path | None = None):
+    """Heatmap of topic-wise contains accuracy."""
+    if topic_df is None or topic_df.empty:
+        return
+    req = {"config", "topic", "contains_ref"}
+    if not req.issubset(topic_df.columns):
+        return
+    pivot = topic_df.pivot(index="config", columns="topic", values="contains_ref").fillna(0)
+    fig, ax = plt.subplots(figsize=(10.5, 4.8))
+    sns.heatmap(pivot, annot=True, fmt=".3f", cmap="YlGnBu", vmin=0, vmax=1, linewidths=0.4, ax=ax)
+    ax.set_title("Topic-wise Contains Accuracy (Posthoc)")
+    fig.tight_layout()
+    _savefig(fig, output_path, "posthoc topic heatmap")
+
+
+def plot_posthoc_word_boxplot(qmetrics_df: pd.DataFrame, output_path: Path | None = None):
+    """Distribution of prediction lengths by config."""
+    if qmetrics_df is None or qmetrics_df.empty:
+        return
+    req = {"config", "pred_words"}
+    if not req.issubset(qmetrics_df.columns):
+        return
+    fig, ax = plt.subplots(figsize=(9, 5))
+    sns.boxplot(qmetrics_df, x="config", y="pred_words", ax=ax)
+    ax.set_title("Prediction Length Distribution by Config (Posthoc)")
+    ax.set_ylabel("Words per prediction")
+    ax.grid(axis="y", alpha=0.2)
+    fig.tight_layout()
+    _savefig(fig, output_path, "posthoc word distribution")
+
+
 def plot_ablation_topk(results: list[dict], output_path: Path | None = None):
     """Line plot of contains accuracy vs top-k (ablation-only rows)."""
     ablation = [r for r in results if r.get("top_k") != 5 or r.get("alpha") != 0.5]
@@ -253,6 +475,7 @@ def generate_latex_table(results: list[dict]) -> str:
 def generate_all_plots(
     results_path: Path | None = None,
     benchmarks_dir: Path | None = None,
+    posthoc_dir: Path | None = None,
     output_dir: Path | None = None,
 ):
     """Generate all plots and table artifacts."""
@@ -263,13 +486,27 @@ def generate_all_plots(
     if output_dir is None:
         output_dir = DATA_EVAL / "plots"
     output_dir.mkdir(parents=True, exist_ok=True)
+    if posthoc_dir is None:
+        posthoc_dir = DATA_EVAL / "posthoc"
 
     plot_accuracy_comparison(results, output_dir / "accuracy_comparison.png")
     plot_metric_heatmap(results, output_dir / "metric_heatmap.png")
     plot_tradeoff_scatter(results, output_dir / "contains_vs_bertscore.png")
     plot_runtime(results, output_dir / "runtime_comparison.png")
+    plot_quality_profile(results, output_dir / "quality_profile_radar.png")
+    plot_efficiency_frontier(results, output_dir / "efficiency_frontier.png")
+    plot_delta_vs_m1(results, output_dir / "delta_vs_m1.png")
+    plot_metric_rankings(results, output_dir / "metric_rankings.png")
     plot_ablation_topk(results, output_dir / "ablation_topk.png")
     plot_ablation_alpha(results, output_dir / "ablation_alpha.png")
+
+    # Optional posthoc plots
+    summary_df, topic_df, qmetrics_df = _load_posthoc_frames(posthoc_dir)
+    plot_posthoc_length_vs_contains(summary_df, output_dir / "posthoc_length_vs_contains.png")
+    plot_posthoc_repetition(summary_df, output_dir / "posthoc_repetition_rate.png")
+    plot_posthoc_first_sentence_delta(summary_df, output_dir / "posthoc_first_sentence_delta.png")
+    plot_posthoc_topic_heatmap(topic_df, output_dir / "posthoc_topic_contains_heatmap.png")
+    plot_posthoc_word_boxplot(qmetrics_df, output_dir / "posthoc_word_distribution.png")
 
     latex = generate_latex_table(results)
     latex_path = output_dir / "results_table.tex"
@@ -282,11 +519,13 @@ def main():
     parser = argparse.ArgumentParser(description="Generate benchmark visualizations for paper.")
     parser.add_argument("--results-path", type=Path, default=None, help="Path to combined benchmark_results.json.")
     parser.add_argument("--benchmarks-dir", type=Path, default=None, help="Directory with benchmark_*.json files.")
+    parser.add_argument("--posthoc-dir", type=Path, default=DATA_EVAL / "posthoc", help="Directory with posthoc CSV artifacts.")
     parser.add_argument("--output-dir", type=Path, default=DATA_EVAL / "plots", help="Output directory for plots.")
     args = parser.parse_args()
     generate_all_plots(
         results_path=args.results_path,
         benchmarks_dir=args.benchmarks_dir,
+        posthoc_dir=args.posthoc_dir,
         output_dir=args.output_dir,
     )
 
